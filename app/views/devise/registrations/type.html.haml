@@ -1,0 +1,20 @@
+= bootstrap_page_header "Artist or Fan?"
+.row
+	.span6.offset2
+		%h2
+			%icon.icon-user
+			Artists
+		%p= link_to image_tag("http://placehold.it/400x250", :class => "thumbnail"), nil
+		%p The Earth is a very small stage in a vast cosmic arena. Think of the rivers of blood spilled by all those generals and emperors so that, in glory and triumph.
+		%hr
+		%p
+			= button_link "plus", "Add Music", account_type_artist_path, "btn-danger btn-large"
+	.span6
+		%h2
+			%icon.icon-headphones
+			Fans
+		%p= link_to image_tag("http://placehold.it/400x250", :class => "thumbnail"), nil
+		%p The Earth is a very small stage in a vast cosmic arena. Think of the rivers of blood spilled by all those generals and emperors so that, in glory and triumph.
+		%hr
+		%p
+			= button_link "plus", "<i class='icon-reorder'></i> New Playlist", account_type_fan_path, "btn-info btn-large"

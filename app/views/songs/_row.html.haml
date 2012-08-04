@@ -1,0 +1,21 @@
+.row
+	.span1
+		= link_to image_tag("http://placehold.it/60x60", :class => "thumbnail"), nil
+	.span6
+		%p.btn-group
+			= button_link "play", nil, nil, "btn-danger"
+			= link_to "Track Name", nil, :class => "btn"
+			= link_to "by <strong>Artist</strong>".html_safe, nil, :class => "btn btn-info"
+		%p
+			%span.label.label-success
+				%icon.icon-play 
+				932 Plays 
+			%span.label.label-info
+				%icon.icon-plus 
+				%icon.icon-reorder 
+				4,322 Adds to Playlist 
+	.span3
+		.btn-group.pull-right.ratings
+			= button_link "thumbs-up", "(2,325) Like", nil, "btn-success btn-mini"
+			= button_link "thumbs-down", nil, nil, "btn-inverse btn-mini"
+%hr

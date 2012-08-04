@@ -1,0 +1,13 @@
+- comments.each do |comment|
+  %blockquote
+    = link_to image_tag("http://placehold.it/40x40", :class => "thumbnail pull-left", :style => "margin-right:10px;margin-bottom:10px;"), nil
+    %p= comment.content
+    %small
+      = comment.name
+      ( #{time_ago_in_words(comment.created_at)} ago... )
+      \#{icon_link "retweet", "Reply", nil, "btn btn-mini"}
+      \#{icon_link "flag", "", nil, "btn btn-mini"}
+- if comments.empty?
+  .alert.alert-error
+    There are no comments. Be the first!
+    %a.close{"data-dismiss" => "alert", :href => "#"} ×

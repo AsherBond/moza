@@ -1,0 +1,39 @@
+= bootstrap_page_header "Your Albums", "Create, manage and modify your albums with ease!" 
+
+.row
+  .span12
+    .btn-group
+      = button_link "plus", "New Album", new_album_path, "btn-success"
+    %hr 
+    .drop-zone
+      %strong
+        %i.icon-plus-sign 
+        Drop a folder with your album contents
+      %p to learn more about what we look for in a folder, click here.
+    %ul.thumbnails
+      -if @albums.each do |album| 
+        %li.span3
+          = link_to image_tag(album.cover.url(:large)), album, :class => "thumbnail", "data-original-title" => "#{album.name}", "data-content" => "<p>#{album.description}</p><h6>#{album.record_label} / #{album.year_produced}</h6>", :rel => "popover"
+      -end.empty?
+        -show_msg = true
+    -if show_msg ==  true
+      .alert.alert-info
+        You don't have any albums yet, click on 
+        = button_link "plus", "New Album", new_album_path, "btn-success btn-mini"
+        to get started!
+  .span4.omega
+    %h4
+      %i.icon-umbrella
+      Welcome to the album manager, we make it pretty easy and fun to manage your albums.
+    %hr
+    %p
+      %i.icon-arrow-right
+      The first album will appear as the featured playlist on your profile.
+    %hr
+    %p
+      %i.icon-move
+      You can drag and drop your albums to arrage the order they appear on your profile.
+    %hr
+    %p
+      %i.icon-upload-alt
+      You can also drag and drop all your songs and upload them at the same time. You can drop them anywhere you see a drop zone.

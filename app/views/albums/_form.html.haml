@@ -1,0 +1,11 @@
+= simple_form_for(@album, :defaults => { :input_html => {:class => "span8"} }) do |f|
+  = f.input :name
+  = f.input :cover
+  = f.input :description, :input_html => { :rows => 5}
+  = f.input :record_label
+  = f.input :year_produced
+  = f.input :active
+  = f.input :featured
+  .form-actions
+    = f.button :submit, :class => 'btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), albums_path, :class => 'btn'

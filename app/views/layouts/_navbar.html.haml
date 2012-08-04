@@ -1,0 +1,30 @@
+.navbar.navbar-fixed-top
+	.navbar-inner
+		.container
+			%a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
+				%span.icon-bar
+				%span.icon-bar
+				%span.icon-bar
+			%a.brand(href="/") Mozapolis
+			.container.nav-collapse
+				%ul.nav
+					%li= icon_link "globe", "Discover", nil
+					%li= icon_link "headphones", "Music", nil
+				%ul.nav.pull-right
+					%form.navbar-search.pull-left
+						%input.search-query{:placeholder => "Search for...", :type => "text"}
+					%li.divider-vertical
+					-if user_signed_in?
+						%li.dropdown
+							%a.dropdown-toggle{ "data-toggle" => "dropdown", :href => "#" }
+								%icon.icon-beaker
+								Dashboards
+							%ul.dropdown-menu
+								%li= icon_link "music", 'Albums', albums_path
+						%li= icon_link "cogs", current_user.username, edit_user_registration_path
+						%li.divider-vertical
+						%li= link_to '<i class="icon-signout"></i> Signout'.html_safe, destroy_user_session_path, :method => :delete
+					-else
+						%li= icon_link "signin", 'Signin', new_user_session_path
+						%li.divider-vertical
+						%li= icon_link "heart", 'Register', new_user_registration_path

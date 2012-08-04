@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  lyrics: MyText
+  active: false
+  position: 1
+  album: 
+
+two:
+  name: MyString
+  lyrics: MyText
+  active: false
+  position: 1
+  album: 

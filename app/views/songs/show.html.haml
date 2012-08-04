@@ -1,0 +1,29 @@
+- model_class = Song
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human
+
+%p
+  %strong= model_class.human_attribute_name(:name) + ':'
+  %br
+  = @song.name
+%p
+  %strong= model_class.human_attribute_name(:lyrics) + ':'
+  %br
+  = @song.lyrics
+%p
+  %strong= model_class.human_attribute_name(:active) + ':'
+  %br
+  = @song.active
+%p
+  %strong= model_class.human_attribute_name(:position) + ':'
+  %br
+  = @song.position
+%p
+  %strong= model_class.human_attribute_name(:album_id) + ':'
+  %br
+  = @song.album_id
+
+.form-actions
+  = link_to t('.back', :default => t("helpers.links.back")), songs_path, :class => 'btn'
+  = link_to t('.edit', :default => t("helpers.links.edit")), edit_song_path(@song), :class => 'btn'
+  = link_to t('.destroy', :default => t("helpers.links.destroy")), song_path(@song), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

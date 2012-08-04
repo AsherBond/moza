@@ -1,0 +1,82 @@
+= bootstrap_page_header "<i class='icon-music'></i> #{@album.name}", "by #{icon_link('user',@album.user.artist_name, @album.user)}" 
+.row
+	.span6
+		= link_to image_tag(@album.cover.url(:large), :class => "thumbnail"), nil
+		%hr
+		.btn-group
+			= button_link "thumbs-up", "(2,325) Like", nil, "btn-success btn-large"
+			= button_link "thumbs-down", nil, nil, "btn-inverse btn-large"
+		%hr
+		%h2= @album.name
+		%h3= "by #{icon_link('user',@album.user.artist_name, @album.user)}".html_safe
+		%h6 Album Information
+		%p= @album.description
+		%hr
+		%h6 Record Label
+		%p= @album.record_label
+		%h6 Year Produced
+		%p= @album.year_produced
+	.span10
+		-if user_signed_in? && current_user.id == @album.user_id
+			.btn-group
+				= button_link "upload", "Upload Song", new_album_song_path(@album), "btn-success"
+				= button_link "edit", "Edit Album Details", edit_album_path(@album), "btn-info"
+				= button_link "reorder", "Reorder Tracks", edit_album_path(@album)
+			%hr 
+		%h3
+			%i.icon-headphones
+			Tracks
+		-if @songs.each do |song| 
+			.row
+				.span7
+					.btn-toolbar
+						-if user_signed_in? && current_user.id == @album.user_id
+							.btn-group
+								-if song.active?
+									= button_link "eye-open", nil, nil, "btn-inverse"
+								-else
+									= button_link "eye-close", nil, nil, "btn-inverse"
+						.btn-group
+							= button_link "play", "#{song.name}", nil, "btn-danger"
+							= button_link "time", "0:00", nil
+
+					.collapse.out{:id => "song_#{song.id}_lyrics"}
+						%p
+							-if song.lyrics.blank?
+								There are no lyrics for this song, sorry!
+							-else
+								= song.lyrics.html_safe
+						%hr
+					.collapse.out{:id => "share_song_#{song.id}"}
+						%p
+							= icon_link "facebook", "Post to Wall", nil
+							\ - 
+							= icon_link "twitter", "Tweet", nil
+							\ -
+							= icon_link "envelope-alt", "Email", nil
+						
+
+
+					.btn-group
+						= button_link "plus", "<i class='icon-reorder'></i> Add to Playlist", nil, "btn-mini btn-success"
+						= link_to "<i class='icon-share'></i> Share".html_safe, "#", :class => "btn btn-mini btn-info", "data-toggle" => "collapse", "data-target" => "#share_song_#{song.id}"
+						= link_to "<i class='icon-pencil'></i> Lyrics".html_safe, "#", :class => "btn btn-mini btn-inverse", "data-toggle" => "collapse", "data-target" => "#song_#{song.id}_lyrics"
+						-if user_signed_in? && current_user.id == @album.user_id
+							= button_link "edit", "Edit Song", edit_album_song_path(@album, song), "btn-mini btn-danger"
+
+
+				.span3
+					.btn-group.pull-right.ratings
+						= button_link "thumbs-up", "(2,325) Like", nil, "btn-success btn-mini"
+						= button_link "thumbs-down", nil, nil, "btn-inverse btn-mini"
+			%hr
+		-end.empty?
+			.alert.alert-info
+				There are no songs for the album
+				%strong= @album.name
+		%h3
+			%i.icon-comments-alt
+			Comments
+		= render "comments/comments"
+		%h6 Write your own comment
+		= render "comments/form"

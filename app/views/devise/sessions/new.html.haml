@@ -1,0 +1,29 @@
+= bootstrap_page_header "Sign In", "with your username or email." 
+.row
+	.span8
+		
+		= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :defaults => {:input_html => { :class => "span8"}}) do |f| 
+			.form-inputs
+				= f.input :login, :required => false, :autofocus => true
+				= f.input :password, :required => false
+				= f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
+		
+			.form-actions
+				= f.button :submit, "Sign in", :class => "btn-primary"
+		= render "devise/shared/links"
+	.span4
+		%h3
+			%icon.icon-user
+			Artists
+		%p= link_to image_tag("http://placehold.it/400x250", :class => "thumbnail"), nil
+		%p The Earth is a very small stage in a vast cosmic arena. Think of the rivers of blood spilled by all those generals and emperors so that, in glory and triumph.
+		%p
+			= button_link "headphones", "Artist Signup", nil, "btn-danger btn-large"
+	.span4
+		%h3
+			%icon.icon-headphones
+			Fans
+		%p= link_to image_tag("http://placehold.it/400x250", :class => "thumbnail"), nil
+		%p The Earth is a very small stage in a vast cosmic arena. Think of the rivers of blood spilled by all those generals and emperors so that, in glory and triumph.
+		%p
+			= button_link "user", "Fan Signup", nil, "btn-info btn-large"

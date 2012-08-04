@@ -1,0 +1,7 @@
+-if user_signed_in?
+	= simple_form_for [@commentable, @comment] do |f|
+		= f.error_notification
+		= f.input :content, :label => false, :as => :text, :input_html => {:class => "span8", :rows => 4}
+		= f.submit "Submit Comment", :class => "btn btn-primary"
+-else
+	%p Sorry! You must signin to write a comment.

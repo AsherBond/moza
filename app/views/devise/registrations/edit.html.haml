@@ -1,0 +1,57 @@
+= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "form-vertical" }, :defaults => { :input_html => {:class => "span10"} }) do |f|
+  = bootstrap_page_header "#{current_user.full_name}", "#{current_user.email}" 
+  .row
+    .span10  
+      %ul.nav.nav-pills
+        %li.active= link_to "Credentials", "#credentials", "data-toggle" => "tab"
+        %li= link_to "Passwords", "#passwords", "data-toggle" => "tab"
+        %li= link_to "Personal", "#personal", "data-toggle" => "tab"
+        %li= link_to "Artist Details", "#artist-details", "data-toggle" => "tab"
+        %li= link_to "Cancel Account", "#cancel-account", "data-toggle" => "tab"
+      =f.error_notification
+      .tab-content
+        .active.tab-pane#credentials
+          = f.input :email, :required => true, :autofocus => true
+          = f.input :username, :required => true
+
+        .tab-pane#personal
+          = f.input :full_name, :required => true
+          = f.input :date_of_birth, :required => false, :as => :string, :input_html => { "data-datepicker" => "datepicker" }
+          = f.input :city, :required => false
+          = f.input :state, :required => false
+          = f.input :country, :required => false
+          = f.input :phone, :required => false
+
+        .tab-pane#passwords
+          = f.input :password, :autocomplete => "off", :hint => "leave it blank if you don't want to change it", :required => false
+          = f.input :password_confirmation, :required => false
+
+        .tab-pane#artist-details
+          = f.association :genres, :input_html => { :class => "input-xlarge" }
+          = f.input :artist_name, :required => true
+          = f.input :band_birth, :required => false, :as => :string, :input_html => { "data-datepicker" => "datepicker" }
+          = f.input :band_members, :required => false, :input_html => {:rows => 5}
+          = f.input :about, :required => false, :input_html => {:rows => 5}
+          = f.input :interests, :required => false, :input_html => {:rows => 5}
+          = f.input :inspirations, :required => false, :input_html => {:rows => 5}
+          = f.input :sounds_like, :required => false, :input_html => {:rows => 5}
+        .tab-pane#cancel-account
+          %p.lead
+            Unhappy? 
+          =link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "btn btn-danger"
+          %hr
+          %h6 Sorry to see you go!
+          %p If theres anything we can do let us know!
+          
+    .span6
+      = f.button :submit, "Click to save changes", :class => "btn btn-large btn-success"
+      %hr
+      %h3 
+        %i.icon-edit
+        Profile Engine
+      %p We are creating a very unique way to personalize your experience. The profile engine is a way to customise the look of your profile easily with handy tools.
+      %p The live preview editor is currently being worked on and will be available next!
+      %p
+        %strong Now that you know that, you are free to use it at caution.
+      %hr
+      = button_link "ok-sign", "Go to Profile Engine", nil, "btn-mini pull-right"

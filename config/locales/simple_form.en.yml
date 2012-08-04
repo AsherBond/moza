@@ -1,0 +1,50 @@
+en:
+  simple_form:
+    "yes": 'Yes'
+    "no": 'No'
+    required:
+      text: 'required'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "Please review the problems below:"
+    # Labels and hints examples
+    # labels:
+    #   defaults:
+    #     password: 'Password'
+    #   user:
+    #     new:
+    #       email: 'E-mail to sign in.'
+    #     edit:
+    #       email: 'E-mail.'
+    # hints:
+    #   defaults:
+    #     username: 'User name to sign in.'
+    #     password: 'No special characters, please.'
+    hints:
+      album:
+        name: "The title of your album."
+        description: "A breif synopsis of you album."
+        record_label: "If you are/were not signed, you can write your name or 'Unsigned'."
+        year_produced: "The year the album was released."
+        active: "If you check this the album will be visible to others, unchecking it will hide it from everyone except you."
+        featured: "If you check this the album will be featured first on your profile."
+      user:
+        artist_name: "Whatever you call yourself!"
+        band_birth: "The date you started playing."
+        about: "Tell us about your music."
+        interests: "What do you like to do?"
+        sounds_like: "Do you sound like anyone else?"
+        inspirations: "What gets you out of bed everyday?"
+        band_members: "List all members here."
+        full_name: "Your real name please!"
+        date_of_birth: "How old are you?"
+        city: "Where are you located?"
+        state: "The state or province you are located."
+        country: "What country are you in?"
+        phone: "Just in case, we won't ever use it without consent!"
+        email: "A valid email address."
+        username: "This username is your unique tag, it will be used throughout the website. You can only change it twice!"
+        genres: "Start typing to see the list, you may choose up to three."

@@ -1,0 +1,4 @@
+= simple_form_for [commentable, comment] do |f|
+  = f.error_notification
+  = f.input :content, :label => false, :as => :text, :input_html => {:class => "span4", :rows => 4}, :placeholder => "Remember: You will be rewarded for positive and helpful feedback."
+  = f.submit "Submit Comment", :class => "btn btn-primary"

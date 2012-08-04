@@ -1,0 +1,35 @@
+= bootstrap_page_header "Sign Up", "Registrations are currently free!" 
+.row
+	.span8
+		= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :defaults => {:input_html => { :class => "span8" }}) do |f|
+			= f.error_notification
+			= f.input :email, :required => true, :autofocus => true
+			= f.input :username, :required => true
+			= f.input :password, :required => true
+			= f.input :password_confirmation, :required => true
+			.form-actions
+				= f.button :submit, "Sign up", :class => "btn btn-primary"
+		= render "devise/shared/links"
+	.span8
+		%p After you register you will be  prompted for which type of account you will be using. 
+		%p 
+			Once you signup you'll gain access to a bunch of features! 
+			%strong Such as our profile engine and album uploader, they are one of a kind!
+
+		%hr
+		%p.lead What type of account should you pick?
+		.row
+			.span4
+				%h3
+					%icon.icon-user
+					Artists
+				%p The Earth is a very small stage in a vast cosmic arena. Think of the rivers of blood spilled by all those generals and emperors so that, in glory and triumph.
+				%p
+					= button_link "headphones", "Learn More", nil, "btn-danger btn-mini"
+			.span4
+				%h3
+					%icon.icon-headphones
+					Fans
+				%p The Earth is a very small stage in a vast cosmic arena. Think of the rivers of blood spilled by all those generals and emperors so that, in glory and triumph.
+				%p
+					= button_link "user", "Learn More", nil, "btn-info btn-mini"

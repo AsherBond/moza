@@ -1,0 +1,16 @@
+= bootstrap_page_header "Edit Album", "#{@album.name}" 
+.row
+	.span8
+		= render 'form'
+	.span8
+		= link_to "Delete Album Permently", album_path(@album), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-large btn-danger'
+		%hr
+
+		%p.lead Let's light this fire one more time, Mike, and witness this great nation at its best.
+
+		%p A good rule for rocket experimenters to follow is this: always assume that it will explode.
+		%p That's one small step for [a] man; one giant leap for mankind.
+
+		%p Houston, that may have seemed like a very long final phase. The autotargeting was taking us right into a ... crater, with a large number of big boulders and rocks ... and it required ... flying manually over the rock field to find a reasonably good area.
+
+		%p First, I believe that this nation should commit itself to achieving the goal, before this decade is out, of landing a man on the moon and returning him safely to the earth. No single space project in this period will be more impressive to mankind, or more important for the long-range exploration of space; and none will be so difficult or expensive to accomplish.

@@ -1,0 +1,397 @@
+@import "twitter/bootstrap/bootstrap";
+@gridColumns:16;
+@gridColumnWidth:40px;
+body { 
+	padding-top: 60px;
+	background-color:darken(@white, 15%);
+	background-image:url('/assets/noise.png');
+}
+// @import "twitter/bootstrap/responsive";
+
+// Set the correct sprite paths
+@iconSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings.png');
+@iconWhiteSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings-white.png');
+
+// Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
+// Note: If you use asset_path() here, your compiled boostrap_and_overrides.css will not 
+//       have the proper paths. So for now we use the absolute path.
+@fontAwesomeEotPath: '/assets/fontawesome-webfont.eot';
+@fontAwesomeWoffPath: '/assets/fontawesome-webfont.woff';
+@fontAwesomeTtfPath: '/assets/fontawesome-webfont.ttf';
+@fontAwesomeSvgPath: '/assets/fontawesome-webfont.svg';
+
+// Font Awesome
+@import "fontawesome";
+
+@linkColor:#A33724;
+@linkHoverColor:darken(@linkColor, 15%);
+
+/* ###-
+	Font Changes 
+###- */
+/* Change the main fonts to.. */
+@condensedFontFamily: 'Open Sans Condensed', sans-serif;
+@baseFontFamily: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+.serif {font-family:@serifFontFamily;}
+.swanky {font-family:'Swanky and Moo Moo', cursive; font-size:32px;line-height:38px;}
+hr{ border-top:1px solid rgba(0,0,0,0.1); border-bottom:1px solid rgba(255,255,255,0.2);}
+
+
+/* ###-
+	Navbar 
+###- */
+/* Change the logo */
+.navbar-inner a.brand {
+	font-family:'Oleo Script';
+	font-size:36px;
+	line-height: 40px;
+	padding:7px;
+	.rotate(-1deg);
+	color:white;
+}
+
+/* Increase navbar height */
+@navbarHeight:60px;
+
+/* ###-
+	Date Picker for Rails 
+###- */
+
+.datepicker {
+  background-color: #ffffff;
+  border-color: #999;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-style: solid;
+  border-width: 1px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding-box;
+  background-clip: padding-box;
+  display: none;
+  position: absolute;
+  z-index: 900;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 18px;
+  padding-bottom: 4px;
+  width: 218px;
+}
+.datepicker .nav {
+  font-weight: bold;
+  width: 100%;
+  padding: 4px 0;
+  background-color: #f5f5f5;
+  color: #808080;
+  border-bottom: 1px solid #ddd;
+  -webkit-box-shadow: inset 0 1px 0 #ffffff;
+  -moz-box-shadow: inset 0 1px 0 #ffffff;
+  box-shadow: inset 0 1px 0 #ffffff;
+  zoom: 1;
+}
+.datepicker .nav:before, .datepicker .nav:after {
+  display: table;
+  content: "";
+  zoom: 1;
+  *display: inline;
+}
+.datepicker .nav:after {
+  clear: both;
+}
+.datepicker .nav span {
+  display: block;
+  float: left;
+  text-align: center;
+  height: 28px;
+  line-height: 28px;
+  position: relative;
+}
+.datepicker .nav .bg {
+  width: 100%;
+  background-color: #fdf5d9;
+  height: 28px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+.datepicker .nav .fg {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.datepicker .button {
+  cursor: pointer;
+  padding: 0 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+.datepicker .button:hover {
+  background-color: #808080;
+  color: #ffffff;
+}
+.datepicker .months {
+  float: left;
+  margin-left: 4px;
+}
+.datepicker .months .name {
+  width: 72px;
+  padding: 0;
+}
+.datepicker .years {
+  float: right;
+  margin-right: 4px;
+}
+.datepicker .years .name {
+  width: 36px;
+  padding: 0;
+}
+.datepicker .dow, .datepicker .days div {
+  float: left;
+  width: 30px;
+  line-height: 25px;
+  text-align: center;
+}
+.datepicker .dow {
+  font-weight: bold;
+  color: #808080;
+}
+.datepicker .calendar {
+  padding: 4px;
+}
+.datepicker .days div {
+  cursor: pointer;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+.datepicker .days div:hover {
+  background-color: #0064cd;
+  color: #ffffff;
+}
+.datepicker .overlap {
+  color: #bfbfbf;
+}
+.datepicker .today {
+  background-color: #fee9cc;
+}
+.datepicker .selected {
+  background-color: #bfbfbf;
+  color: #ffffff;
+}
+/* ###-
+	Alerts 
+###- */
+/* Have the alert float above content */
+.alert-top {
+	.border-radius(0 0 0 5px);
+	padding-top:10px;
+	position: absolute;
+	width:400px;
+	right:0;
+
+	border:none;
+	text-shadow:1px 1px 0 rgba(0,0,0,.3);
+	color:white;
+}
+.alert-error {
+	background:darken(@red, 10%);
+	border:none;
+	text-shadow:1px 1px 0 rgba(0,0,0,.3);
+	color:white;
+}
+.alert-success {
+	background:darken(@green, 10%);
+	border:none;
+	text-shadow:1px 1px 0 rgba(0,0,0,.3);
+	color:white;
+}
+.alert-info {
+	background:darken(@blue, 10%);
+	border:none;
+	text-shadow:1px 1px 0 rgba(0,0,0,.3);
+	color:white;
+}
+
+/* ###-
+	Buttons!
+###- */
+
+.btn,
+.btn:hover {
+	text-shadow: none;
+	background-image: none;
+	.box-shadow(0px 2px 0 darken(@white, 80%));
+	border: none;
+}
+.btn-warning {
+	background-color: @yellow;
+}
+
+.btn-primary, .btn-primary:hover {
+	.box-shadow(0px 2px 0 darken(@btnPrimaryBackground, 30%));
+}
+
+.btn-warning, .btn-warning:hover {
+	.box-shadow(0px 2px 0 darken(@yellow, 30%));
+}
+
+.btn-danger, .btn-danger:hover {
+	.box-shadow(0px 2px 0 darken(#ee5f5b, 30%));
+}
+
+.btn-success, .btn-success:hover {
+	.box-shadow(0px 2px 0 darken(#62c462, 30%));
+}
+
+.btn-info, .btn-info:hover {
+	.box-shadow(0px 2px 0 darken(#5bc0de, 40%));
+}
+
+.btn-inverse, .btn-inverse:hover {
+	.box-shadow(0px 2px 0 darken(#454545, 20%));
+}
+
+.btn.dropdown-toggle, .btn.dropdown-toggle:hover {
+	.box-shadow(0 2px 0 darken(@white, 80%));
+}
+
+.btn-primary.dropdown-toggle, .btn-primary.dropdown-toggle:hover {
+	.box-shadow(0 2px 0 darken(@btnPrimaryBackground, 30%));
+}
+
+.btn-warning.dropdown-toggle, .btn-warning.dropdown-toggle:hover {
+	.box-shadow(0 2px 0 darken(@yellow, 30%));
+}
+
+.btn-danger.dropdown-toggle, .btn-danger.dropdown-toggle:hover {
+	.box-shadow(0 2px 0 darken(#ee5f5b, 30%));
+}
+
+.btn-success.dropdown-toggle, .btn-success.dropdown-toggle:hover {
+	.box-shadow(0 2px 0 darken(#62c462, 30%));
+}
+
+.btn-info.dropdown-toggle, .btn-info.dropdown-toggle:hover {
+	.box-shadow(0 2px 0 darken(#5bc0de, 40%));
+}
+
+.btn-inverse.dropdown-toggle, .btn-inverse.dropdown-toggle:hover {
+	.box-shadow(0 2px 0 darken(#454545, 20%));
+}
+/* ###-
+	Drop zone 
+###- */
+
+.drop-zone {
+	text-align: center;
+	padding:15px;
+  margin-bottom:20px;
+	.border-radius(10px);
+	background:lighten(@yellow, 30%);
+	.transition(background .3s ease-in-out);
+	border:1px solid rgba(0,0,0,.2);
+}
+
+
+.drop-zone:hover {
+
+	background:lighten(@red, 20%);
+	color:white;
+	text-shadow:none;
+}
+
+
+/* ###-
+	Thumbnails 
+###- */
+div.thumbnail, a.thumbnail {
+	padding:6px;
+	background-color: darken(@white, 10%);
+}
+
+
+/* ###-
+  Ratings 
+###- */
+.ratings {
+  padding-bottom:20px;
+  opacity:.5;
+  .transition(opacity .3s ease-in-out);
+  
+}
+.ratings:hover {
+  opacity:1;
+  .transition(opacity .3s ease-in-out);
+
+}
+/* ###-
+	Wells 
+###- */
+.well {
+	background:darken(@white, 2%);
+	.box-shadow(inset 0 0 25px 10px rgba(0,0,0,.1));
+	border-color: rgba(0,0,0,.2);
+}
+
+/* ###-
+	Footer 
+###- */
+
+footer {
+	text-align: center;
+	margin:20px 0;
+}
+
+/* ###-
+	Clean two column template 
+###- */
+/* The white background content wrapper */
+.content {
+  background-color: #fff;
+  padding: 20px;
+  margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+  .border-radius(0 0 6px 6px);
+  .box-shadow(0 1px 2px rgba(0,0,0,.15));
+}
+
+/* Page header tweaks */
+.page-header {
+  background-color: #f5f5f5;
+  padding: 20px 20px 10px;
+  margin: -20px -20px 20px;
+}
+
+/* Give a quick and non-cross-browser friendly divider */
+.omega {
+  margin-left: 0px;
+  padding-left: 20px;
+}
+
+/* Form action needs some more dynamic styling */
+.form-actions {
+	background:rgba(0,0,0,.1);
+	.border-radius(5px);
+	border:1px solid rgba(0,0,0,.1);
+}
+/* Labels need margins */
+.label, .badge {
+	margin-right:5px;
+}
+/* MEOW */
+.hero-unit {
+	text-align: center;
+	.box-shadow(inset 0 0 25px 25px rgba(0,0,0,.7));
+	background-image:url('/assets/hero-unit.jpg');
+	background-position: center;
+	h1 { font-family: 'Swanky and Moo Moo', cursive; .rotate(-2deg); color:white;margin:50px 0; }
+	p { font-family: 'Swanky and Moo Moo', cursive; .rotate(0deg); color:white;margin:50px 0; font-size:24px;}
+}
