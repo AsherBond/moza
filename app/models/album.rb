@@ -3,6 +3,11 @@ class Album < ActiveRecord::Base
 	has_many :songs
 	attr_accessible :active, :description, :featured, :name, :position, :record_label, :year_produced, :cover
 	has_many :comments, as: :commentable, :dependent => :destroy
+
+	has_reputation :album_votes, source: :user, aggregated_by: :sum
+	has_reputation :song_votes, source: {reputation: :song_votes, of: :songs}, aggregated_by: :sum
+
+
 	# Validations
 	# -----------
 	validates :record_label, 
@@ -39,5 +44,6 @@ class Album < ActiveRecord::Base
                         :large => "900x900#", 
                         :full_large => "900x900>",
                         :avatar => "60x60#"
-                      }
+                      },
+                      :default_url => 'http://placehold.it/400x400'
 end

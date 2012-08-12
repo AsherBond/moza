@@ -20,6 +20,38 @@ Moza::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+  #^*^*^*^*
+  #  * * * *
+  #
+  # Devise GEEEMailer
+  #
+  #-----------\ # Use gmail to send out emails.
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: "587",
+    domain: "moza.dev",
+    authentication: "plain",
+    enable_starttls_auto: "false",
+    user_name: "mozapolis@gmail.com",
+    password: "qwedsa123"
+  }
+
+
+
+  #^*^*^*^*
+  #  * * * *
+  #
+  # Devise Mailer
+  #
+  #-----------\ # 
+  config.action_mailer.default_url_options = { :host => 'mozapolis.justclickmedia.com' }
+  # ActionMailer Config
+  # Setup for production - deliveries, no errors raised
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default :charset => "utf-8"
+
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
 

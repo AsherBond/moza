@@ -1,95 +1,126 @@
-.row
-	.span6
-		%ul.thumbnails
-			%li.span6
-				%a.thumbnail= image_tag "http://placehold.it/500x500"
-		%h6
-			%i.icon-tags
-			Genres
-		%h6
-			%i.icon-info-sign
-			About
-		%h6
-			%i.icon-group
-			Band Members
-		%h6
-			%i.icon-music
-			Sounds Like
-		%h6
-			%i.icon-asterisk
-			Inspirations
 
-	.span10
-		.well
-			%h1 Cody Lopez
-			%h3 Alias
+%style
+	/body{ background:url('http://colourlovers.com.s3.amazonaws.com/images/patterns/2792/2792451.png'); }
+	/.content{ background:#ED7272; }
+	/h6{ color:black; }
+	/.span6 p{ color:black; }
+	/.span10 h3{ color:black; }
+	/hr{ border-top-color:white; border-bottom-color:black; }
+	/hr.d{ border-top-color:white; border-bottom-color:black; }
+	/a.thumbnail{ background:#ED7272;border-color:black; }
+	/a.thumbnail:hover{ background:black;border-color:white; }
+	/.black.well{ background:black;border-color:white;color:red; }
+	/.black.well h1 small { color:red; }
+	/footer{border-top-color:red;}
+	/blockquote{color:black;border-left-color:black;}
+	/.content blockquote > small{color:black;}
+	/.comments a{color:black;}
+	/.comments a:hover{color:white;}
+	/form#new_comment textarea#comment_content{border-color:black;background:black;color:white;}
+
+-if @user.is_active?
+	= bootstrap_page_header "#{@user.artist_name}", "#{@user.username}" 
+
+	.row
+		.span6
+			%ul.thumbnails
+				%li.span6
+					-if @user.profile_photo.file?
+						=link_to image_tag(@user.profile_photo.url(:large)), "#/", :class => "thumbnail"
+					-else
+						%a.thumbnail= image_tag "http://placehold.it/500x500"
+			%h6
+				%i.icon-tags
+				Genres
 			%p
-				%span.label.label-info
-					%i.icon-eye-open
-					700 Views
-				%span.label.label-success
-					%i.icon-play
-					700 Plays
-				%span.label.label-important
-					%i.icon-heart
-					+700 Rep 
-		%hr
-		%h3 
-			%i.icon-star
-			Featured Songs
-		-if @songs.each do |song| 
-			.row
-				.span7
-					.btn-toolbar
-						.btn-group
-							= button_link "play", "#{song.name}", nil, "btn-danger"
-							= button_link "time", "0:00", nil
+				- if @user.genres.each do |genre|
+					%span.label.label-info=genre.name
+				- end.empty?
+					No genres...
+			%h6
+				%i.icon-info-sign
+				About
+			-if !@user.about.nil?
+				%p= @user.about
+			-else
+				%p Nothing you need to know!
 
-					.collapse.out{:id => "song_#{song.id}_lyrics"}
-						%p
-							-if song.lyrics.blank?
-								There are no lyrics for this song, sorry!
-							-else
-								= song.lyrics.html_safe
-						%hr
-					.collapse.out{:id => "share_song_#{song.id}"}
-						%p
-							= icon_link "facebook", "Post to Wall", nil
-							\ - 
-							= icon_link "twitter", "Tweet", nil
-							\ -
-							= icon_link "envelope-alt", "Email", nil
+			%h6
+				%i.icon-group
+				Band Members
+			-if !@user.band_members.nil?
+				%p= @user.band_members
+			-else
+				%p What band members...
+			%h6
+				%i.icon-music
+				Sounds Like
+			-if !@user.sounds_like.nil?
+				%p= @user.sounds_like
+			-else
+				%p Pop funk jazz blues mix...
+			%h6
+				%i.icon-asterisk
+				Inspirations
+			-if !@user.inspirations.nil?
+				%p= @user.inspirations
+			-else
+				%p Being alive :)
 
+		.span10
+			%ul.nav.nav-pills
+				%li.active= link_to "Overview", nil
+				%li= link_to "Albums", nil
+				%li= link_to "Playlists", nil
+				%li= link_to "Videos", nil
+				%li= link_to "Photos", nil
+				%li= link_to "Comments", nil
+				%li= link_to "Fans", nil
+			-if !@user.albums.empty?
+				%h3 
+					%i.icon-star
+					Featured Album
+				%hr
+				.row
+					.span2
+						=link_to image_tag(@album.cover.url(:large)), @album, :class => "thumbnail"
+					.span8
+						%h2= @album.name
+						%p 17 Tracks - Released 2012
+						%p=@album.description
+				%hr.d
+				-if @songs.nil?
+					.alert.alert-info This user has no featured album.
+				-else
+					=render 'songs/row'
 
-					.btn-group
-						= button_link "plus", "<i class='icon-reorder'></i> Add to Playlist", nil, "btn-mini btn-success"
-						= link_to "<i class='icon-share'></i> Share".html_safe, "#", :class => "btn btn-mini btn-info", "data-toggle" => "collapse", "data-target" => "#share_song_#{song.id}"
-						= link_to "<i class='icon-pencil'></i> Lyrics".html_safe, "#", :class => "btn btn-mini btn-inverse", "data-toggle" => "collapse", "data-target" => "#song_#{song.id}_lyrics"
-						-if user_signed_in? && current_user.id == @album.user_id
-							= button_link "edit", "Edit Song", edit_album_song_path(@album, song), "btn-mini btn-danger"
-
-
-				.span3
-					.btn-group.pull-right.ratings
-						= button_link "thumbs-up", "(2,325) Like", nil, "btn-success btn-mini"
-						= button_link "thumbs-down", nil, nil, "btn-inverse btn-mini"
+			%h3 
+				%i.icon-film
+				Videos
 			%hr
-		-end.empty?
-			.alert.alert-info
-				There are no songs for the album
-				%strong= @album.name
+			-if @videos.nil?
+				.alert.alert-info This user has no videos.
+			-else
+				=render 'albums/shared/profile'
 
-		%h3 
-			%i.icon-music
-			Albums
-		%ul.thumbnails
-			-if @albums.each do |album| 
-				%li.span2
-					= link_to image_tag(album.cover.url(:large)), album, :class => "thumbnail", "data-original-title" => "#{album.name}", "data-content" => "<p>#{album.description}</p><h6>#{album.record_label} / #{album.year_produced}</h6>", :rel => "popover"
-			-end.empty?
-				-show_msg = true
-		-if show_msg ==  true
-			.alert.alert-info
-				You don't have any albums yet, click on 
-				= button_link "plus", "New Album", new_album_path, "btn-success btn-mini"
-				to get started!
+			%h3 
+				%i.icon-music
+				Albums
+			%hr
+			-if @albums.nil?
+				.alert.alert-info This user has no albums.
+			-else
+				=render 'albums/shared/profile'
+			%h3 
+				%i.icon-comments-alt
+				Comments
+			%hr
+			=render 'comments/comments'
+			=render 'comments/form'
+
+-else
+	.row
+		.span16
+			.hero-unit
+				%h1 Sorry!
+				%p This user is being lazy and hasnt setup his profile yet.

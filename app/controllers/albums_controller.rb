@@ -1,5 +1,13 @@
 class AlbumsController < ApplicationController
   authorize_resource
+
+  def vote
+    value = params[:type] == "up" ? 1 : -1
+    @album = Album.find(params[:id])
+    @album.add_or_update_evaluation(:album_votes, value, current_user)
+    redirect_to :back, notice: "Thank you for voting"
+  end
+
   # GET /albums
   # GET /albums.json
   def index
@@ -35,8 +43,7 @@ class AlbumsController < ApplicationController
   # GET /albums/new
   # GET /albums/new.json
   def new
-    @artist = current_user
-    @album = @artist.albums.build
+    @album = current_user.albums.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -52,8 +59,7 @@ class AlbumsController < ApplicationController
   # POST /albums
   # POST /albums.json
   def create
-    @artist = current_user
-    @album = @artist.albums.build(params[:album])
+    @album = current_user.albums.build(params[:album])
 
     respond_to do |format|
       if @album.save

@@ -21,7 +21,17 @@
 								Dashboards
 							%ul.dropdown-menu
 								%li= icon_link "music", 'Albums', albums_path
-						%li= icon_link "cogs", current_user.username, edit_user_registration_path
+								%li= icon_link "reorder", 'Playlists', playlists_path
+								%li= icon_link "picture", 'Photos', playlists_path
+								%li= icon_link "film", 'Videos', videos_path
+						%li.dropdown
+							%a.dropdown-toggle{ "data-toggle" => "dropdown", :href => "#" }
+								%icon.icon-cogs
+								= current_user.username 
+							%ul.dropdown-menu
+								%li= icon_link "edit", 'Edit Info', edit_user_registration_path
+								%li= icon_link "eye-open", 'View Profile', current_user
+						%li
 						%li.divider-vertical
 						%li= link_to '<i class="icon-signout"></i> Signout'.html_safe, destroy_user_session_path, :method => :delete
 					-else

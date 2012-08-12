@@ -2,8 +2,9 @@
 @gridColumns:16;
 @gridColumnWidth:40px;
 body { 
-	padding-top: 60px;
-	background-color:darken(@white, 15%);
+  padding-top: 80px;
+	padding-bottom: 30px;
+	background-color:darken(@white, 60%);
 	background-image:url('/assets/noise.png');
 }
 // @import "twitter/bootstrap/responsive";
@@ -23,9 +24,16 @@ body {
 // Font Awesome
 @import "fontawesome";
 
-@linkColor:#A33724;
-@linkHoverColor:darken(@linkColor, 15%);
+@myRed:#A33724;
 
+@navbarBackground:@black;
+@navbarBackgroundHighlight:lighten(@black, 10%);
+
+@linkColor:@myRed;
+@linkHoverColor:darken(@linkColor, 15%);
+@inputBorderRadius:4px;
+@inputBorder:lighten(@black, 40%);
+@inputBackground:darken(@white, 10%);
 /* ###-
 	Font Changes 
 ###- */
@@ -34,7 +42,10 @@ body {
 @baseFontFamily: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
 .serif {font-family:@serifFontFamily;}
 .swanky {font-family:'Swanky and Moo Moo', cursive; font-size:32px;line-height:38px;}
-hr{ border-top:1px solid rgba(0,0,0,0.1); border-bottom:1px solid rgba(255,255,255,0.2);}
+.oleo {font-family:'Oleo Script', cursive; font-size:32px;line-height:38px;}
+h6 {color:rgba(0,0,0,.5);}
+hr{ border-top:1px solid rgba(163, 55, 36,.3); border-bottom:1px solid rgba(255,255,255,0.2);margin:10px 0;}
+hr.d{ border-top:1px dashed rgba(0,0,0,0.2); border-bottom:1px dashed rgba(255,255,255,0.4);margin:10px 0;}
 
 
 /* ###-
@@ -45,13 +56,12 @@ hr{ border-top:1px solid rgba(0,0,0,0.1); border-bottom:1px solid rgba(255,255,2
 	font-family:'Oleo Script';
 	font-size:36px;
 	line-height: 40px;
-	padding:7px;
+	padding:16px 0;
 	.rotate(-1deg);
 	color:white;
 }
-
 /* Increase navbar height */
-@navbarHeight:60px;
+@navbarHeight:80px;
 
 /* ###-
 	Date Picker for Rails 
@@ -192,11 +202,11 @@ hr{ border-top:1px solid rgba(0,0,0,0.1); border-bottom:1px solid rgba(255,255,2
 ###- */
 /* Have the alert float above content */
 .alert-top {
-	.border-radius(0 0 0 5px);
+	.border-radius(0 0 5px 5px);
 	padding-top:10px;
-	position: absolute;
-	width:400px;
-	right:0;
+	position: fixed;
+  width:890px;
+
 
 	border:none;
 	text-shadow:1px 1px 0 rgba(0,0,0,.3);
@@ -225,68 +235,77 @@ hr{ border-top:1px solid rgba(0,0,0,0.1); border-bottom:1px solid rgba(255,255,2
 	Buttons!
 ###- */
 
-.btn,
+
+@btnPrimaryBackground:darken(@myRed, 15%);
+@btnPrimaryBackgroundHighlight:darken(@myRed, 15%);
+@btnSuccessBackground:darken(@green, 10%);
+@btnSuccessBackgroundHighlight:darken(@green, 10%);
+@btnDangerBackground:@red;
+@btnDangerBackgroundHighlight:@red;
+@btnInfoBackground:@blue;
+@btnInfoBackgroundHighlight:@blue;
+@btnWarningBackground:darken(@orange, 5%);
+@btnWarningBackgroundHighlight:darken(@orange, 5%);
+@btnInverseBackground:lighten(@black, 10%);
+@btnInverseBackgroundHighlight:lighten(@black, 10%);
+
+.btn {
+  .box-shadow(0 3px 0 0 rgba(0,0,0,.3));
+  border:1px solid rgba(0,0,0,.3);
+}
+.btn.active, .btn.disabled {
+  @btnshadow: inset 0 3px 0 0 rgba(0,0,0,.2), 0 3px 0 0 rgba(0,0,0,.3);
+  .box-shadow(@btnshadow);
+  border:1px solid rgba(0,0,0,.3);
+}
 .btn:hover {
-	text-shadow: none;
-	background-image: none;
-	.box-shadow(0px 2px 0 darken(@white, 80%));
-	border: none;
+  .box-shadow(0 3px 0 0 rgba(0,0,0,.6));
+
 }
-.btn-warning {
-	background-color: @yellow;
+.btn-facebook {
+  color: @white;
+  text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+  .buttonBackground(darken(@blue, 20%), darken(@blue, 10%));
+  &:hover {
+    color: @white;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+  }
+}
+.btn-twitter {
+  color: @white;
+  text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+  .buttonBackground(@blue, lighten(@blue, 10%));
+  &:hover {
+    color: @white;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+  }
+}
+.btn-google {
+  color: @white;
+  text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+  .buttonBackground(@red, lighten(@red, 10%));
+  &:hover {
+    color: @white;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+  }
+}
+.btn-email {
+  color: @white;
+  text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+  .buttonBackground(@green, lighten(@green, 10%));
+  &:hover {
+    color: @white;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+  }
 }
 
-.btn-primary, .btn-primary:hover {
-	.box-shadow(0px 2px 0 darken(@btnPrimaryBackground, 30%));
+/* ###-
+  Share and lyrics buttons in songs/row
+###- */
+.share-lyrics {
+  width:120px;
 }
 
-.btn-warning, .btn-warning:hover {
-	.box-shadow(0px 2px 0 darken(@yellow, 30%));
-}
-
-.btn-danger, .btn-danger:hover {
-	.box-shadow(0px 2px 0 darken(#ee5f5b, 30%));
-}
-
-.btn-success, .btn-success:hover {
-	.box-shadow(0px 2px 0 darken(#62c462, 30%));
-}
-
-.btn-info, .btn-info:hover {
-	.box-shadow(0px 2px 0 darken(#5bc0de, 40%));
-}
-
-.btn-inverse, .btn-inverse:hover {
-	.box-shadow(0px 2px 0 darken(#454545, 20%));
-}
-
-.btn.dropdown-toggle, .btn.dropdown-toggle:hover {
-	.box-shadow(0 2px 0 darken(@white, 80%));
-}
-
-.btn-primary.dropdown-toggle, .btn-primary.dropdown-toggle:hover {
-	.box-shadow(0 2px 0 darken(@btnPrimaryBackground, 30%));
-}
-
-.btn-warning.dropdown-toggle, .btn-warning.dropdown-toggle:hover {
-	.box-shadow(0 2px 0 darken(@yellow, 30%));
-}
-
-.btn-danger.dropdown-toggle, .btn-danger.dropdown-toggle:hover {
-	.box-shadow(0 2px 0 darken(#ee5f5b, 30%));
-}
-
-.btn-success.dropdown-toggle, .btn-success.dropdown-toggle:hover {
-	.box-shadow(0 2px 0 darken(#62c462, 30%));
-}
-
-.btn-info.dropdown-toggle, .btn-info.dropdown-toggle:hover {
-	.box-shadow(0 2px 0 darken(#5bc0de, 40%));
-}
-
-.btn-inverse.dropdown-toggle, .btn-inverse.dropdown-toggle:hover {
-	.box-shadow(0 2px 0 darken(#454545, 20%));
-}
 /* ###-
 	Drop zone 
 ###- */
@@ -296,17 +315,31 @@ hr{ border-top:1px solid rgba(0,0,0,0.1); border-bottom:1px solid rgba(255,255,2
 	padding:15px;
   margin-bottom:20px;
 	.border-radius(10px);
-	background:lighten(@yellow, 30%);
-	.transition(background .3s ease-in-out);
+  background:lighten(@red, 20%);
+	.transition(opacity .3s ease-in-out);
 	border:1px solid rgba(0,0,0,.2);
+  opacity:.5;
 }
 
 
 .drop-zone:hover {
 
-	background:lighten(@red, 20%);
 	color:white;
-	text-shadow:none;
+  opacity:1;
+}
+
+
+/* ###-
+  Tracks number in loops
+###- */
+.track-number {
+  color:rgba(0,0,0,.5);
+  font-style:italic;
+  text-shadow:1px 1px 0px rgba(255,255,255,.4);
+  font-size:36px;
+  line-height: 40px;
+  text-align: right;
+  font-weight: bold;
 }
 
 
@@ -323,6 +356,7 @@ div.thumbnail, a.thumbnail {
   Ratings 
 ###- */
 .ratings {
+  width:120px;
   padding-bottom:20px;
   opacity:.5;
   .transition(opacity .3s ease-in-out);
@@ -334,12 +368,50 @@ div.thumbnail, a.thumbnail {
 
 }
 /* ###-
+  Thumbnail 
+###- */
+div.thumbnail, a.thumbnail {
+  background:darken(@white, 20%);
+  #gradient > .vertical(darken(@white, 10%), darken(@white, 20%));
+  .box-shadow(0 3px 10px rgba(0,0,0,.30));
+  border-color: rgba(0,0,0,.3);
+}
+
+/* ###-
 	Wells 
 ###- */
 .well {
-	background:darken(@white, 2%);
-	.box-shadow(inset 0 0 25px 10px rgba(0,0,0,.1));
-	border-color: rgba(0,0,0,.2);
+  background:darken(@white, 20%);
+  #gradient > .vertical(darken(@white, 20%), darken(@white, 30%));
+  .box-shadow(0 3px 10px rgba(0,0,0,.30));
+  border-color: rgba(0,0,0,.3);
+}
+.black.well {
+  #gradient > .vertical(darken(@white, 80%), darken(@white, 90%));
+  color:white;
+  h1 small { 
+    color:rgba(255,255,255,0.5);
+  }
+}
+
+/* ###-
+  SMALL Fix
+###- */
+.content small {
+  color:rgba(0,0,0,.5);
+}
+
+
+
+/* ###-
+  Dropdown menus 
+###- */
+.content ul.dropdown-menu {
+  .border-radius(5px);
+  background:darken(@white, 15%);
+  border:1px solid darken(@white, 55%);
+  li a { color:lighten(@black, 25%); }
+  li a:hover { background:lighten(@white, 5%);color:darken(@black, 15%); }
 }
 
 /* ###-
@@ -347,8 +419,37 @@ div.thumbnail, a.thumbnail {
 ###- */
 
 footer {
-	text-align: center;
-	margin:20px 0;
+  background-color: darken(@white, 20%);
+  padding: 20px;
+  margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+  .box-shadow(0 3px 10px rgba(0,0,0,.30));
+  border-top:10px solid rgba(0,0,0,.3);
+  .border-radius(0 0 10px 10px);
+
+}
+.footer {
+  margin-top:30px;
+}
+
+/* ###-
+  Music player
+###- */
+.jp-current-time, .jp-duration {
+  padding:2px 6px;
+}
+.music-player.well {
+  padding-top:7px;
+  padding-bottom:2px;
+  #gradient > .vertical(darken(@white, 80%), darken(@white, 90%));
+  color:white;
+}
+.progress {
+  height:21px;
+  #gradient > .vertical(darken(@white, 40%), darken(@white, 60%));
+}
+.progress .bar {
+  height:21px;
+  .transition(width 2.5s ease);
 }
 
 /* ###-
@@ -356,16 +457,17 @@ footer {
 ###- */
 /* The white background content wrapper */
 .content {
-  background-color: #fff;
+  background-color: darken(@white, 30%);
   padding: 20px;
   margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
-  .border-radius(0 0 6px 6px);
-  .box-shadow(0 1px 2px rgba(0,0,0,.15));
+  .box-shadow(0 3px 10px rgba(0,0,0,.30));
 }
 
 /* Page header tweaks */
 .page-header {
-  background-color: #f5f5f5;
+  background-color: darken(@white, 15%);
+  #gradient > .vertical(darken(@white, 15%),@white);
+  border-bottom:1px solid rgba(0,0,0,.4);
   padding: 20px 20px 10px;
   margin: -20px -20px 20px;
 }
@@ -394,4 +496,65 @@ footer {
 	background-position: center;
 	h1 { font-family: 'Swanky and Moo Moo', cursive; .rotate(-2deg); color:white;margin:50px 0; }
 	p { font-family: 'Swanky and Moo Moo', cursive; .rotate(0deg); color:white;margin:50px 0; font-size:24px;}
+}
+
+
+@inputBorderFocus: @myRed;
+
+textarea:focus, input[type="text"]:focus, 
+input[type="password"]:focus, 
+input[type="datetime"]:focus, 
+input[type="datetime-local"]:focus, 
+input[type="date"]:focus, 
+input[type="month"]:focus, 
+input[type="time"]:focus, 
+input[type="week"]:focus, 
+input[type="number"]:focus, 
+input[type="email"]:focus, 
+input[type="url"]:focus, 
+input[type="search"]:focus, 
+input[type="tel"]:focus, 
+input[type="color"]:focus, 
+.uneditable-input:focus {
+  border-color: fade(@inputBorderFocus, 80%);
+  @shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px fade(@inputBorderFocus, 60%);
+  .box-shadow(@shadow);
+  outline: 0;
+  outline: thin dotted \9; /* IE6-9 */
+}
+
+input[type="text"], 
+input[type="password"], 
+input[type="datetime"], 
+input[type="datetime-local"], 
+input[type="date"], 
+input[type="month"], 
+input[type="time"], 
+input[type="week"], 
+input[type="number"], 
+input[type="email"], 
+input[type="url"], 
+input[type="search"], 
+input[type="tel"], 
+input[type="color"], 
+.uneditable-input,
+.input-block-level, {
+  padding-top:10px;
+  padding-bottom:10px;
+  font-size:16px;
+  line-height:18px;
+  
+  .box-shadow(inset 0 5px 5px rgba(0,0,0,.175));
+}
+
+
+
+.help-inline {
+  font-weight: bold;
+  
+}
+.help-block {
+  font-style: italic;
+  color:rgba(0,0,0,.4);
+
 }

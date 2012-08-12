@@ -1,0 +1,36 @@
+= bootstrap_page_header "Your Playlists", "Create, share and listen to your favorite music, for free!" 
+
+.row
+  .span12
+    .btn-group
+      = button_link "plus", "New Playlist", new_playlist_path, "btn-success"
+    %hr 
+    #sortable
+      = content_tag_for(:div, @playlists, :class => "row") do |playlist|
+        .span6
+          %h2
+            = link_to playlist.name, playlist
+          %p
+            = button_link "move", nil, nil, "btn-inverse btn-mini"
+            = button_link "edit", "Edit Details", edit_playlist_path(playlist), "btn-warning btn-mini"
+        .span3
+          %h6 Views
+          %p 3,324
+        .span3
+          %h6 Total Plays
+          %p 20
+        .span12
+          %hr.d
+
+  .span4.omega
+    %h4
+      %i.icon-umbrella
+      Welcome to the playlist manager, we make it pretty easy and fun to manage your playlists.
+    %hr
+    %p
+      %i.icon-arrow-right
+      The first playlist will appear as the featured playlist on your profile. 
+    %hr
+    %p
+      %i.icon-move
+      You can drag and drop your playlists to arrage the order they appear on your profile.

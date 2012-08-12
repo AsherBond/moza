@@ -1,0 +1,12 @@
+development:
+  bucket: moza_dev
+  access_key_id: AKIAIKR7X6JWS5G2X3DQ
+  secret_access_key: 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
+test:
+  bucket: moza_test
+  access_key_id: AKIAIKR7X6JWS5G2X3DQ
+  secret_access_key: 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
+production:
+  bucket: moza_pro
+  access_key_id: AKIAIKR7X6JWS5G2X3DQ
+  secret_access_key: 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

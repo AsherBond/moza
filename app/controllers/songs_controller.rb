@@ -1,4 +1,13 @@
 class SongsController < ApplicationController
+  authorize_resource
+
+  def vote
+    value = params[:type] == "up" ? 1 : -1
+    @song = Song.find(params[:id])
+    @song.add_or_update_evaluation(:song_votes, value, current_user)
+    redirect_to :back, notice: "Thank you for voting"
+  end
+
   # GET /songs
   # GET /songs.json
   def index
@@ -47,7 +56,7 @@ class SongsController < ApplicationController
 
     respond_to do |format|
       if @song.save
-        format.html { redirect_to album_songs_path(@album), notice: 'Song was successfully created.' }
+        format.html { redirect_to album_path(@album), notice: 'Song was successfully created.' }
         format.json { render json: @song, status: :created, location: @song }
       else
         format.html { render action: "new" }

@@ -1,0 +1,16 @@
+-if current_user
+	.btn-group
+		-if current_user.voted_for?(song)
+			= link_to "<i class='icon-thumbs-up'></i> Like (#{pluralize(song.reputation_value_for(:song_votes).to_i, "vote")})".html_safe, vote_song_path(song, type: "up"), method: "post", :class => "btn btn-mini btn-success disabled"
+			= link_to "<i class='icon-thumbs-down'></i>".html_safe, vote_song_path(song, type: "down"), method: "post", :class => "btn btn-mini btn-inverse disabled"
+		-else
+			= link_to "<i class='icon-thumbs-up'></i> Like (#{pluralize(song.reputation_value_for(:song_votes).to_i, "vote")})".html_safe, vote_song_path(song, type: "up"), method: "post", :class => "btn btn-mini btn-success"
+			= link_to "<i class='icon-thumbs-down'></i>".html_safe, vote_song_path(song, type: "down"), method: "post", :class => "btn btn-mini btn-inverse"
+-else
+	.btn-group
+		%span.btn.btn-mini.btn-info
+			%i.icon-heart
+			= pluralize(song.reputation_value_for(:song_votes).to_i, "vote")
+
+	.btn-group
+		= link_to "Sign in to vote!".html_safe, new_user_session_path, :class => "btn btn-mini btn-inverse"

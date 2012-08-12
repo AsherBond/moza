@@ -1,0 +1,29 @@
+= bootstrap_page_header "#{@video.name}", "Video by #{icon_link(:user,@video.user.username, @video.user)}"
+.row
+  .span10
+    -if @video.youtube_url.empty?
+      %video.video-js.vjs-default-skin{:controls => "", "data-setup" => "{}", :height => "330", :poster => "http://placehold.it/1920x1080", :preload => "auto", :width => "100%"}
+        %source{:src => @video.item.url, :type => "video/mp4"}
+    -else 
+      %iframe{:allowfullscreen => "", :frameborder => "0", :height => "330", :src => "http://www.youtube.com/embed/#{parse_youtube(@video.youtube_url)}", :width => "100%" }
+    .well
+      %h6 Description
+      %p= @video.description
+    %h3 
+      %i.icon-comments-alt
+      Comments
+    %hr
+    =render 'comments/comments'
+    =render 'comments/form'
+  .span6.omega
+    .black.well
+      %h1
+        = @video.user.username
+        %small= @video.user.full_name
+      %p
+        = button_link "plus", "Follow", nil, "btn-success btn-mini"
+        = button_link "user", "Profile", nil, "btn-info btn-mini"
+    = link_to image_tag(@video.user.profile_photo.url(:large)), @video.user, :class => "thumbnail"
+    %hr.d
+    %h3
+      #{@video.user.username}'s Videos

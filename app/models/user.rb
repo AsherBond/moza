@@ -8,16 +8,59 @@ class User < ActiveRecord::Base
 
 	# Setup accessible (or protected) attributes for your model
 	attr_accessible :email, :password, :password_confirmation, :remember_me,
-					:username, :full_name, :about, :interests, :inspirations, :sounds_like,
+					:username, :full_name, :about, :interests, :inspirations, :sounds_like, :gender,
 					:phone, :state, :city, :country, :date_of_birth, :band_birth, :band_members,
-					:login, :artist_name, :genre_ids
+					:login, :artist_name, :genre_ids, :slug, :profile_photo
 	# attr_accessible :title, :body
 	has_many :comments, as: :commentable, :dependent => :destroy
 	has_many :albums
+	has_many :videos
+	has_many :playlists
 	has_and_belongs_to_many :genres
+	#-----\
+	#
+	# SLUGS!
+	#---------\
+	extend FriendlyId
+	friendly_id :username, use: :slugged
+	#-----\
+	#
+	# Voting!
+	#---------\
+	has_many :evaluations, class_name: "RSEvaluation", as: :source
+	has_reputation :album_votes, source: {reputation: :album_votes, of: :albums}, aggregated_by: :sum
 
+	def voted_for?(album)
+	  evaluations.where(target_type: album.class, target_id: album.id).present?
+	end
+
+	def is_active? 
+		!artist_name.nil?
+	end
+
+	def total_votes 
+		reputation_value_for(:album_votes).to_i
+	end
+
+	#-----\
+	#
+	# Profile Image
+	#---------\
+	has_attached_file :profile_photo, 
+                      :styles => {
+                        :small => "150x150#", 
+                        :full_small => "150x150>", 
+                        :medium => "400x400#", 
+                        :full_medium => "400x400>", 
+                        :large => "900x900#", 
+                        :full_large => "900x900>",
+                        :avatar => "60x60#"
+                      },
+                      :default_url => 'http://placehold.it/400x400'
+	#-----\
+	#
 	# Valid email regex.
-	# -----
+	#---------\
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
 	# Validate the current users email with a regex.
@@ -38,8 +81,9 @@ class User < ActiveRecord::Base
 	          length: {
 	            minimum: 2, maximum: 40,
 	            :message => "2-40 letters."
-	          }, 
-	          :allow_nil => true, :allow_blank => true
+	          }
+
+	validates :gender, presence: true
 
 	validates :phone,
 	          length: {
@@ -51,7 +95,6 @@ class User < ActiveRecord::Base
 	# Artist only Validations
 	# -----------
 	validates :interests,
-	          presence: true,
 	          length: {
 	            minimum: 5, maximum: 300,
 	            :message => "5-300 letters."
@@ -60,7 +103,6 @@ class User < ActiveRecord::Base
 	          :allow_nil => true, :allow_blank => true
 	          
 	validates :inspirations,
-	          presence: true,
 	          length: {
 	            minimum: 5, maximum: 300,
 	            :message => "5-300 letters."
@@ -69,7 +111,6 @@ class User < ActiveRecord::Base
 	          :allow_nil => true, :allow_blank => true
 	          
 	validates :sounds_like,
-	          presence: true,
 	          length: {
 	            minimum: 5, maximum: 300,
 	            :message => "5-300 letters."
@@ -78,7 +119,6 @@ class User < ActiveRecord::Base
 	          :allow_nil => true, :allow_blank => true
 	          
 	validates :band_members,
-	          presence: true,
 	          length: {
 	            minimum: 5, maximum: 300,
 	            :message => "5-300 letters."

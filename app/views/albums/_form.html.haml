@@ -4,8 +4,30 @@
   = f.input :description, :input_html => { :rows => 5}
   = f.input :record_label
   = f.input :year_produced
-  = f.input :active
-  = f.input :featured
+  = f.label :active
+  = f.hint :active
+  .btn-group{"data-toggle"=>"buttons-radio"}
+    -if @album.active?
+      %label.btn.btn-large.active{:for=>"album_active"} 
+        %i.icon-eye-open
+        Active
+    -else
+      %label.btn.btn-large{:for=>"album_active"} 
+        %i.icon-eye-open
+        Active
+
+    -if !@album.active?
+      %label.btn.btn-large.active{:for=>"album_unactive"} 
+        %i.icon-eye-close
+        Hidden
+    -else
+      %label.btn.btn-large{:for=>"album_unactive"} 
+        %i.icon-eye-close
+        Hidden
+
+  %input{:type=>"checkbox", :id=>"album_active", :name=>"album[active]", :value=>"1", :style=>"display:none"}
+  %input{:type=>"checkbox", :id=>"album_unactive", :name=>"album[active]", :value=>"0", :style=>"display:none"}
+
   .form-actions
     = f.button :submit, :class => 'btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), albums_path, :class => 'btn'

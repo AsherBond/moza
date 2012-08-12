@@ -1,2 +1,11 @@
+
 %footer
-	%p &copy; Mozapolis Beta 2012
+	.row
+		.span6
+			%h1.oleo &copy; Mozapolis 2012
+			%h6 Find us on
+			%p
+				= button_link "facebook", "Facebook", nil, "btn-mini btn-facebook"
+				= button_link "twitter", "Twitter", nil, "btn-mini btn-twitter"
+				= button_link "google-plus-sign", "Google +", nil, "btn-mini btn-google"
+= debug(params) if Rails.env.development?

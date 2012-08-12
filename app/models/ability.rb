@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
     user ||= User.new # guest user (not logged in)
     if user.has_role? :artist
-        can :manage, [Album]
+        can :manage, [Album, Song]
     elsif user.has_role? :fan
         cannot :manage, [Album]
         can :show, [Album]

@@ -1,12 +1,16 @@
-.row
-	.span1
-		= link_to image_tag("http://placehold.it/60x60", :class => "thumbnail"), nil
-	.span7
-		%h3
-			= link_to "Artist Name", nil
-			%small Rock / Punk
-		%p
-			%span.label.label-info
-				%icon.icon-play 
-				932 Total Plays 
-%hr
+- @albums.to_enum.with_index(1).each  do |album,a|
+	.row
+		.span1
+			%p
+				.track-number= a
+		.span2
+			= link_to image_tag(album.cover.url(:small)), album, :class => "thumbnail"
+		.span5
+			%h3
+				= link_to album.name, album
+				%small= album.user.artist_name
+			%p
+				%span.label.label-info
+					%icon.icon-play 
+					0 Total Plays 
+	%hr.d

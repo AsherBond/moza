@@ -3,6 +3,10 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.7'
 gem 'pg'
 
+group :development do
+	gem "letter_opener"
+	gem "faker"
+end
 group :assets do
 	gem 'sass-rails',   '~> 3.2.3'
 	gem 'coffee-rails', '~> 3.2.1'
@@ -20,7 +24,6 @@ gem 'devise'
 gem 'cancan'
 gem 'rolify'
 gem 'simple_form'
-gem 'select2-rails'
 gem 'bootstrap-will_paginate'
 gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails', :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
 gem 'country-select'
@@ -35,3 +38,7 @@ gem 'activerecord-reputation-system', :require => 'reputation_system'
 gem 'impressionist'
 
 gem 'formatize'
+
+gem 'capistrano'
+gem 'aws-sdk'
+gem 'aws-s3'

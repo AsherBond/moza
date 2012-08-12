@@ -1,0 +1,16 @@
+= bootstrap_page_header "#{@playlist.name}", "Playlist by #{icon_link(:user,@playlist.user.username, @playlist.user)}"
+.row
+	.span10
+		=render "songs/row"
+	.span6.omega
+		.black.well
+			%h1
+				= @playlist.user.username
+				%small= @playlist.user.full_name
+			%p
+				= button_link "plus", "Follow", nil, "btn-success btn-mini"
+				= button_link "user", "Profile", nil, "btn-info btn-mini"
+		= link_to image_tag(@playlist.user.profile_photo.url(:large)), @playlist.user, :class => "thumbnail"
+		%hr.d
+		%h3
+			#{@playlist.user.username}'s Playlists

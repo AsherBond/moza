@@ -1,0 +1,18 @@
+= bootstrap_page_header "Edit Playlist", "#{@playlist.name}" 
+.row
+	.span8
+		= render 'form'
+	.span8
+
+		%p.lead Edit Playlist
+
+		%hr
+
+		%p
+			%strong If this is your first playlist on Mozapolis these tips may come in handy!
+		%p 
+			You can add any song to any playlist and share it instantly just look for the 
+			= button_link "share", "Share", nil, "btn-mini btn-inverse" 
+			button! and the add to playlist button!
+		%hr.d
+		%p You can edit this text in Admin > Blocks > Albums > New Album Info

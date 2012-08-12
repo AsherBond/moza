@@ -1,7 +1,31 @@
 = simple_form_for [@album, @song], :defaults => { :input_html => {:class => "span8"} } do |f|
   = f.input :name
+  = f.input :file
   = f.input :lyrics, :input_html => {:rows => 5}
-  = f.input :active
+  = f.label :active
+  = f.hint :active
+  .btn-group{"data-toggle"=>"buttons-radio"}
+    -if @song.active?
+      %label.btn.btn-large.active{:for=>"song_active"} 
+        %i.icon-eye-open
+        Active
+    -else
+      %label.btn.btn-large{:for=>"song_active"} 
+        %i.icon-eye-open
+        Active
+
+    -if !@song.active?
+      %label.btn.btn-large.active{:for=>"song_unactive"} 
+        %i.icon-eye-close
+        Hidden
+    -else
+      %label.btn.btn-large{:for=>"song_unactive"} 
+        %i.icon-eye-close
+        Hidden
+
+  %input{:type=>"checkbox", :id=>"song_active", :name=>"song[active]", :value=>"1", :style=>"display:none"}
+  %input{:type=>"checkbox", :id=>"song_unactive", :name=>"song[active]", :value=>"0", :style=>"display:none"}
+
   .form-actions
     = f.button :submit, :class => 'btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), album_songs_path, :class => 'btn'

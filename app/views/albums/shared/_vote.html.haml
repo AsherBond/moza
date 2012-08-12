@@ -1,0 +1,18 @@
+%h6 Rate this album
+.btn-toolbar
+	-if current_user
+		.btn-group
+			= link_to "<i class='icon-heart'></i> #{pluralize(@album.reputation_value_for(:album_votes).to_i, "vote")}".html_safe, vote_album_path(@album, type: "up"), method: "post", :class => "btn btn-info disabled"
+			-if current_user && current_user.voted_for?(@album)
+				%span.btn.disabled Thanks!
+		.btn-group
+			= link_to "<i class='icon-thumbs-up'></i> Like".html_safe, vote_album_path(@album, type: "up"), method: "post", :class => "btn btn-success"
+			= link_to "<i class='icon-thumbs-down'></i>".html_safe, vote_album_path(@album, type: "down"), method: "post", :class => "btn btn-inverse"
+	-else
+		.btn-group
+			%span.btn.btn-info
+				%i.icon-heart
+				= pluralize(@album.reputation_value_for(:album_votes).to_i, "vote").html_safe
+		.btn-group
+
+			= link_to "Sign in to vote!".html_safe, new_user_session_path, :class => "btn btn-inverse"

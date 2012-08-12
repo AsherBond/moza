@@ -1,0 +1,12 @@
+- if current_user
+	.btn-group
+		%a.btn.btn-mini.btn-inverse.dropdown-toggle{"data-toggle"=>"dropdown"}
+			%i.icon-plus
+			%i.icon-reorder
+			Playlists
+			%span.caret
+		%ul.dropdown-menu
+			- if current_user.playlists.each do |playlist|
+				%li= link_to playlist.name, add_song_to_playlist_path("song_id" => song.id, "playlist_id" => playlist.id), :method => :post
+			- end.empty?
+				%li= icon_link "plus", "New Playlist", new_playlist_path

@@ -23,6 +23,9 @@ en:
     #   defaults:
     #     username: 'User name to sign in.'
     #     password: 'No special characters, please.'
+    labels:
+      user:
+        artist_name: "Artist/Band Name"
     hints:
       album:
         name: "The title of your album."
@@ -33,8 +36,9 @@ en:
         featured: "If you check this the album will be featured first on your profile."
       user:
         artist_name: "Whatever you call yourself!"
-        band_birth: "The date you started playing."
+        band_birth: "The date you became a artist/band."
         about: "Tell us about your music."
+        gender: "We wont display this anywhere!"
         interests: "What do you like to do?"
         sounds_like: "Do you sound like anyone else?"
         inspirations: "What gets you out of bed everyday?"

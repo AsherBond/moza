@@ -1,21 +1,41 @@
-.row
-	.span1
-		= link_to image_tag("http://placehold.it/60x60", :class => "thumbnail"), nil
-	.span6
-		%p.btn-group
-			= button_link "play", nil, nil, "btn-danger"
-			= link_to "Track Name", nil, :class => "btn"
-			= link_to "by <strong>Artist</strong>".html_safe, nil, :class => "btn btn-info"
-		%p
-			%span.label.label-success
-				%icon.icon-play 
-				932 Plays 
-			%span.label.label-info
-				%icon.icon-plus 
-				%icon.icon-reorder 
-				4,322 Adds to Playlist 
-	.span3
-		.btn-group.pull-right.ratings
-			= button_link "thumbs-up", "(2,325) Like", nil, "btn-success btn-mini"
-			= button_link "thumbs-down", nil, nil, "btn-inverse btn-mini"
-%hr
+- if @songs.to_enum.with_index(1).each  do |song, s|
+	.row
+		.span1
+			%p
+				.track-number=s
+		.span9
+			%p.mozer-song
+				.mozer-song-controls
+					%p
+						%a.btn.btn-inverse.mozer-play{"data-song-id" => "play_song_#{song.id}", :href => "#/"}
+							%i.icon-play
+							= song.name
+						%a.btn.btn-danger.mozer-pause.hide{"data-song-id" => "play_song_#{song.id}", :href => "#/"}
+							%i.icon-pause
+							= song.name
+				%audio{:id => "play_song_#{song.id}", :src => "#{song.file.url}", :type => "audio/mp3"}
+
+			.btn-toolbar
+				= render 'songs/shared/vote', :song => song
+				= render 'playlists/shared/button', :song => song
+				.btn-group.share-lyrics
+					= link_to "<i class='icon-share'></i> Share".html_safe, "#/", :class => "btn btn-mini btn-inverse", "data-toggle" => "collapse", "data-target" => "#share_song_#{song.id}"
+					= link_to "<i class='icon-pencil'></i> Lyrics".html_safe, "#/", :class => "btn btn-mini btn-inverse", "data-toggle" => "collapse", "data-target" => "#song_#{song.id}_lyrics"
+			.collapse.out{:id => "song_#{song.id}_lyrics"}
+				%p
+					-if song.lyrics.blank?
+						There are no lyrics for this song, sorry!
+					-else
+						= song.lyrics.html_safe
+			.collapse.out{:id => "share_song_#{song.id}"}
+				%p.btn-group
+					= button_link "facebook", "Post to Wall", nil, "btn-mini btn-facebook"
+					= button_link "twitter", "Tweet", nil, "btn-mini btn-twitter"
+					= button_link "google-plus", "Google+", nil, "btn-mini btn-google"
+					= button_link "envelope-alt", "Email", nil, "btn-email btn-mini"
+			%hr.d
+
+- end.empty?
+	.row
+		.span10
+			.alert.alert-info No songs!

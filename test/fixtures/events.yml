@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  start: 2012-08-10 12:08:32
+  end: 2012-08-10 12:08:32
+  details: MyText
+  ticket_link: MyString
+  ticket_info: MyText
+  active: false
+  user: 
+
+two:
+  name: MyString
+  start: 2012-08-10 12:08:32
+  end: 2012-08-10 12:08:32
+  details: MyText
+  ticket_link: MyString
+  ticket_info: MyText
+  active: false
+  user: 

@@ -1,0 +1,35 @@
+= simple_form_for @video, :html => { :class => 'form-vertical' }, :defaults => { :input_html => {:class => "span8"} } do |f|
+  = f.input :name
+  .row
+    .span4
+      = f.input :item, :input_html => { :class => "span4" }
+    .span4
+      = f.input :youtube_url, :input_html => { :class => "span4" }
+  = f.input :description, :input_html => { :rows => 5}
+  = f.label :active
+  .btn-group{"data-toggle"=>"buttons-radio"}
+    -if @video.active?
+      %label.btn.btn-large.active{:for=>"video_active"} 
+        %i.icon-eye-open
+        Active
+    -else
+      %label.btn.btn-large{:for=>"video_active"} 
+        %i.icon-eye-open
+        Active
+
+    -if !@video.active?
+      %label.btn.btn-large.active{:for=>"video_unactive"} 
+        %i.icon-eye-close
+        Hidden
+    -else
+      %label.btn.btn-large{:for=>"video_unactive"} 
+        %i.icon-eye-close
+        Hidden
+
+  = f.hint :active
+  %input{:type=>"checkbox", :id=>"video_active", :name=>"video[active]", :value=>"1", :style=>"display:none"}
+  %input{:type=>"checkbox", :id=>"video_unactive", :name=>"video[active]", :value=>"0", :style=>"display:none"}
+
+  .form-actions
+    = f.button :submit, :class => 'btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), videos_path, :class => 'btn'

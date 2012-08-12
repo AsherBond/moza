@@ -1,0 +1,15 @@
+.navbar.navbar-fixed-bottom
+	.navbar-inner
+		.container
+			#moz_player
+			#moz_player_container
+
+				%span.track-name.btn.btn-info
+				= button_link "play", "" , nil, "jp-play btn-danger"
+				= button_link "pause", "", nil, "jp-pause btn-danger"
+				= button_link "stop", nil, nil, "jp-stop btn-danger"
+				= button_link "volume-up", nil, nil, "jp-unmute"
+				= button_link "volume-off", nil, nil, "jp-mute"
+
+				.progress.progress-danger.progress-striped.active
+					#song-progress.bar

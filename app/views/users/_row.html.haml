@@ -1,13 +1,25 @@
-%p
-	%h3
-		= link_to "Artist Name", nil
-		%small Rock / Pop Punk
-	%p
-		%span.badge.badge-success
-			%icon.icon-plus 
-			%icon.icon-heart 
-			932 Rep 
-		%span.label.label-info
-			%icon.icon-group 
-			932 Followers 
-%hr
+- @artists.to_enum.with_index(1).each  do |user, u|
+	.row
+		.span1
+			%p
+				.track-number=u
+		.span2
+			= link_to image_tag(user.profile_photo(:small)), user, :class => "thumbnail"
+		.span6
+			%h3
+				= link_to user.artist_name, user
+				%small= user.username
+			%p
+				- if user.genres.each do |genre|
+					%span.label=genre.name
+				- end.empty?
+					No genres...
+			%p
+				%span.badge.badge-success
+					%icon.icon-plus 
+					%icon.icon-heart 
+					0 Rep 
+				%span.label.label-info
+					%icon.icon-group 
+					0 Followers 
+	%hr.d

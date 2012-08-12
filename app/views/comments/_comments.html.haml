@@ -1,11 +1,9 @@
 - @comments.each do |comment|
-  %blockquote
+  %blockquote.comments
     %p= comment.content
     %small
       = icon_link :user, comment.user.username, comment.user
       ( #{time_ago_in_words(comment.created_at)} ago... )
-      \#{icon_link "retweet", "Reply", nil, "btn btn-mini"}
-      \#{icon_link "flag", "", nil, "btn btn-mini"}
 - if @comments.empty?
   .alert.alert-error
     There are no comments. Be the first!

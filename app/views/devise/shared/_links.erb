@@ -1,17 +1,17 @@
 <%- if controller_name != 'sessions' %>
-  <%= button_link "signin", "Sign in", new_session_path(resource_name), "btn-mini btn-primary" %>
+  <%= button_link "signin", "Sign in", new_session_path(resource_name), "btn-info btn-mini" %>
 <% end -%>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= button_link "pencil", "Sign up", new_registration_path(resource_name), "btn-mini btn-success" %>
+  <%= button_link "pencil", "Sign up", new_registration_path(resource_name), "btn-success btn-mini" %>
 <% end -%>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
-  <%= button_link "question-sign", "Forgot your password?", new_password_path(resource_name), "btn-mini btn-danger" %>
+  <%= button_link "question-sign", "Forgot your password?", new_password_path(resource_name), "btn-warning btn-mini" %>
 <% end -%>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-  <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
+  <%= button_link "question-sign", "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), "btn-danger btn-mini" %><br />
 <% end -%>
 
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>

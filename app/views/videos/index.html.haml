@@ -1,0 +1,35 @@
+= bootstrap_page_header "Your Videos", "Share your videos with ease!" 
+
+.row
+  .span12
+    .btn-group
+      = button_link "plus", "New Video", new_video_path, "btn-success"
+    %hr 
+    .drop-zone
+      %strong
+        %i.icon-plus-sign 
+        Drop a video here
+      %p to learn more about drag and drop uploads, click here.
+    %ul.thumbnails
+      -if @videos.each do |video| 
+        %li.span3
+          = link_to image_tag("http://placehold.it/500x500"), video, :class => "thumbnail", "data-original-title" => "#{video.name}", "data-content" => "<p>#{video.description}</p>", :rel => "popover"
+      -end.empty?
+        -show_msg = true
+    -if show_msg ==  true
+      .alert.alert-info
+        You don't have any videos yet, click on 
+        = button_link "plus", "New Video", new_video_path, "btn-success btn-mini"
+        to get started!
+  .span4.omega
+    %h4
+      %i.icon-umbrella
+      Welcome to the video manager, we make it pretty easy and fun to manage your videos.
+    %hr
+    %p
+      %i.icon-arrow-right
+      The first video will appear as the featured video on your profile.
+    %hr
+    %p
+      %i.icon-move
+      You can drag and drop your videos to arrage the order they appear on your profile.
