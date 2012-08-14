@@ -39,6 +39,7 @@ gem 'impressionist'
 
 gem 'formatize'
 
+gem 'unicorn'
 gem 'capistrano'
 gem 'aws-sdk'
 gem 'aws-s3'
