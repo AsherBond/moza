@@ -1,122 +1,62 @@
+#profile-editor.profile-editor-tools.span3.well
+	.btn.btn-info.btn-mini.pull-right
+		%i.icon-move
+	= simple_form_for(@user, :url => registration_path(@user), :html => { :method => :put, :class => "form-vertical" }, :defaults => { :input_html => {:class => "span3 color {pickerClosable:true, pickerPosition:'right', pickerFaceColor:'#FFFFFF', pickerInsetColor:'#CCCCCC', pickerBorderColor:'#555555'}"} }) do |f|
+		%ul.nav.nav-pills.nav-stacked
+			%li.active= link_to "Background", "#background", "data-toggle"=>"tab"
+			%li= link_to "Header", "#header", "data-toggle"=>"tab"
+			%li= link_to "Text", "#text", "data-toggle"=>"tab"
+		.tab-content
+			#background.tab-pane.active.fade.in
+				%h6 Background
+				= f.input :background_color, :input_html => {:onchange => "document.getElementsByTagName('BODY')[0].style.backgroundColor = '#'+this.color"}
+				= f.input :content_background_color, :input_html => {:onchange => "document.getElementsByClassName('content')[0].style.backgroundColor = '#'+this.color"}
+			#header.tab-pane.fade.in
+				%h6 Header
+				= f.input :header_background_color, :input_html => {:onchange => "document.getElementsByClassName('page-header')[0].style.backgroundColor = '#'+this.color"}
+				= f.input :header_color, :input_html => {:onchange => "document.getElementsByClassName('page-header-h1')[0].style.color = '#'+this.color"}
+				= f.input :header_small_color, :input_html => {:onchange => "document.getElementsByClassName('page-header-small')[0].style.color = '#'+this.color"}
+			#text.tab-pane.fade.in
+				%h6 Text
+				= f.input :regular_text_color, :input_html => {:onchange => "document.getElementsByClassName('page-header-small')[0].style.color = '#'+this.color"}
+				= f.input :heading_text_color, :input_html => {:onchange => "document.getElementsByClassName('page-header-small')[0].style.color = '#'+this.color"}
+				= f.input :small_heading_text_color, :input_html => {:onchange => "document.getElementsByClassName('page-header-small')[0].style.color = '#'+this.color"}
+				= f.input :link_color, :input_html => {:onchange => "document.getElementsByClassName('page-header-small')[0].style.color = '#'+this.color"}
+				= f.input :link_color_hover, :input_html => {:onchange => "document.getElementsByClassName('page-header-small')[0].style.color = '#'+this.color"}
+				= f.input :comment_text_color, :input_html => {:onchange => "document.getElementsByClassName('page-header-small')[0].style.color = '#'+this.color"}
+				= f.input :comment_block_quote_border, :input_html => {:onchange => "document.getElementsByClassName('page-header-small')[0].style.color = '#'+this.color"}
 
-%style
-	/body{ background:url('http://colourlovers.com.s3.amazonaws.com/images/patterns/2792/2792451.png'); }
-	/.content{ background:#ED7272; }
-	/h6{ color:black; }
-	/.span6 p{ color:black; }
-	/.span10 h3{ color:black; }
-	/hr{ border-top-color:white; border-bottom-color:black; }
-	/hr.d{ border-top-color:white; border-bottom-color:black; }
-	/a.thumbnail{ background:#ED7272;border-color:black; }
-	/a.thumbnail:hover{ background:black;border-color:white; }
-	/.black.well{ background:black;border-color:white;color:red; }
-	/.black.well h1 small { color:red; }
-	/footer{border-top-color:red;}
-	/blockquote{color:black;border-left-color:black;}
-	/.content blockquote > small{color:black;}
-	/.comments a{color:black;}
-	/.comments a:hover{color:white;}
-	/form#new_comment textarea#comment_content{border-color:black;background:black;color:white;}
+
 
 -if @user.is_active?
 	= bootstrap_page_header "#{@user.artist_name}", "#{@user.username}" 
 
 	.row
 		.span6
-			%ul.thumbnails
-				%li.span6
-					-if @user.profile_photo.file?
-						=link_to image_tag(@user.profile_photo.url(:large)), "#/", :class => "thumbnail"
-					-else
-						%a.thumbnail= image_tag "http://placehold.it/500x500"
-			%h6
-				%i.icon-tags
-				Genres
-			%p
-				- if @user.genres.each do |genre|
-					%span.label.label-info=genre.name
-				- end.empty?
-					No genres...
-			%h6
-				%i.icon-info-sign
-				About
-			-if !@user.about.nil?
-				%p= @user.about
-			-else
-				%p Nothing you need to know!
-
-			%h6
-				%i.icon-group
-				Band Members
-			-if !@user.band_members.nil?
-				%p= @user.band_members
-			-else
-				%p What band members...
-			%h6
-				%i.icon-music
-				Sounds Like
-			-if !@user.sounds_like.nil?
-				%p= @user.sounds_like
-			-else
-				%p Pop funk jazz blues mix...
-			%h6
-				%i.icon-asterisk
-				Inspirations
-			-if !@user.inspirations.nil?
-				%p= @user.inspirations
-			-else
-				%p Being alive :)
+			= render 'users/profile/left'
 
 		.span10
 			%ul.nav.nav-pills
-				%li.active= link_to "Overview", nil
-				%li= link_to "Albums", nil
-				%li= link_to "Playlists", nil
-				%li= link_to "Videos", nil
-				%li= link_to "Photos", nil
-				%li= link_to "Comments", nil
-				%li= link_to "Fans", nil
-			-if !@user.albums.empty?
-				%h3 
-					%i.icon-star
-					Featured Album
-				%hr
-				.row
-					.span2
-						=link_to image_tag(@album.cover.url(:large)), @album, :class => "thumbnail"
-					.span8
-						%h2= @album.name
-						%p 17 Tracks - Released 2012
-						%p=@album.description
-				%hr.d
-				-if @songs.nil?
-					.alert.alert-info This user has no featured album.
-				-else
-					=render 'songs/row'
-
-			%h3 
-				%i.icon-film
-				Videos
-			%hr
-			-if @videos.nil?
-				.alert.alert-info This user has no videos.
-			-else
-				=render 'albums/shared/profile'
-
-			%h3 
-				%i.icon-music
-				Albums
-			%hr
-			-if @albums.nil?
-				.alert.alert-info This user has no albums.
-			-else
-				=render 'albums/shared/profile'
-			%h3 
-				%i.icon-comments-alt
-				Comments
-			%hr
-			=render 'comments/comments'
-			=render 'comments/form'
+				%li.active= link_to "Overview", "#overview", "data-toggle"=>"tab"
+				%li= link_to "Albums", "#albums", "data-toggle"=>"tab"
+				%li= link_to "Playlists", "#playlists", "data-toggle"=>"tab"
+				%li= link_to "Videos", "#videos", "data-toggle"=>"tab"
+				%li= link_to "Photos", "#photos", "data-toggle"=>"tab"
+				%li= link_to "Comments", "#comments", "data-toggle"=>"tab"
+				%li= link_to "Fans", "#fans", "data-toggle"=>"tab"
+			.tab-content
+				#photos.tab-pane.fade.in
+				#playlists.tab-pane.fade.in
+					=render 'users/profile/playlists'
+				#fans.tab-pane.fade.in
+				#comments.tab-pane.fade.in
+					=render 'users/profile/comments'
+				#videos.tab-pane.fade.in
+					=render 'users/profile/videos'
+				#albums.tab-pane.fade.in
+					=render 'users/profile/albums'
+				#overview.tab-pane.active.fade.in
+					=render 'users/profile/overview'
 
 -else
 	.row

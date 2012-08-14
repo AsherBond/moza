@@ -2,7 +2,7 @@
 .row
   .span10
     -if @video.youtube_url.empty?
-      %video.video-js.vjs-default-skin{:controls => "", "data-setup" => "{}", :height => "330", :poster => "http://placehold.it/1920x1080", :preload => "auto", :width => "100%"}
+      %video.video-js.vjs-default-skin{:controls => "", "data-setup" => "{}", :height => "330", :poster => "#{@video.item.url(:thumb)}", :preload => "auto", :width => "100%"}
         %source{:src => @video.item.url, :type => "video/mp4"}
     -else 
       %iframe{:allowfullscreen => "", :frameborder => "0", :height => "330", :src => "http://www.youtube.com/embed/#{parse_youtube(@video.youtube_url)}", :width => "100%" }

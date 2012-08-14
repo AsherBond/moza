@@ -1,0 +1,19 @@
+%h3 
+	%i.icon-reorder
+	Playlists
+%hr
+-if @playlists.nil?
+	.alert.alert-info This user has no playlists.
+-else
+	= content_tag_for(:div, @playlists, :class => "row") do |playlist|
+		.span6
+			%h2
+				= link_to playlist.name, playlist
+		.span2
+			%h6 Views
+			%p 3,324
+		.span2
+			%h6 Total Plays
+			%p 20
+		.span10
+			%hr.d

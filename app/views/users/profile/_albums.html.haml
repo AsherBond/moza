@@ -1,0 +1,26 @@
+-if !@user.albums.empty?
+	%h3 
+		%i.icon-star
+		Featured Album
+	%hr
+	.row
+		.span2
+			=link_to image_tag(@album.cover.url(:large)), @album, :class => "thumbnail"
+		.span8
+			%h2= @album.name
+			%p 17 Tracks - Released 2012
+			%p=@album.description
+	%hr.d
+	-if @songs.nil?
+		.alert.alert-info This user has no featured album.
+	-else
+		=render 'songs/row'
+
+%h3 
+	%i.icon-music
+	Albums
+%hr
+-if @albums.nil?
+	.alert.alert-info This user has no albums.
+-else
+	=render 'albums/shared/profile'

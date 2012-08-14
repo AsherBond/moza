@@ -9,7 +9,10 @@ class PlaylistsController < ApplicationController
       ptrack = PlaylistsSongs.new(:song_id => song_id, :playlist_id => playlist_id)
     end
 
-    if ptrack.save
+    if PlaylistsSongs.where(:song_id => song_id).size > 0
+      flash[:notice] = "<i class='icon-remove'></i> <i class='icon-reorder'></i> This song is already in your playlist.".html_safe
+      redirect_to :back
+    elsif ptrack.save
       flash[:notice] = "<i class='icon-plus'></i> <i class='icon-reorder'></i> Song added to the playlist '#{playlist.name}'.".html_safe
       redirect_to :back
     else

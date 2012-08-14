@@ -1,0 +1,8 @@
+%h3 
+	%i.icon-film
+	Videos
+%hr
+-if @videos.nil?
+	.alert.alert-info This user has no videos.
+-else
+	=render 'videos/row'

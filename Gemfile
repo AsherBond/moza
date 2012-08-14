@@ -29,7 +29,7 @@ gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails', :git
 gem 'country-select'
 
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
-
+gem "paperclip-ffmpeg", :git => 'git://github.com/hellocodes/paperclip-ffmpeg.git'
 gem 'friendly_id', :git => 'git://github.com/norman/friendly_id.git'
 
 gem 'acts_as_list'

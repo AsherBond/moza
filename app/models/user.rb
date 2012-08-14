@@ -42,10 +42,12 @@ class User < ActiveRecord::Base
 		reputation_value_for(:album_votes).to_i
 	end
 
-	#-----\
+	#-----------------------------@*@*\
 	#
-	# Profile Image
-	#---------\
+	# * Profile Image *
+	#
+	#-----------------------------@*@*\
+	#
 	has_attached_file :profile_photo, 
                       :styles => {
                         :small => "150x150#", 
@@ -56,6 +58,8 @@ class User < ActiveRecord::Base
                         :full_large => "900x900>",
                         :avatar => "60x60#"
                       },
+  					  :storage => :s3,
+					  :s3_credentials => "#{Rails.root}/config/s3.yml",
                       :default_url => 'http://placehold.it/400x400'
 	#-----\
 	#

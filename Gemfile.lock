@@ -6,6 +6,13 @@ GIT
       railties (>= 3.0)
 
 GIT
+  remote: git://github.com/hellocodes/paperclip-ffmpeg.git
+  revision: f1662c868821f4df661b50fd6e417ea8ef8327fc
+  specs:
+    paperclip-ffmpeg (0.9.0)
+      paperclip (>= 2.5.2)
+
+GIT
   remote: git://github.com/norman/friendly_id.git
   revision: 0d168b8aacc63afab81cb3564c4f3af4dcaef20c
   specs:
@@ -240,6 +247,7 @@ DEPENDENCIES
   jquery-rails
   letter_opener
   paperclip!
+  paperclip-ffmpeg!
   pg
   rails (= 3.2.7)
   rolify

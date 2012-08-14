@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120810224445) do
+ActiveRecord::Schema.define(:version => 20120813184518) do
 
   create_table "albums", :force => true do |t|
     t.string   "name"
@@ -92,6 +92,9 @@ ActiveRecord::Schema.define(:version => 20120810224445) do
     t.integer "song_id"
   end
 
+  add_index "playlists_songs", ["playlist_id"], :name => "index_playlists_songs_on_playlist_id"
+  add_index "playlists_songs", ["song_id"], :name => "index_playlists_songs_on_song_id"
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -164,12 +167,12 @@ ActiveRecord::Schema.define(:version => 20120810224445) do
   add_index "songs", ["album_id"], :name => "index_songs_on_album_id"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                      :default => "", :null => false
-    t.string   "encrypted_password",         :default => "", :null => false
+    t.string   "email",                           :default => "", :null => false
+    t.string   "encrypted_password",              :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",              :default => 0
+    t.integer  "sign_in_count",                   :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -178,12 +181,12 @@ ActiveRecord::Schema.define(:version => 20120810224445) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.integer  "failed_attempts",            :default => 0
+    t.integer  "failed_attempts",                 :default => 0
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.string   "authentication_token"
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
     t.string   "username"
     t.string   "full_name"
     t.text     "about"
@@ -208,6 +211,23 @@ ActiveRecord::Schema.define(:version => 20120810224445) do
     t.integer  "profile_photo_file_size"
     t.datetime "profile_photo_updated_at"
     t.string   "slug"
+    t.string   "background_color"
+    t.string   "background_attachment"
+    t.string   "background_position"
+    t.string   "background_repeat"
+    t.boolean  "background_image_active"
+    t.string   "content_background_color"
+    t.boolean  "content_background_color_active"
+    t.string   "header_background_color"
+    t.string   "header_color"
+    t.string   "header_small_color"
+    t.string   "regular_text_color"
+    t.string   "heading_text_color"
+    t.string   "small_heading_text_color"
+    t.string   "comment_text_color"
+    t.string   "comment_block_quote_border"
+    t.string   "link_color"
+    t.string   "link_color_hover"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

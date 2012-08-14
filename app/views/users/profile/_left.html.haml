@@ -1,0 +1,51 @@
+%ul.thumbnails
+	%li.span6=link_to image_tag(@user.profile_photo.url(:large)), "#/", :class => "thumbnail"
+// End User Profile Image
+//
+%h6
+	%i.icon-tags
+	Genres
+%p
+	- if @user.genres.each do |genre|
+		%span.label.label-info=genre.name
+	- end.empty?
+		No genres...
+// End User Genres
+//
+%h6
+	%i.icon-info-sign
+	About
+-if !@user.about.nil?
+	%p= @user.about
+-else
+	%p Nothing you need to know!
+// End About Information
+//
+
+%h6
+	%i.icon-group
+	Band Members
+-if !@user.band_members.nil?
+	%p= @user.band_members
+-else
+	%p What band members...
+// End Band Members
+//
+%h6
+	%i.icon-music
+	Sounds Like
+-if !@user.sounds_like.nil?
+	%p= @user.sounds_like
+-else
+	%p Pop funk jazz blues mix...
+// End Sounds Like
+//
+%h6
+	%i.icon-asterisk
+	Inspirations
+-if !@user.inspirations.nil?
+	%p= @user.inspirations
+-else
+	%p Being alive :)
+// End Inspirations
+//
