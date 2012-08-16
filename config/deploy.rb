@@ -7,6 +7,7 @@ load "config/recipes/postgresql"
 load "config/recipes/nodejs"
 load "config/recipes/rbenv"
 load "config/recipes/check"
+load 'deploy/assets'
 
 server "mozapolis.justclickmedia.com", :web, :app, :db, primary: true
 
