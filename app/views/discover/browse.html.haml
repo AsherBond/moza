@@ -1,0 +1,64 @@
+.row
+	.span3
+		= render "discover/genre_sidebar"
+	.span13
+		-if !params[:genre].present?
+			.row
+				.span4
+					.pull-right= link_to "More Charts", nil, :class => "btn btn-mini btn-danger"
+					%h3 Top Songs
+					%hr
+					- Song.all.to_enum.with_index(1).take(5).each  do |song,s|
+						%p
+							%span.label.label-important= s
+							= link_to "#{song.name}", song.album
+							%small
+								by
+								= link_to "#{song.album.user.artist_name}", song.album.user
+							%hr.d
+
+				.span5
+					.pull-right= link_to "More Artists", nil, :class => "btn btn-mini btn-info"
+					%h3 Top Artists
+					%hr
+					- User.all.to_enum.with_index(1).take(5).each  do |user,u|
+						%p
+							%span.label.label-info= u
+							= link_to "#{user.artist_name}", user
+							%hr.d
+
+				.span4
+					.pull-right= link_to "More Albums", nil, :class => "btn btn-mini btn-success"
+					%h3 Top Albums
+					%hr
+					- Album.all.to_enum.with_index(1).take(5).each  do |album,a|
+						%p
+							%span.label.label-success= a
+							= link_to "#{album.name}", album
+							%small
+								by
+								= link_to "#{album.user.artist_name}", album.user
+							%hr.d
+			
+			
+			%hr
+
+		%h3 
+			-if params[:genre].present?
+				Browsing '#{@genre.name}'
+			-else
+				Browsing Genres
+		%hr.d
+		- @genres.each do |genre|
+			- user = User.find(genre.user_id)
+			.row
+				.span2
+					= link_to image_tag(user.profile_photo.url(:medium)), user, :class => "thumbnail"
+				.span11
+					%h2= link_to "#{user.artist_name} <small>(#{user.username})</small>".html_safe, user
+					%p
+						- if user.genres.each do |genre|
+							%span.label.label-info=genre.name
+						- end.empty?
+							No Genres
+			%hr.d

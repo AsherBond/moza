@@ -11,10 +11,7 @@
 			%p 17 Tracks - Released 2012
 			%p=@album.description
 	%hr.d
-	-if @songs.nil?
-		.alert.alert-info This user has no featured album.
-	-else
-		=render 'songs/row'
+
 
 %h3 
 	%i.icon-music

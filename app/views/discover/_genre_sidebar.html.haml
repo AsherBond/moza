@@ -1,0 +1,4 @@
+%h6 Genres
+%ul.nav.nav-tabs.nav-stacked
+	- Genre.all.each do |genre|
+		%li= link_to "#{genre.name}", discover_browse_path("genre" => genre.id)

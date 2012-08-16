@@ -1,2 +1,42 @@
-%h1 Users#index
-%p Find me in app/views/users/index.html.haml
+.row
+	.span3
+		%ul.nav.nav-pills.nav-stacked
+			%li.active
+				= link_to "Hello", nil
+			%li
+				= link_to "Hello", nil
+	.span13
+		
+		= form_tag users_path, method: :get, :class => "form-search" do
+			.well
+				= text_field_tag :query, params[:query], :placeholder => "Search for Artists, Albums and Songs", :class => "input-xlarge search-query"
+				= submit_tag "Search", name: nil, :class => "btn btn-inverse"
+			.btn-toolbar
+				.btn-group{"data-toggle"=>"buttons-radio"}
+					.btn.btn-primary.disabled Search by:
+					.btn.btn-primary All
+					.btn.btn-primary Genres
+					.btn.btn-primary Name
+					.btn.btn-primary Username
+				.btn-group{"data-toggle"=>"buttons-radio"}
+					.btn.btn-primary.disabled Filter by:
+					.btn.btn-primary Relevance
+					.btn.btn-primary Reputation
+					.btn.btn-primary Popular
+					.btn.btn-primary Active
+		%hr
+
+		- @users.each do |user|
+			.row
+				.span2
+					= link_to image_tag(user.profile_photo.url(:medium)), user, :class => "thumbnail"
+				.span11
+					%h2= link_to "#{user.artist_name} <small>(#{user.username})</small>".html_safe, user
+					%p
+						- if user.genres.each do |genre|
+							%span.label.label-info=genre.name
+						- end.empty?
+							No Genres
+			%hr.d
+
+		= will_paginate @users

@@ -1,0 +1,44 @@
+.row
+	.span3
+		= render "discover/genre_sidebar"
+	.span13
+		
+		= form_tag discover_path, method: :get, :class => "form-search" do
+			.well
+				.input-append
+					= render 'discover/albums/search_form'
+			.btn-toolbar
+				.btn-group{"data-toggle"=>"buttons-radio"}
+					.btn.btn-primary.disabled Search by:
+					.btn.btn-primary.active Albums
+					.btn.btn-primary Artist
+					.btn.btn-primary Songs
+				.btn-group{"data-toggle"=>"buttons-radio"}
+					.btn.btn-primary.disabled Filter by:
+					.btn.btn-primary.active Relevance
+					.btn.btn-primary Reputation
+					.btn.btn-primary Popular
+					.btn.btn-primary Active
+		%hr
+
+		%p.lead
+			- if params[:query].present?
+				Your results for 
+				%strong= "'#{params[:query]}'"
+			in <strong>'Albums'</strong> filtered by <strong>'Relevance'</strong>
+
+
+		- @albums.each do |album|
+			.row
+				.span2
+					= link_to image_tag(album.cover.url(:medium)), album, :class => "thumbnail"
+				.span11
+					%h2= link_to "#{album.name} <small>(#{album.user.artist_name})</small>".html_safe, album
+					%p
+						- if album.user.genres.each do |genre|
+							%span.label.label-info=genre.name
+						- end.empty?
+							No Genres
+			%hr.d
+
+		= will_paginate @albums

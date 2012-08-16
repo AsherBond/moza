@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
 	has_many :videos
 	has_many :playlists
 	has_and_belongs_to_many :genres
+
+
 	#-----\
 	#
 	# SLUGS!

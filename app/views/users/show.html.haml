@@ -1,36 +1,13 @@
-#profile-editor.profile-editor-tools.span3.well
-	.btn.btn-info.btn-mini.pull-right
-		%i.icon-move
-	= simple_form_for(@user, :url => registration_path(@user), :html => { :method => :put, :class => "form-vertical" }, :defaults => { :input_html => {:class => "span3 color {pickerClosable:true, pickerPosition:'right', pickerFaceColor:'#FFFFFF', pickerInsetColor:'#CCCCCC', pickerBorderColor:'#555555'}"} }) do |f|
-		%ul.nav.nav-pills.nav-stacked
-			%li.active= link_to "Background", "#background", "data-toggle"=>"tab"
-			%li= link_to "Header", "#header", "data-toggle"=>"tab"
-			%li= link_to "Text", "#text", "data-toggle"=>"tab"
-		.tab-content
-			#background.tab-pane.active.fade.in
-				%h6 Background
-				= f.input :background_color, :input_html => {:onchange => "document.getElementsByTagName('BODY')[0].style.backgroundColor = '#'+this.color"}
-				= f.input :content_background_color, :input_html => {:onchange => "document.getElementsByClassName('content')[0].style.backgroundColor = '#'+this.color"}
-			#header.tab-pane.fade.in
-				%h6 Header
-				= f.input :header_background_color, :input_html => {:onchange => "document.getElementsByClassName('page-header')[0].style.backgroundColor = '#'+this.color"}
-				= f.input :header_color, :input_html => {:onchange => "document.getElementsByClassName('page-header-h1')[0].style.color = '#'+this.color"}
-				= f.input :header_small_color, :input_html => {:onchange => "document.getElementsByClassName('page-header-small')[0].style.color = '#'+this.color"}
-			#text.tab-pane.fade.in
-				%h6 Text
-				= f.input :regular_text_color, :input_html => {:onchange => "document.getElementsByClassName('page-header-small')[0].style.color = '#'+this.color"}
-				= f.input :heading_text_color, :input_html => {:onchange => "document.getElementsByClassName('page-header-small')[0].style.color = '#'+this.color"}
-				= f.input :small_heading_text_color, :input_html => {:onchange => "document.getElementsByClassName('page-header-small')[0].style.color = '#'+this.color"}
-				= f.input :link_color, :input_html => {:onchange => "document.getElementsByClassName('page-header-small')[0].style.color = '#'+this.color"}
-				= f.input :link_color_hover, :input_html => {:onchange => "document.getElementsByClassName('page-header-small')[0].style.color = '#'+this.color"}
-				= f.input :comment_text_color, :input_html => {:onchange => "document.getElementsByClassName('page-header-small')[0].style.color = '#'+this.color"}
-				= f.input :comment_block_quote_border, :input_html => {:onchange => "document.getElementsByClassName('page-header-small')[0].style.color = '#'+this.color"}
-
-
-
 -if @user.is_active?
-	= bootstrap_page_header "#{@user.artist_name}", "#{@user.username}" 
-
+	.page-header
+		.pull-right
+			= button_link "facebook", "Facebook", nil, "btn-facebook"
+			= button_link "twitter", "Twitter", nil, "btn-twitter"
+			= button_link "google-plus-sign", "Google+", nil, " btn-google"
+			= button_link "group", "MySpace", nil, " btn-myspace"
+		%h1.page-header-h1
+			= @user.artist_name
+			%small.page-header-small= @user.username
 	.row
 		.span6
 			= render 'users/profile/left'

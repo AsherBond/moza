@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.7'
 gem 'pg'
-
+gem 'pg_search'
 group :development do
 	gem "letter_opener"
 	gem "faker"
@@ -43,3 +43,4 @@ gem 'unicorn'
 gem 'capistrano'
 gem 'aws-sdk'
 gem 'aws-s3'
+gem 'delayed_job_active_record'

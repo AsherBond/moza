@@ -4,7 +4,24 @@ class Song < ActiveRecord::Base
 	attr_accessible :active, :lyrics, :name, :position, :file
 
     has_reputation :song_votes, source: :user, aggregated_by: :sum
-    
+    #-----\
+    #
+    # SEARCH!
+    #---------\
+    include PgSearch
+    pg_search_scope :search, 
+                            against: [:name, :record_label],
+                            using: {tsearch: {dictionary: "english"}},
+                            associated_against: {user: :artist_name, songs: :name}
+
+    def self.text_search(query)
+        if query.present?
+            search(query)
+        else
+            scoped
+        end
+    end
+
     validates :name,
     	presence: true,
     	length: {

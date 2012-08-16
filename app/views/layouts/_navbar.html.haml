@@ -8,8 +8,8 @@
 			%a.brand(href="/") Mozapolis
 			.container.nav-collapse
 				%ul.nav
-					%li= icon_link "globe", "Discover", nil
-					%li= icon_link "headphones", "Music", nil
+					%li= icon_link "globe", "Discover", discover_path
+					%li= icon_link "headphones", "Music", discover_browse_path
 				%ul.nav.pull-right
 					%form.navbar-search.pull-left
 						%input.search-query{:placeholder => "Search for...", :type => "text"}

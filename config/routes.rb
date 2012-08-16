@@ -1,5 +1,10 @@
 Moza::Application.routes.draw do
+  match "discover" => "discover#index"
+  match "discover/browse" => "discover#browse"
 
+  namespace :admin do
+    get 'home' => "pages#home"
+  end
 
   resources :events
 

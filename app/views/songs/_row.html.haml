@@ -15,7 +15,7 @@
 							= song.name
 				%audio{:id => "play_song_#{song.id}", :src => "#{song.file.url}", :type => "audio/mp3"}
 
-			.btn-toolbar
+			.btn-toolbar.song-ratings
 				= render 'songs/shared/vote', :song => song
 				= render 'playlists/shared/button', :song => song
 				.btn-group.share-lyrics
