@@ -1,0 +1,17 @@
+.row
+	.span8
+		%p.lead Its easy to  buy a song with paypal! Just sign in below and we'll set everything up!
+		%hr.d
+
+		%p Houston, that may have seemed like a very long final phase. The autotargeting was taking us right into a ... crater, with a large number of big boulders and rocks ... and it required ... flying manually over the rock field to find a reasonably good area.
+
+		%p From this day forward, Flight Control will be known by two words: 'Tough' and 'Competent.' Tough means we are forever accountable for what we do or what we fail to do. We will never again compromise our responsibilities. Every time we walk into Mission Control we will know what we stand for. Competent means we will never take anything for granted. We will never be found short in our knowledge and in our skills. 
+
+		%p We choose to go to the moon. We choose to go to the moon in this decade and do the other things, not because they are easy, but because they are hard, because that goal will serve to organize and measure the best of our energies and skills, because that challenge is one that we are willing to accept, one we are unwilling to postpone, and one which we intend to win, and the others, too.
+	.span8
+		= simple_form_for Gallery.new, :html => { :class => 'form-vertical' }, :defaults => { :input_html => {:class => "span8"} } do |f|
+			= f.input :name, :label => "Paypal Login/Username"
+			= f.input :name, :label => "Password"
+			.form-actions
+				= f.button :submit, "Login", :class => 'btn-primary'
+				= link_to t('.cancel', :default => t("helpers.links.cancel")), root_path, :class => 'btn'

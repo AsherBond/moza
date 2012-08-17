@@ -56,7 +56,7 @@ Moza::Application.routes.draw do
   resources :songs do 
     member { post :vote }
   end
-  
+  match 'buy/song/paypal' => "pages#paypal", :as => :paypal
   root :to => "pages#home"
 
   # The priority is based upon order of creation:

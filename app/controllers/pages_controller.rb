@@ -4,4 +4,6 @@ class PagesController < ApplicationController
   	@songs   = Song.limit(5).find_with_reputation(:song_votes, :all, order: 'song_votes desc')
   	@artists = User.limit(5)
   end
+  def paypal
+  end
 end

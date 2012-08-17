@@ -16,6 +16,8 @@
 				%audio{:id => "play_song_#{song.id}", :src => "#{song.file.url}", :type => "audio/mp3"}
 
 			.btn-toolbar.song-ratings
+				.btn-group
+					= button_link "money", "Buy Song", paypal_path, "btn-success btn-mini"
 				= render 'songs/shared/vote', :song => song
 				= render 'playlists/shared/button', :song => song
 				.btn-group.share-lyrics
