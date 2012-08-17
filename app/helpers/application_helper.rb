@@ -21,7 +21,7 @@ module ApplicationHelper
 	end
 
 	def button_link icon, title, url, classes=nil
-		link_to "<i class='icon-#{icon}'></i> #{title}".html_safe, url, :class => "btn #{classes}"
+		link_to "<i class='icon-#{icon} icon-large'></i> #{title}".html_safe, url, :class => "btn #{classes}"
 	end
 
 	def icon_link icon, title, url, classes=nil

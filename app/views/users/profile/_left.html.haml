@@ -3,6 +3,13 @@
 // End User Profile Image
 //
 
+%hr
+-if user_signed_in?
+	.h3 
+		You are not following me 
+		= button_link "plus", "Follow", nil, "btn-mini btn-success"
+	%hr
+
 
 %h6
 	%i.icon-tags

@@ -28,7 +28,7 @@
 								%li= icon_link "flag", 'Events', events_path
 						%li.dropdown
 							%a.dropdown-toggle{ "data-toggle" => "dropdown", :href => "#" }
-								%icon.icon-cogs
+								%icon.icon-user
 								= current_user.username
 							%ul.dropdown-menu
 								%li= icon_link "edit", 'Edit Info', edit_user_registration_path
@@ -38,9 +38,18 @@
 								
 								%span.badge.badge-important 
 									%icon.icon-pushpin
-									1 
-							%ul.dropdown-menu
-								%li= icon_link "arrow-right", 'Susy Jones commented on one of your photos.', edit_user_registration_path
+									= current_user.notifications.size.to_i
+							%ul.dropdown-menu.dropdown-notifications
+								- if current_user.notifications.take(5).each do |notification|
+									- notify = notification.notify_object_type.singularize.classify.constantize.find(notification.notify_object_id)
+									%li= icon_link "arrow-right", notification.message, notify
+								- end.empty?
+									%li= icon_link "ok", "You have no notifications, good job!", nil
+								- if current_user.notifications.size > 5
+									%li.divider
+									%li= icon_link "ok", "You have more notifications!", nil
+								%li.divider
+								%li= icon_link "pushpin", "Notifications Dashboard", nil
 			
 						%li
 						%li.divider-vertical

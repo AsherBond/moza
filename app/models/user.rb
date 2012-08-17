@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 	has_many :comments, as: :commentable, :dependent => :destroy
 	has_many :galleries
 	has_many :events
+	has_many :notifications
 	has_many :albums
 	has_many :videos
 	has_many :playlists

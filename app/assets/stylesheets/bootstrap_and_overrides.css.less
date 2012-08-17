@@ -136,10 +136,10 @@ ul.nav.nav-tabs.nav-stacked {
 }
 /* Style up the navbar dropdwon! */
 .navbar-inner ul.nav {
-  margin-top:-1px;
 
+  
   ul.dropdown-menu {
-
+    margin-top:-1px;
     #gradient > .vertical(@black, lighten(@black, 5%));
     .box-shadow(0 5px 0 0 rgba(0,0,0,.3));
     border:none;
@@ -147,11 +147,29 @@ ul.nav.nav-tabs.nav-stacked {
     padding:10px;
 
     li a {
-      
       color:white;
       .border-radius(5px);
     }
   }
+
+  ul.dropdown-menu.dropdown-notifications {
+    margin-top:1px;
+    #gradient > .vertical(darken(@myRed, 15%), darken(@myRed, 5%));
+    .box-shadow(0 5px 0 0 rgba(0,0,0,.3));
+    border:none;
+    .border-radius(0px 0px 5px 5px);
+    padding:10px;
+
+    li a {
+      color:white;
+      .border-radius(5px);
+    }
+    li a:hover {
+      color:@myRed;
+      background:white;
+    }
+  }
+
 }
 /* Style up the dropdwon! */
 

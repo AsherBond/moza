@@ -141,9 +141,12 @@ ActiveRecord::Schema.define(:version => 20120817150204) do
 
   create_table "notifications", :force => true do |t|
     t.integer  "user_id"
-    t.string   "notice"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "from"
+    t.integer  "notify_object_id"
+    t.string   "notify_object_type"
+    t.string   "message"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   add_index "notifications", ["user_id"], :name => "index_notifications_on_user_id"
