@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120816204606) do
+ActiveRecord::Schema.define(:version => 20120817141446) do
 
   create_table "albums", :force => true do |t|
     t.string   "name"
@@ -31,6 +31,20 @@ ActiveRecord::Schema.define(:version => 20120816204606) do
   end
 
   add_index "albums", ["user_id"], :name => "index_albums_on_user_id"
+
+  create_table "articles", :force => true do |t|
+    t.string   "name"
+    t.text     "content"
+    t.integer  "user_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+  end
+
+  add_index "articles", ["user_id"], :name => "index_articles_on_user_id"
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -71,11 +85,29 @@ ActiveRecord::Schema.define(:version => 20120816204606) do
     t.text     "ticket_info"
     t.boolean  "active"
     t.integer  "user_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "cover_file_name"
+    t.string   "cover_content_type"
+    t.integer  "cover_file_size"
+    t.datetime "cover_updated_at"
   end
 
   add_index "events", ["user_id"], :name => "index_events_on_user_id"
+
+  create_table "galleries", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "cover_file_name"
+    t.string   "cover_content_type"
+    t.integer  "cover_file_size"
+    t.datetime "cover_updated_at"
+  end
+
+  add_index "galleries", ["user_id"], :name => "index_galleries_on_user_id"
 
   create_table "genres", :force => true do |t|
     t.string   "name"
@@ -92,6 +124,20 @@ ActiveRecord::Schema.define(:version => 20120816204606) do
 
   add_index "genres_users", ["genre_id"], :name => "index_genres_users_on_genre_id"
   add_index "genres_users", ["user_id"], :name => "index_genres_users_on_user_id"
+
+  create_table "images", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "gallery_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "item_file_name"
+    t.string   "item_content_type"
+    t.integer  "item_file_size"
+    t.datetime "item_updated_at"
+  end
+
+  add_index "images", ["gallery_id"], :name => "index_images_on_gallery_id"
 
   create_table "playlists", :force => true do |t|
     t.string   "name"

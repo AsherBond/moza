@@ -1,4 +1,16 @@
 Moza::Application.routes.draw do
+  
+
+  resources :articles
+
+  resources :galleries do
+    resources :comments
+    resources :images
+  end
+  resources :images do
+    resources :comments
+  end
+
   match "discover" => "discover#index"
   match "discover/browse" => "discover#browse"
 

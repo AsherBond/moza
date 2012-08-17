@@ -1,9 +1,9 @@
-= bootstrap_page_header "Edit Video", "#{@video.name}" 
+= bootstrap_page_header "Edit Gallery", "#{@gallery.name}" 
 .row
 	.span8
 		= render 'form'
 	.span8
-		= link_to "Delete Video Permently", video_path(@video), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-large btn-danger'
+		= link_to "Delete Gallery Permently", gallery_path(@gallery), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-large btn-danger'
 		%hr
 
 		%p.lead Let's light this fire one more time, Mike, and witness this great nation at its best.

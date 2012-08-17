@@ -1,0 +1,9 @@
+.row
+	.span2
+		= link_to image_tag(event.cover.url(:medium)), event, :class => "thumbnail"
+	%div{:class => "#{span}"}
+		%h3= link_to(event.name, event)
+		%h6 Date
+		%p= "#{event.start_date} - #{event.end_date}"
+		%p= truncate(event.details, :length => 175, :omission => "...", :seperator => ". ")
+%hr.d

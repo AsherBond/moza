@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
 					:login, :artist_name, :genre_ids, :slug, :profile_photo
 	# attr_accessible :title, :body
 	has_many :comments, as: :commentable, :dependent => :destroy
+	has_many :galleries
+	has_many :events
 	has_many :albums
 	has_many :videos
 	has_many :playlists

@@ -18,13 +18,27 @@
 				%li= link_to "Albums", "#albums", "data-toggle"=>"tab"
 				%li= link_to "Playlists", "#playlists", "data-toggle"=>"tab"
 				%li= link_to "Videos", "#videos", "data-toggle"=>"tab"
+				%li= link_to "Events", "#events", "data-toggle"=>"tab"
 				%li= link_to "Photos", "#photos", "data-toggle"=>"tab"
 				%li= link_to "Comments", "#comments", "data-toggle"=>"tab"
 				%li= link_to "Fans", "#fans", "data-toggle"=>"tab"
 			.tab-content
 				#photos.tab-pane.fade.in
+					%h3 
+						%i.icon-camera-retro
+						Galleries
+					%hr
+					%ul.thumbnails
+						=render @user.galleries, :span => "span2"
+
 				#playlists.tab-pane.fade.in
 					=render 'users/profile/playlists'
+				#events.tab-pane.fade.in
+					%h3 
+						%i.icon-flag
+						Events
+					%hr
+					=render @user.events, :span => "span8"
 				#fans.tab-pane.fade.in
 				#comments.tab-pane.fade.in
 					=render 'users/profile/comments'

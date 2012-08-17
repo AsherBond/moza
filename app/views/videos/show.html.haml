@@ -16,14 +16,20 @@
     =render 'comments/comments'
     =render 'comments/form'
   .span6.omega
-    .black.well
-      %h1
-        = @video.user.username
-        %small= @video.user.full_name
-      %p
-        = button_link "plus", "Follow", nil, "btn-success btn-mini"
-        = button_link "user", "Profile", nil, "btn-info btn-mini"
-    = link_to image_tag(@video.user.profile_photo.url(:large)), @video.user, :class => "thumbnail"
-    %hr.d
+    .row
+      .span2
+        = link_to image_tag(@video.user.profile_photo.url(:large)), @video.user, :class => "thumbnail"
+      .span4
+        %h1
+          = @video.user.username
+          %small= @video.user.full_name
+        %p
+          = button_link "plus", "Follow", nil, "btn-success btn-mini"
+          = button_link "user", "Profile", nil, "btn-info btn-mini"
+    
+    %hr
     %h3
       #{@video.user.username}'s Videos
+    %hr.d
+    %ul.thumbnails
+      = render @video.user.videos, :span => "span2"

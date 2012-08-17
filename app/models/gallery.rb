@@ -1,6 +1,9 @@
-class Event < ActiveRecord::Base
+class Gallery < ActiveRecord::Base
 	belongs_to :user
-	attr_accessible :active, :details, :name, :start_date, :start_time, :end_date, :end_time, :ticket_info, :ticket_link, :cover
+	has_many :images
+	has_many :comments, as: :commentable, :dependent => :destroy
+
+	attr_accessible :description, :name, :cover
   	has_attached_file :cover, 
                       :styles => {
                         :small => "150x150#", 

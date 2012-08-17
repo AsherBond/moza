@@ -1,14 +1,46 @@
-= simple_form_for @event, :html => { :class => 'form-horizontal' } do |f|
+= simple_form_for @event, :html => { :class => 'form-vertical' }, :defaults => { :input_html => {:class => "span8"} } do |f|
   = f.input :name
-  = f.input :start_date
-  = f.input :start_time
-  = f.input :end_date
-  = f.input :end_time
-  = f.input :details
-  = f.input :ticket_link
-  = f.input :ticket_info
-  = f.input :active
-  = f.input :user_id
+  .row
+    .span3
+      -if @event.cover.file?
+        =link_to image_tag(@event.cover.url(:medium)), "#/", :class => "thumbnail"
+    .span5
+      = f.input :cover
+  %hr.d
+  .row
+    .span4
+      = f.input :start_date, :required => false, :as => :string, :input_html => { "data-datepicker" => "datepicker",  :class => "span4" }
+    .span4
+      = f.input :start_time, :input_html => { :class => "span2" }
+  .row
+    .span4
+      = f.input :end_date, :required => false, :as => :string, :input_html => { "data-datepicker" => "datepicker",  :class => "span4" }
+    .span4
+      = f.input :end_time, :input_html => { :class => "span2" }
+  = f.input :details, :input_html => { :rows => 5 }
+
+  = f.label :active, :required => true
+  .btn-group{"data-toggle"=>"buttons-radio"}
+    -if @event.active?
+      %label.btn.btn-large.active{:for=>"event_active"} 
+        %i.icon-eye-open
+        Active
+    -else
+      %label.btn.btn-large{:for=>"event_active"} 
+        %i.icon-eye-open
+        Active
+
+    -if !@event.active?
+      %label.btn.btn-large.active{:for=>"event_unactive"} 
+        %i.icon-eye-close
+        Hidden
+    -else
+      %label.btn.btn-large{:for=>"event_unactive"} 
+        %i.icon-eye-close
+        Hidden
+  %input{:type=>"checkbox", :id=>"event_active", :name=>"event[active]", :value=>"1", :style=>"display:none"}
+  %input{:type=>"checkbox", :id=>"event_unactive", :name=>"event[unactive]", :value=>"0", :style=>"display:none"}
+  = f.hint :gender, :required => true
   .form-actions
     = f.button :submit, :class => 'btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), events_path, :class => 'btn'

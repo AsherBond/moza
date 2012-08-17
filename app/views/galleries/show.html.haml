@@ -1,0 +1,19 @@
+= bootstrap_page_header "#{@gallery.name}", "Gallery by #{link_to(@gallery.user.artist_name, @gallery.user)}" 
+
+.row
+  .span8
+    -if user_signed_in? and current_user == @gallery.user
+      %h3 
+        = button_link "upload-alt", "Upload New Image", new_gallery_image_path(@gallery), "btn-success"
+        = button_link "edit", "Edit Gallery", edit_gallery_path(@gallery), "btn-warning"
+      %hr
+    %ul.thumbnails
+      - @gallery.images.each do |image|
+        %li.span2= link_to image_tag(image.item.url(:medium)), image, :class => "thumbnail"
+  .span8
+    %h3 
+      %i.icon-comments-alt
+      Comments
+    %hr
+    = render 'comments/comments'
+    = render 'comments/form'

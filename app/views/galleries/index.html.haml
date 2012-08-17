@@ -1,0 +1,39 @@
+= bootstrap_page_header "Your Galleries", "Create, manage and modify your galleries with ease!" 
+
+.row
+  .span12
+    .btn-group
+      = button_link "plus", "New Gallery", new_gallery_path, "btn-success"
+    %hr 
+    .drop-zone
+      %strong
+        %i.icon-plus-sign 
+        Drop a folder with your gallery contents
+      %p to learn more about what we look for in a folder, click here.
+    %ul.thumbnails
+      -if @galleries.each do |gallery| 
+        %li.span3
+          = link_to image_tag(gallery.cover.url(:large)), gallery, :class => "thumbnail", "data-original-title" => "#{gallery.name}", "data-content" => "<p>#{gallery.description}</p>", :rel => "popover"
+      -end.empty?
+        -show_msg = true
+    -if show_msg ==  true
+      .alert.alert-info
+        You don't have any galleries yet, click on 
+        = button_link "plus", "New Gallery", new_gallery_path, "btn-success btn-mini"
+        to get started!
+  .span4.omega
+    %h4
+      %i.icon-umbrella
+      Welcome to the gallery manager, we make it pretty easy and fun to manage your gallery.
+    %hr
+    %p
+      %i.icon-arrow-right
+      The first gallery will appear as the featured gallery on your profile.
+    %hr
+    %p
+      %i.icon-move
+      You can drag and drop your gallery to arrage the order they appear on your profile.
+    %hr
+    %p
+      %i.icon-upload-alt
+      You can also drag and drop all your gallery images and upload them at the same time. You can drop them anywhere you see a drop zone.

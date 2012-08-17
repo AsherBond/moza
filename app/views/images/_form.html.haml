@@ -1,0 +1,12 @@
+= simple_form_for [@gallery, @image], :html => { :class => 'form-vertical' }, :defaults => { :input_html => {:class => "span8"} } do |f|
+  = f.input :name
+  = f.input :description, :input_html => { :rows => 5 }
+  .row
+    .span3
+      -if @image.item.file?
+        =link_to image_tag(@image.item.url(:medium)), "#/", :class => "thumbnail"
+    .span5
+      = f.input :item
+  .form-actions
+    = f.button :submit, :class => 'btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), images_path, :class => 'btn'

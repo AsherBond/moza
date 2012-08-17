@@ -1,0 +1,13 @@
+= bootstrap_page_header "#{@image.gallery.name}", "Image from #{link_to(@image.gallery.name, @image.gallery)}" 
+.row
+  .span8.offset4
+    = link_to image_tag(@image.item.url), "#/", :class => "thumbnail"
+    %hr.d
+    -if !@image.description.nil?
+      .well= @image.description
+    %hr
+    %h3 
+      %i.icon-comments-alt
+      Comments
+    = render 'comments/comments'
+    = render 'comments/form'
