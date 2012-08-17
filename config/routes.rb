@@ -18,7 +18,9 @@ Moza::Application.routes.draw do
     get 'home' => "pages#home"
   end
 
-  resources :events
+  resources :events do
+    resources :comments
+  end
 
   resources :videos do
     resources :comments

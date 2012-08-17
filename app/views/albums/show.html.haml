@@ -42,8 +42,6 @@
 						.span10
 							-if is_me? @album.user
 								.btn-group
-									= button_link "upload", "Upload Song", new_album_song_path(@album), "btn-success"
-									= button_link "edit", "Edit Album Details", edit_album_path(@album), "btn-warning"
 									= link_to "<i class='icon-arrow-left'></i> Back".html_safe, "#normal", :class => "btn", "data-toggle" => "tab"
 								%hr 
 					#sortable

@@ -6,8 +6,8 @@
 			-if current_user && current_user.voted_for?(@album)
 				%span.btn.disabled Thanks!
 		.btn-group
-			= link_to "<i class='icon-thumbs-up'></i> Like".html_safe, vote_album_path(@album, type: "up"), method: "post", :class => "btn btn-success"
-			= link_to "<i class='icon-thumbs-down'></i>".html_safe, vote_album_path(@album, type: "down"), method: "post", :class => "btn btn-inverse"
+			= link_to "<i class='icon-thumbs-up icon-large'></i> Like".html_safe, vote_album_path(@album, type: "up"), method: "post", :class => "btn btn-success"
+			= link_to "<i class='icon-thumbs-down icon-large'></i>".html_safe, vote_album_path(@album, type: "down"), method: "post", :class => "btn btn-inverse"
 	-else
 		.btn-group
 			%span.btn.btn-info

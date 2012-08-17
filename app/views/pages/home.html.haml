@@ -1,5 +1,10 @@
 .row
 	.span16
+		%h2{:style => "text-align:center;"}
+			%i.icon.icon-heart
+			Featured Artists
+			%small Hand picked
+		%hr
 
 		%ul.thumbnails
 			-User.all.take(4).each do |user| 

@@ -28,6 +28,8 @@
 						%i.icon-camera-retro
 						Galleries
 					%hr
+					-if @user.galleries.empty?
+						.alert.alert-info This user has no galleries.
 					%ul.thumbnails
 						=render @user.galleries, :span => "span2"
 
@@ -39,6 +41,8 @@
 						Events
 					%hr
 					=render @user.events, :span => "span8"
+					-if @user.events.empty?
+						.alert.alert-info This user has no events.
 				#fans.tab-pane.fade.in
 				#comments.tab-pane.fade.in
 					=render 'users/profile/comments'

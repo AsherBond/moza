@@ -2,7 +2,9 @@
 	%i.icon-film
 	Videos
 %hr
--if @videos.nil?
+-if @user.videos.empty?
 	.alert.alert-info This user has no videos.
--else
-	=render 'videos/row'
+%ul.thumbnails
+	=render @user.videos, :span => "span2"
+
+	

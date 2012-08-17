@@ -14,6 +14,7 @@
 					%form.navbar-search.pull-left
 						%input.search-query{:placeholder => "Search for...", :type => "text"}
 					%li.divider-vertical
+
 					-if user_signed_in?
 						%li.dropdown
 							%a.dropdown-toggle{ "data-toggle" => "dropdown", :href => "#" }
@@ -28,10 +29,20 @@
 						%li.dropdown
 							%a.dropdown-toggle{ "data-toggle" => "dropdown", :href => "#" }
 								%icon.icon-cogs
-								= current_user.username 
+								= current_user.username
 							%ul.dropdown-menu
 								%li= icon_link "edit", 'Edit Info', edit_user_registration_path
 								%li= icon_link "eye-open", 'View Profile', current_user
+						%li.dropdown
+							%a.dropdown-toggle{ "data-toggle" => "dropdown", :href => "#" }
+								
+								%span.badge.badge-important 
+									%icon.icon-pushpin
+									1 
+							%ul.dropdown-menu
+								%li= icon_link "arrow-right", 'Susy Jones commented on one of your photos.', edit_user_registration_path
+								%li= icon_link "arrow-right", 'Bobby David Anthony Jr. voted on your song "Love me long time and I will show you the way home". Bobby David Anthony Jr. voted on your song "Love me long time and I will show you the way home".', edit_user_registration_path
+			
 						%li
 						%li.divider-vertical
 						%li= link_to '<i class="icon-signout"></i> Signout'.html_safe, destroy_user_session_path, :method => :delete
