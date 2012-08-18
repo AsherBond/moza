@@ -6,6 +6,7 @@
   = f.input :year_produced
   = f.label :active
   = f.hint :active
+  
   .btn-group{"data-toggle"=>"buttons-radio"}
     -if @album.active?
       %label.btn.btn-large.active{:for=>"album_active"} 
@@ -15,7 +16,6 @@
       %label.btn.btn-large{:for=>"album_active"} 
         %i.icon-eye-open
         Active
-
     -if !@album.active?
       %label.btn.btn-large.active{:for=>"album_unactive"} 
         %i.icon-eye-close

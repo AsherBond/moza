@@ -13,6 +13,7 @@
         %li= link_to "Passwords", "#passwords", "data-toggle" => "tab"
         %li= link_to "Personal", "#personal", "data-toggle" => "tab"
         %li= link_to "Artist Details", "#artist-details", "data-toggle" => "tab"
+        %li= link_to "Customize", "#customize", "data-toggle" => "tab"
         %li= link_to "Cancel Account", "#cancel-account", "data-toggle" => "tab"
       =f.error_notification
       .tab-content
@@ -20,6 +21,48 @@
           = f.input :email, :required => true, :autofocus => true
           = f.input :username, :required => true
 
+        .tab-pane#customize
+          %h3 Background
+          %hr.d
+          .row
+            .span5
+              = f.input :background_color, :required => false, :input_html => {:class => "span5 jscolor"}
+              = f.label :background_attachment
+              = render 'devise/registrations/image_attachment'
+              %hr.d
+              = f.label :background_position
+              = render 'devise/registrations/image_position'
+              %hr.d
+              = f.label :background_image_repeat
+              = render 'devise/registrations/image_repeat'
+              %hr.d
+              = f.label "Enable/Disable Background Image"
+              = render 'devise/registrations/image_active'
+            .span5
+              = f.input :content_background_color, :required => false, :input_html => {:class => "span5"}
+              %hr.d
+              = f.label "Background Content Color Active"
+              = render 'devise/registrations/content_background_active'
+          %hr
+          %h3 Header
+          %hr.d
+
+          %hr
+          %h3 Links
+          %hr.d
+
+          %hr
+          %h3 Thumbnails
+          %hr.d
+
+          %hr
+          %h3 Comments
+          %hr.d
+
+          %hr
+          %h3 Other
+          %hr.d
+          
         .tab-pane#personal
           .row
             .span3

@@ -1,0 +1,42 @@
+
+.btn-group{"data-toggle"=>"buttons-radio"}
+  -if current_user.background_position == "left"
+    %label.btn.active{:for=>"user_background_position_left"} 
+      Left
+  -else
+    %label.btn{:for=>"user_background_position_left"} 
+      Left
+
+  -if current_user.background_position == "right"
+    %label.btn.active{:for=>"user_background_position_right"} 
+      Right
+  -else
+    %label.btn{:for=>"user_background_position_right"} 
+      Right
+
+  -if current_user.background_position == "top"
+    %label.btn.active{:for=>"user_background_position_top"} 
+      Top
+  -else
+    %label.btn{:for=>"user_background_position_top"} 
+      Top
+
+  -if current_user.background_position == "bottom"
+    %label.btn.active{:for=>"user_background_position_bottom"} 
+      Bottom
+  -else
+    %label.btn{:for=>"user_background_position_bottom"} 
+      Bottom
+
+  -if current_user.background_position == "center"
+    %label.btn.active{:for=>"user_background_position_center"} 
+      Center
+  -else
+    %label.btn{:for=>"user_background_position_center"} 
+      Center
+
+%input{:type=>"checkbox", :id=>"user_background_position_left", :name=>"user[background_position]", :value=>"left", :style=>"display:none"}
+%input{:type=>"checkbox", :id=>"user_background_position_right", :name=>"user[background_position]", :value=>"right", :style=>"display:none"}
+%input{:type=>"checkbox", :id=>"user_background_position_top", :name=>"user[background_position]", :value=>"top", :style=>"display:none"}
+%input{:type=>"checkbox", :id=>"user_background_position_bottom", :name=>"user[background_position]", :value=>"bottom", :style=>"display:none"}
+%input{:type=>"checkbox", :id=>"user_background_position_center", :name=>"user[background_position]", :value=>"center", :style=>"display:none"}

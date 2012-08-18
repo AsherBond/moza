@@ -1,0 +1,18 @@
+.btn-group{"data-toggle"=>"buttons-radio"}
+  -if current_user.background_attachment == "fixed"
+    %label.btn.active{:for=>"background_image_attachment_fixed"} 
+      Fixed
+  -else
+    %label.btn{:for=>"background_image_attachment_fixed"} 
+      Fixed
+
+  -if current_user.background_attachment == "static"
+    %label.btn.active{:for=>"background_image_attachment_static"} 
+      Static
+  -else
+    %label.btn{:for=>"background_image_attachment_static"} 
+      Static
+
+
+%input{:type=>"checkbox", :id=>"background_image_attachment_fixed", :name => "user[background_attachment]", :value=>"fixed", :style=>"display:none"}
+%input{:type=>"checkbox", :id=>"background_image_attachment_static", :name => "user[background_attachment]", :value=>"static", :style=>"display:none"}

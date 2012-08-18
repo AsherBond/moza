@@ -10,7 +10,8 @@ class User < ActiveRecord::Base
 	attr_accessible :email, :password, :password_confirmation, :remember_me,
 					:username, :full_name, :about, :interests, :inspirations, :sounds_like, :gender,
 					:phone, :state, :city, :country, :date_of_birth, :band_birth, :band_members,
-					:login, :artist_name, :genre_ids, :slug, :profile_photo
+					:login, :artist_name, :genre_ids, :slug, :profile_photo,
+					:background_color, :background_attachment, :background_position, :background_repeat, :background_image_active, :content_background_color, :content_background_color_active
 	# attr_accessible :title, :body
 	has_many :comments, as: :commentable, :dependent => :destroy
 	has_many :galleries

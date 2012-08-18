@@ -1,0 +1,17 @@
+.btn-group{"data-toggle"=>"buttons-radio"}
+  -if current_user.content_background_color_active?
+    %label.btn.active{:for=>"content_background_color_active"} 
+      Active
+  -else
+    %label.btn{:for=>"content_background_color_active"} 
+      Active
+
+  -if !current_user.content_background_color_active?
+    %label.btn.active{:for=>"content_background_color_unactive"} 
+      Hidden
+  -else
+    %label.btn{:for=>"content_background_color_unactive"} 
+      Hidden
+
+%input{:type=>"checkbox", :id=>"content_background_color_active", :name=>"user[content_background_color_active]", :value=>"1", :style=>"display:none"}
+%input{:type=>"checkbox", :id=>"content_background_color_unactive", :name=>"user[content_background_color_active]", :value=>"0", :style=>"display:none"}
