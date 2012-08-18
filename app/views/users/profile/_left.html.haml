@@ -3,12 +3,9 @@
 // End User Profile Image
 //
 
-%hr
 -if user_signed_in?
-	%p
-		You are not following me 
-		= button_link "plus", "Follow", nil, "btn-mini btn-success"
-	%hr
+	= render 'users/follow_form' 
+%hr
 
 
 %h6

@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+  before_filter :signed_in_user, 
+                only: [:index, :edit, :update, :destroy, :following, :followers]
   def show
     @user = User.find(params[:id])
     @playlists = @user.playlists
@@ -20,7 +23,20 @@ class UsersController < ApplicationController
     @users = User.all.page(params[:page]).per_page(3)
   end
 
+  def following
+    @title = "Following"
+    @user = User.find(params[:id])
+    @users = @user.followed_users.paginate(page: params[:page])
+    render 'show_follow'
+  end
 
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow'
+  end
+  
   def is_artist
     @user = current_user
   end

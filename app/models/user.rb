@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 					:username, :full_name, :about, :interests, :inspirations, :sounds_like, :gender,
 					:phone, :state, :city, :country, :date_of_birth, :band_birth, :band_members,
 					:login, :artist_name, :genre_ids, :slug, :profile_photo,
-					:background_color, :background_attachment, :background_position, :background_repeat, :background_image_active, :content_background_color, :content_background_color_active,
+					:background_image, :background_color, :background_attachment, :background_position, :background_repeat, :background_image_active, :content_background_color, :content_background_color_active,
 					:header_background_color, :header_color, :header_small_color,
 					:link_color, :link_color_hover,
 					:thumbnail_background_color, :thumbnail_border_color, :thumbnail_border_color_hover,
@@ -30,10 +30,34 @@ class User < ActiveRecord::Base
 
 	#-----\
 	#
+	# FOLLOW!
+	#---------\
+	has_many :relationships, foreign_key: "follower_id", dependent: :destroy
+	has_many :followed_users, through: :relationships, source: :followed
+	has_many :reverse_relationships, foreign_key: "followed_id",
+	                                 class_name: "Relationship",
+	                                 dependent: :destroy
+
+	has_many :followers, through: :reverse_relationships, source: :follower
+
+	def following?(other_user)
+		relationships.find_by_followed_id(other_user.id)
+	end
+
+	def follow!(other_user)
+		relationships.create!(followed_id: other_user.id)
+	end
+
+	def unfollow!(other_user)
+		relationships.find_by_followed_id(other_user.id).destroy
+	end
+	#-----\
+	#
 	# SLUGS!
 	#---------\
 	extend FriendlyId
 	friendly_id :username, use: :slugged
+
 	#-----\
 	#
 	# Voting!
@@ -68,6 +92,14 @@ class User < ActiveRecord::Base
                         :large => "900x900#", 
                         :full_large => "900x900>",
                         :avatar => "60x60#"
+                      },
+  					  :storage => :s3,
+					  :s3_credentials => "#{Rails.root}/config/s3.yml",
+                      :default_url => 'http://placehold.it/400x400'
+
+	has_attached_file :background_image, 
+                      :styles => {
+                        :small => "150x150#", 
                       },
   					  :storage => :s3,
 					  :s3_credentials => "#{Rails.root}/config/s3.yml",
@@ -156,7 +188,6 @@ class User < ActiveRecord::Base
 	def is_fan?
 		self.has_role? :fan
 	end
-
 
 	# Username login
 	attr_accessor :login

@@ -25,6 +25,7 @@
           %h3= link_to "Background", "#customize-background", "data-toggle" => "collapse"
           #customize-background.row.collapse
             .span5
+              = f.input :background_image, :required => false, :input_html => {:class => "span5"}
               = f.input :background_color, :required => false, :input_html => {:class => "span5 color"}
               %hr.d
               = f.label :background_attachment

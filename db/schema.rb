@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120818025147) do
+ActiveRecord::Schema.define(:version => 20120818224544) do
 
   create_table "albums", :force => true do |t|
     t.string   "name"
@@ -169,6 +169,17 @@ ActiveRecord::Schema.define(:version => 20120818025147) do
   add_index "playlists_songs", ["playlist_id"], :name => "index_playlists_songs_on_playlist_id"
   add_index "playlists_songs", ["song_id"], :name => "index_playlists_songs_on_song_id"
 
+  create_table "relationships", :force => true do |t|
+    t.integer  "follower_id"
+    t.integer  "followed_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "relationships", ["followed_id"], :name => "index_relationships_on_followed_id"
+  add_index "relationships", ["follower_id", "followed_id"], :name => "index_relationships_on_follower_id_and_followed_id", :unique => true
+  add_index "relationships", ["follower_id"], :name => "index_relationships_on_follower_id"
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -322,6 +333,10 @@ ActiveRecord::Schema.define(:version => 20120818025147) do
     t.string   "nav_background_color_hover"
     t.string   "nav_background_color_active"
     t.string   "nav_text_color_active"
+    t.string   "background_image_file_name"
+    t.string   "background_image_content_type"
+    t.integer  "background_image_file_size"
+    t.datetime "background_image_updated_at"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

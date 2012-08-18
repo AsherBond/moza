@@ -1,18 +1,33 @@
 Moza::Application.routes.draw do
   
+  devise_for :users, :skip => [:sessions], :controllers => { :registrations => :user_registrations }
+  resources :users, :only => [:show, :index]
+  resources :users do 
+    member do
+      get :following, :followers
+    end
 
-  resources :articles
+    resources :comments
+  end
 
+  as :user do
+    get "account-artist" => "users#artist",            :as => :account_type_artist
+    get "account-fan"    => "users#fan",               :as => :account_type_fan
+    get 'account-type'   => 'users#type',              :as => :account_type
+    get 'signin'         => 'devise/sessions#new',     :as => :new_user_session
+    post 'signin'        => 'devise/sessions#create',  :as => :user_session
+    delete 'signout'     => 'devise/sessions#destroy', :as => :destroy_user_session
+  end
+  resources :relationships, only: [:create, :destroy]
+  
   resources :galleries do
     resources :comments
     resources :images
   end
+
   resources :images do
     resources :comments
   end
-
-  match "discover" => "discover#index"
-  match "discover/browse" => "discover#browse"
 
   namespace :admin do
     get 'home' => "pages#home"
@@ -30,33 +45,26 @@ Moza::Application.routes.draw do
     member { post :add_song_to }
   end
 
-  resources :genres
-
-  match 'restricted' => "exceptions#restricted", :as => :restricted
-
-  devise_for :users, :skip => [:sessions], :controllers => { :registrations => :user_registrations }
-  resources :users, :only => [:show, :index]
-  resources :users do 
-    resources :comments
-  end
-  as :user do
-    get "account-artist" => "users#artist", :as => :account_type_artist
-    get "account-fan" => "users#fan", :as => :account_type_fan
-    get 'account-type' => 'users#type', :as => :account_type
-    get 'signin' => 'devise/sessions#new', :as => :new_user_session
-    post 'signin' => 'devise/sessions#create', :as => :user_session
-    delete 'signout' => 'devise/sessions#destroy', :as => :destroy_user_session
-  end
-
   resources :albums do
     member { post :vote }
+
     resources :comments
     resources :songs
   end
+
   resources :songs do 
     member { post :vote }
   end
+  
+
+  resources :genres
+  resources :articles
+
+  match "discover" => "discover#index"
+  match "discover/browse" => "discover#browse"
+  match 'restricted' => "exceptions#restricted", :as => :restricted
   match 'buy/song/paypal' => "pages#paypal", :as => :paypal
+
   root :to => "pages#home"
 
   # The priority is based upon order of creation:
