@@ -11,7 +11,12 @@ class User < ActiveRecord::Base
 					:username, :full_name, :about, :interests, :inspirations, :sounds_like, :gender,
 					:phone, :state, :city, :country, :date_of_birth, :band_birth, :band_members,
 					:login, :artist_name, :genre_ids, :slug, :profile_photo,
-					:background_color, :background_attachment, :background_position, :background_repeat, :background_image_active, :content_background_color, :content_background_color_active
+					:background_color, :background_attachment, :background_position, :background_repeat, :background_image_active, :content_background_color, :content_background_color_active,
+					:header_background_color, :header_color, :header_small_color,
+					:link_color, :link_color_hover,
+					:thumbnail_background_color, :thumbnail_border_color, :thumbnail_border_color_hover,
+					:blockquote_border_color, :blockquote_color, :comment_textarea_color, :comment_textarea_border_color, :comment_textarea_background,
+					:nav_text_color, :nav_text_color_hover, :nav_background_color_hover, :nav_background_color_active, :nav_text_color_active, :content_header_color, :content_small_header_color, :content_text_color, :hr_color_top, :hr_color_bottom, :hrd_color_top, :hrd_color_bottom
 	# attr_accessible :title, :body
 	has_many :comments, as: :commentable, :dependent => :destroy
 	has_many :galleries

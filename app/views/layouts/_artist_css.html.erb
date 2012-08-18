@@ -1,0 +1,81 @@
+<style>
+body {
+	<% if @user.background_image_active? %>
+		background-image: url(<%= @user.background_image.url %>);
+		background-position: <%= @user.background_position %>;
+		background-attachment: <%= @user.background_attachment %>;
+		background-repeat: <%= @user.background_repeat %>;
+	<% end %>
+	background-color: #<%= @user.background_color %>;
+}
+.content {
+	<% if @user.content_background_color_active? %>
+		background-color: #<%= @user.content_background_color %>;
+	<% else %>
+		background-color: transparent;
+	<% end %>
+}
+.page-header {
+	background-color: #<%= @user.header_background_color %>;
+}
+.page-header h1 {
+	color: #<%= @user.header_color %>;
+}
+.page-header h1 small {
+	color: #<%= @user.header_small_color %>;
+}
+div.thumbnail, a.thumbnail {
+	border-color: #<%= @user.thumbnail_border_color %>;
+	background: #<%= @user.thumbnail_background_color %>;
+}
+div.thumbnail:hover, a.thumbnail:hover {
+	border-color: #<%= @user.thumbnail_border_color_hover %>;
+}
+blockquote {
+	border-left-color: #<%= @user.blockquote_border_color %>;
+	
+}
+blockquote p {
+	color: #<%= @user.blockquote_color %>;
+
+}
+.content a {
+	color: #<%= @user.link_color %>;
+}
+.content a:hover {
+	color: #<%= @user.link_color_hover %>;
+}
+form#new_comment textarea {
+	border-color: #<%= @user.comment_textarea_border_color %>;
+	background-color: #<%= @user.comment_textarea_background %>;
+	color: #<%= @user.comment_textarea_color %>;
+}
+.content h2, .content h3 {
+	color:#<%= @user.content_header_color %>;
+}
+.content h6 {
+	color:#<%= @user.content_small_header_color %>;
+}
+.content p {
+	color:#<%= @user.content_text_color %>;
+}
+hr {
+	border-top-color:#<%= @user.hr_color_top %>;
+	border-bottom-color:#<%= @user.hr_color_bottom %>;
+}
+hr.d {
+	border-top-color:#<%= @user.hrd_color_top %>;
+	border-bottom-color:#<%= @user.hrd_color_bottom %>;
+}
+.nav-pills li.active a {
+	background-color:#<%= @user.nav_background_color_active %>;
+	color:#<%= @user.nav_text_color_active %>;
+}
+.nav-pills li a {
+	color:#<%= @user.nav_text_color %>;
+}
+.nav-pills li a:hover, .nav-pills li.active a:hover {
+	background-color:#<%= @user.nav_background_color_hover %>;
+	color:#<%= @user.nav_text_color_hover %>;
+}
+</style>

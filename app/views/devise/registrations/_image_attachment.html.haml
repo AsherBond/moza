@@ -1,16 +1,16 @@
 .btn-group{"data-toggle"=>"buttons-radio"}
   -if current_user.background_attachment == "fixed"
-    %label.btn.active{:for=>"background_image_attachment_fixed"} 
+    %label.btn.btn-primary.active{:for=>"background_image_attachment_fixed"} 
       Fixed
   -else
-    %label.btn{:for=>"background_image_attachment_fixed"} 
+    %label.btn.btn-primary{:for=>"background_image_attachment_fixed"} 
       Fixed
 
   -if current_user.background_attachment == "static"
-    %label.btn.active{:for=>"background_image_attachment_static"} 
+    %label.btn.btn-primary.active{:for=>"background_image_attachment_static"} 
       Static
   -else
-    %label.btn{:for=>"background_image_attachment_static"} 
+    %label.btn.btn-primary{:for=>"background_image_attachment_static"} 
       Static
 
 

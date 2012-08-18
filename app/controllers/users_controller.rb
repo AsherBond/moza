@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     	@albums = @user.albums
     	@songs  = @album.songs
     end
-    
+    render :layout => "profile"
   end
 
   def index

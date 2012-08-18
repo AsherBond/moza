@@ -1,15 +1,15 @@
 .btn-group{"data-toggle"=>"buttons-radio"}
   -if current_user.background_image_active?
-    %label.btn.active{:for=>"background_image_active"} 
+    %label.btn.btn-primary.active{:for=>"background_image_active"} 
       Active
   -else
-    %label.btn{:for=>"background_image_active"} 
+    %label.btn.btn-primary{:for=>"background_image_active"} 
       Active
   -if !current_user.background_image_active?
-    %label.btn.active{:for=>"background_image_unactive"} 
+    %label.btn.btn-primary.active{:for=>"background_image_unactive"} 
       Hidden
   -else
-    %label.btn{:for=>"background_image_unactive"} 
+    %label.btn.btn-primary{:for=>"background_image_unactive"} 
       Hidden
 
 %input{:type=>"checkbox", :id=>"background_image_active", :name=>"album[background_image_active]", :value=>"1", :style=>"display:none"}

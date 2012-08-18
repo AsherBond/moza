@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120817150204) do
+ActiveRecord::Schema.define(:version => 20120818025147) do
 
   create_table "albums", :force => true do |t|
     t.string   "name"
@@ -302,6 +302,26 @@ ActiveRecord::Schema.define(:version => 20120817150204) do
     t.string   "comment_block_quote_border"
     t.string   "link_color"
     t.string   "link_color_hover"
+    t.string   "thumbnail_background_color"
+    t.string   "thumbnail_border_color"
+    t.string   "thumbnail_border_color_hover"
+    t.string   "blockquote_border_color"
+    t.string   "blockquote_color"
+    t.string   "comment_textarea_color"
+    t.string   "comment_textarea_border_color"
+    t.string   "comment_textarea_background"
+    t.string   "content_header_color"
+    t.string   "content_small_header_color"
+    t.string   "content_text_color"
+    t.string   "hr_color_top"
+    t.string   "hr_color_bottom"
+    t.string   "hrd_color_top"
+    t.string   "hrd_color_bottom"
+    t.string   "nav_text_color"
+    t.string   "nav_text_color_hover"
+    t.string   "nav_background_color_hover"
+    t.string   "nav_background_color_active"
+    t.string   "nav_text_color_active"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

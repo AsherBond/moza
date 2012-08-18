@@ -1,24 +1,24 @@
 
 .btn-group{"data-toggle"=>"buttons-radio"}
   -if current_user.background_repeat == "repeat-x"
-    %label.btn.active{:for=>"user_background_repeat_x"} 
+    %label.btn.btn-primary.active{:for=>"user_background_repeat_x"} 
       Repeat-x
   -else
-    %label.btn{:for=>"user_background_repeat_x"} 
+    %label.btn.btn-primary{:for=>"user_background_repeat_x"} 
       Repeat-x
 
   -if current_user.background_repeat == "repeat-y"
-    %label.btn.active{:for=>"user_background_repeat_y"} 
+    %label.btn.btn-primary.active{:for=>"user_background_repeat_y"} 
       Repeat-y
   -else
-    %label.btn{:for=>"user_background_repeat_y"} 
+    %label.btn.btn-primary{:for=>"user_background_repeat_y"} 
       Repeat-y
 
   -if current_user.background_repeat == "repeat-both"
-    %label.btn.active{:for=>"user_background_repeat_both"} 
+    %label.btn.btn-primary.active{:for=>"user_background_repeat_both"} 
       Both
   -else
-    %label.btn{:for=>"user_background_repeat_both"} 
+    %label.btn.btn-primary{:for=>"user_background_repeat_both"} 
       Both
 
 %input{:type=>"checkbox", :id=>"user_background_repeat_x", :name=>"user[background_repeat]", :value=>"repeat-x", :style=>"display:none"}

@@ -22,11 +22,11 @@
           = f.input :username, :required => true
 
         .tab-pane#customize
-          %h3 Background
-          %hr.d
-          .row
+          %h3= link_to "Background", "#customize-background", "data-toggle" => "collapse"
+          #customize-background.row.collapse
             .span5
-              = f.input :background_color, :required => false, :input_html => {:class => "span5 jscolor"}
+              = f.input :background_color, :required => false, :input_html => {:class => "span5 color"}
+              %hr.d
               = f.label :background_attachment
               = render 'devise/registrations/image_attachment'
               %hr.d
@@ -39,30 +39,78 @@
               = f.label "Enable/Disable Background Image"
               = render 'devise/registrations/image_active'
             .span5
-              = f.input :content_background_color, :required => false, :input_html => {:class => "span5"}
+              = f.input :content_background_color, :required => false, :input_html => {:class => "span5 color"}
               %hr.d
               = f.label "Background Content Color Active"
               = render 'devise/registrations/content_background_active'
           %hr
-          %h3 Header
-          %hr.d
+          %h3= link_to "Header", "#customize-header", "data-toggle" => "collapse"
+          #customize-header.row.collapse
+            .span5
+              = f.input :header_background_color, :required => false, :input_html => {:class => "span5 color"}
+            .span5
+              = f.input :header_color, :required => false, :input_html => {:class => "span5 color"}
+              = f.input :header_small_color, :required => false, :input_html => {:class => "span5 color"}
 
           %hr
-          %h3 Links
-          %hr.d
+          %h3= link_to "Links", "#customize-links", "data-toggle" => "collapse"
+
+          #customize-links.row.collapse
+            .span5
+              = f.input :link_color, :required => false, :input_html => {:class => "span5 color"}
+            .span5
+              = f.input :link_color_hover, :required => false, :input_html => {:class => "span5 color"}
 
           %hr
-          %h3 Thumbnails
-          %hr.d
+          %h3= link_to "Thumbnails", "#customize-thumbnails", "data-toggle" => "collapse"
+
+          #customize-thumbnails.row.collapse
+            .span5
+              = f.input :thumbnail_background_color, :required => false, :input_html => {:class => "span5 color"}
+            .span5
+              = f.input :thumbnail_border_color, :required => false, :input_html => {:class => "span5 color"}
+              = f.input :thumbnail_border_color_hover, :required => false, :input_html => {:class => "span5 color"}
 
           %hr
-          %h3 Comments
-          %hr.d
+          %h3= link_to "Comments", "#customize-comments", "data-toggle" => "collapse"
+
+          #customize-comments.row.collapse
+            .span5
+              = f.input :blockquote_border_color, :required => false, :input_html => {:class => "span5 color"}
+              = f.input :blockquote_color, :required => false, :input_html => {:class => "span5 color"}
+            .span5
+              = f.input :comment_textarea_color, :required => false, :input_html => {:class => "span5 color"}
+              = f.input :comment_textarea_border_color, :required => false, :input_html => {:class => "span5 color"}
+              = f.input :comment_textarea_background, :required => false, :input_html => {:class => "span5 color"}
+          %hr
+          %h3= link_to "Nav Buttons", "#customize-navbar", "data-toggle" => "collapse"
+
+          #customize-navbar.row.collapse
+            .span5
+              = f.input :nav_text_color, :required => false, :input_html => {:class => "span5 color"}
+              = f.input :nav_text_color_hover, :required => false, :input_html => {:class => "span5 color"}
+              = f.input :nav_background_color_hover, :required => false, :input_html => {:class => "span5 color"}
+            .span5
+              = f.input :nav_background_color_active, :required => false, :input_html => {:class => "span5 color"}
+              = f.input :nav_text_color_active, :required => false, :input_html => {:class => "span5 color"}
 
           %hr
-          %h3 Other
-          %hr.d
-          
+          %h3= link_to "General", "#customize-general", "data-toggle" => "collapse"
+
+          #customize-general.row.collapse
+            .span5
+              = f.input :content_header_color, :required => false, :input_html => {:class => "span5 color"}
+              = f.input :content_small_header_color, :required => false, :input_html => {:class => "span5 color"}
+              = f.input :content_text_color, :required => false, :input_html => {:class => "span5 color"}
+            .span5
+              = f.input :hr_color_top, :required => false, :input_html => {:class => "span5 color"}
+              = f.input :hr_color_bottom, :required => false, :input_html => {:class => "span5 color"}
+              %hr.d
+              = f.input :hrd_color_top, :required => false, :input_html => {:class => "span5 color"}
+              = f.input :hrd_color_bottom, :required => false, :input_html => {:class => "span5 color"}
+
+
+
         .tab-pane#personal
           .row
             .span3
