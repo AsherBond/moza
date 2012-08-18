@@ -1,6 +1,5 @@
-class RedoNotifications < ActiveRecord::Migration
-  def self.down
-    drop_table :notifications
+class CreateNotifications < ActiveRecord::Migration
+  def change
     create_table :notifications do |t|
       t.references :user
       t.integer :from
@@ -11,6 +10,7 @@ class RedoNotifications < ActiveRecord::Migration
       t.timestamps
     end
     add_index :notifications, :user_id
-  end
-end
 
+  end
+
+end
