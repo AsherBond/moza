@@ -9,9 +9,9 @@ load "config/recipes/rbenv"
 load "config/recipes/check"
 load 'deploy/assets'
 
-server "mozapolis.justclickmedia.com", :web, :app, :db, primary: true
+server "50.116.2.99", :web, :app, :db, primary: true
 
-set :user, "cody"
+set :user, "root"
 set :application, "moza"
 set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_via, :remote_cache
