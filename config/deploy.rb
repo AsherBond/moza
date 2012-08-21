@@ -9,16 +9,16 @@ load "config/recipes/rbenv"
 load "config/recipes/check"
 load 'deploy/assets'
 
-server "50.116.2.99", :web, :app, :db, primary: true
+server "mozapolis.justclickmedia.com", :web, :app, :db, primary: true
 
-set :user, "root"
-set :application, "moza"
+set :user, "cody"
+set :application, "moza1"
 set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_via, :remote_cache
 set :use_sudo, false
 
 set :scm, "git"
-set :repository, "git@github.com:hellocodes/#{application}.git"
+set :repository, "git@github.com:hellocodes/moza.git"
 set :branch, "master"
 
 default_run_options[:pty] = true
