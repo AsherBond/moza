@@ -1,13 +1,18 @@
 Moza::Application.routes.draw do
-  
+
+  root :to => "welcome#index"
   devise_for :users, :skip => [:sessions], :controllers => { :registrations => :user_registrations }
+
   resources :users, :only => [:show, :index]
+
   resources :users do 
+
     member do
       get :following, :followers
     end
 
     resources :comments
+
   end
 
   as :user do
@@ -19,6 +24,11 @@ Moza::Application.routes.draw do
     delete 'signout'     => 'devise/sessions#destroy', :as => :destroy_user_session
   end
   resources :relationships, only: [:create, :destroy]
+  
+  resources :playlists do 
+    resources :comments
+    member { get :add_song_to }
+  end
   
   resources :galleries do
     resources :comments
@@ -41,22 +51,21 @@ Moza::Application.routes.draw do
     resources :comments
   end
 
-  resources :playlists do 
-    member { post :add_song_to }
-  end
 
   resources :albums do
-    member { post :vote }
+    member { get :vote }
 
     resources :comments
     resources :songs
   end
 
   resources :songs do 
-    member { post :vote }
+    member { 
+      get :buy
+      get :vote 
+    }
   end
   
-
   resources :genres
   resources :articles
 
@@ -65,7 +74,6 @@ Moza::Application.routes.draw do
   match 'restricted' => "exceptions#restricted", :as => :restricted
   match 'buy/song/paypal' => "pages#paypal", :as => :paypal
 
-  root :to => "pages#home"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

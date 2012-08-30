@@ -1,0 +1,11 @@
+%h3= link_to "Comments", "#customize-comments", "data-toggle" => "collapse"
+
+#customize-comments.row.collapse
+  .span5
+    = f.input :blockquote_border_color, :required => false, :input_html => {:class => "span5 color"}
+    = f.input :blockquote_color, :required => false, :input_html => {:class => "span5 color"}
+  .span5
+    = f.input :comment_textarea_color, :required => false, :input_html => {:class => "span5 color"}
+    = f.input :comment_textarea_border_color, :required => false, :input_html => {:class => "span5 color"}
+    = f.input :comment_textarea_background, :required => false, :input_html => {:class => "span5 color"}
+%hr

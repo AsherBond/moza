@@ -1,0 +1,19 @@
+.tab-pane#artist-details
+  .row
+    .span4
+      %div{:style => "padding-left:0px;margin-left:-20px;padding-top:0;"}= f.association :genres, :input_html => { :class => "span4 pull-left" }, :label => false, :hint => false
+    .span6{:style => "padding-top:10px;"}
+      = f.label :genres
+      = f.hint :genres
+  %hr.d
+  .row
+    .span6
+      = f.input :artist_name, :required => true, :input_html => { :class => "span6" }
+    .span4
+      = f.input :band_birth, :required => false, :as => :string, :input_html => { "data-datepicker" => "datepicker" }, :input_html => { :class => "span4" }
+  
+  = f.input :band_members, :required => false, :input_html => {:rows => 5}
+  = f.input :about, :required => false, :input_html => {:rows => 5}
+  = f.input :interests, :required => false, :input_html => {:rows => 5}
+  = f.input :inspirations, :required => false, :input_html => {:rows => 5}
+  = f.input :sounds_like, :required => false, :input_html => {:rows => 5}

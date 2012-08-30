@@ -1,11 +1,19 @@
 class SongsController < ApplicationController
-  authorize_resource
+  load_and_authorize_resource
 
   def vote
     value = params[:type] == "up" ? 1 : -1
     @song = Song.find(params[:id])
     @song.add_or_update_evaluation(:song_votes, value, current_user)
-    redirect_to :back, notice: "Thank you for voting"
+    respond_to :html, :js
+  end
+
+  def buy
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @song }
+    end
   end
 
   # GET /songs

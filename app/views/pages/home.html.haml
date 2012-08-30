@@ -1,102 +1,104 @@
-.row
-	.span16
-		%h2{:style => "text-align:center;"}
-			%i.icon.icon-heart
-			Featured Artists
-			%small Hand picked
-		%hr
 
-		%ul.thumbnails
-			-User.all.take(4).each do |user| 
-				%li.span4
-					.thumbnail
-						= link_to image_tag(user.profile_photo.url(:large)), user
-						.caption
-							%h4= link_to user.full_name, user
-							%p= user.username
-
-		%hr
-.row
-	.span9
-		%h2
-			%i.icon.icon-star
-			Top Artists
-			%small Overall
-		%hr
-		= render 'users/row'
-		%p
-			%i.icon-star
-			Don't forgot to click 
-			= button_link "globe", "Discover", nil, "btn-primary btn-mini"
-			to find find more music by sorting, searching and more! Theres new artists signing up every day!
-	.span7.omega
-		%h2
-			%i.icon.icon-bar-chart
-			Song Chart
-			%small Most Played
-		%hr
-		- @songs.to_enum.with_index(1).each  do |song, s|
-			.row
-				.span1
-					%p
-						.track-number=s
-				.span6
-					%p.mozer-song
-						.mozer-song-controls
-							%p
-								%a.btn.btn-inverse.mozer-play{"data-song-id" => "play_song_#{song.id}", :href => "#/"}
-									%i.icon-play
-									= song.name
-								%a.btn.btn-danger.mozer-pause.hide{"data-song-id" => "play_song_#{song.id}", :href => "#/"}
-									%i.icon-pause
-									= song.name
-							%p
-								= link_to "by <strong>#{song.album.user.artist_name}</strong>".html_safe, song.album.user, :class => "btn btn-mini btn-danger"
-						%audio{:id => "play_song_#{song.id}", :src => "#{song.file.url}", :type => "audio/mp3"}
+.content#featured-artists
+	= bootstrap_page_header "Featured Artists", "Hand Picked" 
+	.row
+		.span16
 
 
-			%hr.d
+			%ul.thumbnails
+				-User.all.take(4).each do |user| 
+					%li.span4
+						.thumbnail
+							= link_to image_tag(user.profile_photo.url(:large)), user
+							.caption
+								%h3
+									= link_to user.artist_name, user
+									%small= user.username
 
+.content#featured-middle
 
-		%p
-			Check out all of our
-			= button_link "bar-chart", "Song Charts", nil, "btn-info btn-mini"
-			to see the most popular artists!
-%hr
-.row
-	.span8
-		%h2
-			%i.icon.icon-music
-			Album Chart
-			%small Most Listened to
-		%hr
-		= render 'albums/row'
-	.span8.omega
-		.row
-			.span4
-				%h2
-					%i.icon.icon-headphones
-					Artists
-				%p= link_to image_tag("http://placehold.it/300x150"), nil, :class => "thumbnail"
-				%p The Earth is a very small stage in a vast cosmic arena. Think of the rivers of blood spilled by all those generals and emperors so that, in glory and triumph.
-				%p
-					= button_link "headphones", "Artist Signup", nil, "btn-danger btn-large"
-			.span4
-				%h2
-					%i.icon.icon-user
-					Fans
-				%p= link_to image_tag("http://placehold.it/300x150"), nil, :class => "thumbnail"
-				%p The Earth is a very small stage in a vast cosmic arena. Think of the rivers of blood spilled by all those generals and emperors so that, in glory and triumph.
-				%p
-					= button_link "user", "Fan Signup", nil, "btn-info btn-large"
-		%hr.d
-		%h2
-			%i.icon.icon-tags
-			New Artists
-			%small Just Signed Up
-
-		%hr
-		-5.times do
+	.row
+		.span9
+			%h2
+				%i.icon.icon-star
+				Top Artists
+				%small Overall
+			%hr
+			= render 'users/row'
 			%p
-				= link_to "Artist Name", nil
-				%small Rock / Punk
+				%i.icon-star
+				Don't forgot to click 
+				= button_link "globe", "Discover", nil, "btn-primary btn-mini"
+				to find find more music by sorting, searching and more! Theres new artists signing up every day!
+		.span7.omega
+			%h2
+				%i.icon.icon-bar-chart
+				Song Chart
+				%small Most Played
+			%hr
+			- @songs.to_enum.with_index(1).each  do |song, s|
+				.row
+					.span1
+						%p
+							.track-number=s
+					.span6
+						%p.mozer-song
+							.mozer-song-controls
+								%p
+									%a.btn.btn-inverse.mozer-play{"data-song-id" => "play_song_#{song.id}", :href => "#/"}
+										%i.icon-play
+										= song.name
+									%a.btn.btn-danger.mozer-pause.hide{"data-song-id" => "play_song_#{song.id}", :href => "#/"}
+										%i.icon-pause
+										= song.name
+								%p
+									= link_to "by <strong>#{song.album.user.artist_name}</strong>".html_safe, song.album.user, :class => "btn btn-mini btn-danger"
+							%audio{:id => "play_song_#{song.id}", :src => "#{song.file.url}", :type => "audio/mp3"}
+
+
+				%hr.d
+
+
+			%p
+				Check out all of our
+				= button_link "bar-chart", "Song Charts", nil, "btn-info btn-mini"
+				to see the most popular artists!
+	%hr
+.content#featured-bottom
+	.row
+		.span8
+			%h2
+				%i.icon.icon-music
+				Album Chart
+				%small Most Listened to
+			%hr
+			= render 'albums/row'
+		.span8.omega
+			.row
+				.span4
+					%h2
+						%i.icon.icon-headphones
+						Artists
+					%p= link_to image_tag("http://placehold.it/300x150"), nil, :class => "thumbnail"
+					%p The Earth is a very small stage in a vast cosmic arena. Think of the rivers of blood spilled by all those generals and emperors so that, in glory and triumph.
+					%p
+						= button_link "headphones", "Artist Signup", nil, "btn-danger btn-large"
+				.span4
+					%h2
+						%i.icon.icon-user
+						Fans
+					%p= link_to image_tag("http://placehold.it/300x150"), nil, :class => "thumbnail"
+					%p The Earth is a very small stage in a vast cosmic arena. Think of the rivers of blood spilled by all those generals and emperors so that, in glory and triumph.
+					%p
+						= button_link "user", "Fan Signup", nil, "btn-info btn-large"
+			%hr.d
+			%h2
+				%i.icon.icon-tags
+				New Artists
+				%small Just Signed Up
+
+			%hr
+			-5.times do
+				%p
+					= link_to "Artist Name", nil
+					%small Rock / Punk

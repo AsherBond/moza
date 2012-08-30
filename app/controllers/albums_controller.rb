@@ -1,102 +1,56 @@
 class AlbumsController < ApplicationController
-  authorize_resource
 
-  def vote
-    value = params[:type] == "up" ? 1 : -1
-    @album = Album.find(params[:id])
-    @album.add_or_update_evaluation(:album_votes, value, current_user)
-    redirect_to :back, notice: "Thank you for voting"
-  end
+	load_and_authorize_resource
+	
+	def vote
+		value = params[:type] == "up" ? 1 : -1
+		@album.add_or_update_evaluation(:album_votes, value, current_user)
+		respond_to :html, :js
+	end
 
-  # GET /albums
-  # GET /albums.json
-  def index
-    @albums = current_user.albums
+	def index
+		@albums = current_user.albums
+	end
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @albums }
-    end
-  end
+	def show
+		if current_user == @album.user
+			@songs = @album.songs
+		else
+			@songs = Song.where(:album_id => @album.id, :active => true)
+		end
 
-  # GET /albums/1
-  # GET /albums/1.json
-  def show
-    @album = Album.find(params[:id])
-    if current_user == @album.user
-      @songs = @album.songs
-    else
-      @songs = Song.where(:album_id => @album.id, :active => true)
-    end
+		@commentable = @album
+		@comments = @commentable.comments
+		@comment = Comment.new
+	end
 
-    # Comments
-    @commentable = @album
-    @comments = @commentable.comments
-    @comment = Comment.new
+	def new
+		@album = current_user.albums.build
+	end
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @album }
-    end
-  end
+	def edit
+	end
 
-  # GET /albums/new
-  # GET /albums/new.json
-  def new
-    @album = current_user.albums.build
+	def create
+		@album = current_user.albums.build(params[:album])
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @album }
-    end
-  end
+		if @album.save
+			 redirect_to @album, notice: 'You have successfully created an Album, you can add songs to the album below.'
+		else
+			 render action: "new" 
+		end
+	end
 
-  # GET /albums/1/edit
-  def edit
-    @album = Album.find(params[:id])
-  end
+	def update
+		if @album.update_attributes(params[:album])
+			 redirect_to @album, notice: 'Album was successfully updated.'
+		else
+			 render action: "edit"
+		end
+	end
 
-  # POST /albums
-  # POST /albums.json
-  def create
-    @album = current_user.albums.build(params[:album])
-
-    respond_to do |format|
-      if @album.save
-        format.html { redirect_to @album, notice: 'Album was successfully created.' }
-        format.json { render json: @album, status: :created, location: @album }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @album.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /albums/1
-  # PUT /albums/1.json
-  def update
-    @album = Album.find(params[:id])
-
-    respond_to do |format|
-      if @album.update_attributes(params[:album])
-        format.html { redirect_to @album, notice: 'Album was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @album.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /albums/1
-  # DELETE /albums/1.json
-  def destroy
-    @album = Album.find(params[:id])
-    @album.destroy
-
-    respond_to do |format|
-      format.html { redirect_to albums_url }
-      format.json { head :no_content }
-    end
-  end
+	def destroy
+		@album.destroy
+		redirect_to albums_url, notice: 'Album was deleted successfully.'
+	end
 end

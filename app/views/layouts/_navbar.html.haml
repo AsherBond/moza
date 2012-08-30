@@ -1,4 +1,5 @@
-.navbar.navbar-fixed-top
+.navbar.navbar-inverse.navbar-fixed-top
+
 	.navbar-inner
 		.container
 			%a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
@@ -16,23 +17,27 @@
 					%li.divider-vertical
 
 					-if user_signed_in?
-						%li.dropdown
-							%a.dropdown-toggle{ "data-toggle" => "dropdown", :href => "#" }
-								%icon.icon-beaker
-								Dashboards
-							%ul.dropdown-menu
-								%li= icon_link "music", 'Albums', albums_path
-								%li= icon_link "reorder", 'Playlists', playlists_path
-								%li= icon_link "picture", 'Photos', galleries_path
-								%li= icon_link "film", 'Videos', videos_path
-								%li= icon_link "flag", 'Events', events_path
+						-if current_user.has_role? :fan
+							%li= icon_link "reorder", 'Playlists', playlists_path
+						-if current_user.has_role? :artist
+							%li.dropdown
+								%a.dropdown-toggle{ "data-toggle" => "dropdown", :href => "#" }
+									%icon.icon-beaker
+									Dashboards
+								%ul.dropdown-menu
+									%li= link_to 'Songs', albums_path
+									%li= link_to 'Albums', albums_path
+									%li= link_to 'Playlists', playlists_path
+									%li= link_to 'Photos', galleries_path
+									%li= link_to 'Videos', videos_path
+									%li= link_to 'Events', events_path
 						%li.dropdown
 							%a.dropdown-toggle{ "data-toggle" => "dropdown", :href => "#" }
 								%icon.icon-user
 								= current_user.username
 							%ul.dropdown-menu
-								%li= icon_link "edit", 'Edit Info', edit_user_registration_path
-								%li= icon_link "eye-open", 'View Profile', current_user
+								%li= link_to 'Edit Details', edit_user_registration_path
+								%li= link_to 'View Profile', current_user
 						%li.dropdown
 							%a.dropdown-toggle{ "data-toggle" => "dropdown", :href => "#" }
 								
@@ -55,6 +60,7 @@
 						%li.divider-vertical
 						%li= link_to '<i class="icon-signout"></i> Signout'.html_safe, destroy_user_session_path, :method => :delete
 					-else
+
 						%li= icon_link "signin", 'Signin', new_user_session_path
 						%li.divider-vertical
 						%li= icon_link "heart", 'Register', new_user_registration_path

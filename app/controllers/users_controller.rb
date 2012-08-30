@@ -55,6 +55,7 @@ class UsersController < ApplicationController
       redirect_to edit_user_registration_path, :notice => "We are waiting to listen to you!"
     end
   end
+  
   def fan
   	if current_user.roles.empty?
 	  	current_user.add_role :fan

@@ -9,16 +9,9 @@ class PlaylistsController < ApplicationController
       ptrack = PlaylistsSongs.new(:song_id => song_id, :playlist_id => playlist_id)
     end
 
-    if PlaylistsSongs.where(:song_id => song_id).size > 0
-      flash[:notice] = "<i class='icon-remove'></i> <i class='icon-reorder'></i> This song is already in your playlist.".html_safe
-      redirect_to :back
-    elsif ptrack.save
-      flash[:notice] = "<i class='icon-plus'></i> <i class='icon-reorder'></i> Song added to the playlist '#{playlist.name}'.".html_safe
-      redirect_to :back
-    else
-      flash[:notice] = "<i class='icon-remove'></i> <i class='icon-reorder'></i> There was a problem with your playlist.".html_safe
-      redirect_to playlists_path
-    end
+    ptrack.save
+    
+    respond_to :html, :js
 
   end
 
@@ -38,6 +31,10 @@ class PlaylistsController < ApplicationController
   def show
     @playlist = Playlist.find(params[:id])
     @songs = @playlist.songs
+
+    @commentable = @playlist
+    @comments = @commentable.comments
+    @comment = Comment.new
 
     respond_to do |format|
       format.html # show.html.erb

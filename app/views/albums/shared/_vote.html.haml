@@ -2,12 +2,12 @@
 .btn-toolbar
 	-if current_user
 		.btn-group
-			= link_to "<i class='icon-heart'></i> #{pluralize(@album.reputation_value_for(:album_votes).to_i, "vote")}".html_safe, vote_album_path(@album, type: "up"), method: "post", :class => "btn btn-info disabled"
+			= link_to "<i class='icon-heart'></i> #{pluralize(@album.reputation_value_for(:album_votes).to_i, "vote")}".html_safe, "#/", class: "btn btn-info disabled"
 			-if current_user && current_user.voted_for?(@album)
 				%span.btn.disabled Thanks!
 		.btn-group
-			= link_to "<i class='icon-thumbs-up icon-large'></i> Like".html_safe, vote_album_path(@album, type: "up"), method: "post", :class => "btn btn-success"
-			= link_to "<i class='icon-thumbs-down icon-large'></i>".html_safe, vote_album_path(@album, type: "down"), method: "post", :class => "btn btn-inverse"
+			= link_to "<i class='icon-thumbs-up icon-large'></i> Like".html_safe, vote_album_path(@album, type: "up"), :class => "btn btn-success", action: :vote, remote: :true
+			= link_to "<i class='icon-thumbs-down icon-large'></i>".html_safe, vote_album_path(@album, type: "down"), :class => "btn btn-inverse", action: :vote, remote: :true
 	-else
 		.btn-group
 			%span.btn.btn-info

@@ -1,0 +1,12 @@
+%h3= link_to "Nav Buttons", "#customize-navbar", "data-toggle" => "collapse"
+
+#customize-navbar.row.collapse
+  .span5
+    = f.input :nav_text_color, :required => false, :input_html => {:class => "span5 color"}
+    = f.input :nav_text_color_hover, :required => false, :input_html => {:class => "span5 color"}
+    = f.input :nav_background_color_hover, :required => false, :input_html => {:class => "span5 color"}
+  .span5
+    = f.input :nav_background_color_active, :required => false, :input_html => {:class => "span5 color"}
+    = f.input :nav_text_color_active, :required => false, :input_html => {:class => "span5 color"}
+
+%hr

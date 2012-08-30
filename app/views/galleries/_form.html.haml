@@ -1,11 +1,11 @@
-= simple_form_for @gallery, :html => { :class => 'form-vertical' }, :defaults => { :input_html => {:class => "span8"} } do |f|
+= simple_form_for @gallery, :html => { :class => 'form-vertical' }, :defaults => { :input_html => {:class => "input-block-level"} } do |f|
   = f.input :name
   = f.input :description, :input_html => { :rows => 5 }
   .row
     .span3
       -if @gallery.cover.file?
         =link_to image_tag(@gallery.cover.url(:medium)), "#/", :class => "thumbnail"
-    .span5
+    .span4
       = f.input :cover
   .form-actions
     = f.button :submit, :class => 'btn-primary'

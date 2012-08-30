@@ -1,0 +1,6 @@
+%h6 Rate this album
+.btn-toolbar
+	-if current_user
+		.btn-group
+			= link_to "<i class='icon-heart'></i> #{pluralize(@album.reputation_value_for(:album_votes).to_i, "vote")}".html_safe, "#/", class: "btn btn-info disabled"
+			%span.btn.disabled Thanks!

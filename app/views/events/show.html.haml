@@ -1,17 +1,32 @@
 .row
-  .span8
+  .span10
     .row
       .span2
-        = link_to image_tag(@event.cover.url(:medium)), "#/", :class => "thumbnail"
+        = link_to image_tag(@event.user.profile_photo.url(:medium)), @event.user, class: "thumbnail"
       .span6
-        %h3= @event.name
-        %h6 Date
-        %p= "#{@event.start_date} - #{@event.end_date}"
-        %p= @event.details
-  .span8
+        %h3
+          = @event.name
+          %small
+            started by
+            = link_to @event.user.artist_name, @event.user
+    %hr
+    %dl.dl-horizontal
+      %dt 
+        %span.label.label-info Start Time
+      %dd= "#{l @event.start_date, format: :event_date} @ #{l @event.start_time, format: :event_time}"
+      %hr.d
+      %dt 
+        %span.label.label-warning End Time
+      %dd= "#{l @event.end_date, format: :event_date} @ #{l @event.end_time, format: :event_time}"
+      %hr.d
+      %dt 
+        %span.label.label-inverse Details
+      %dd= @event.details
     %h3 
       %i.icon-comments-alt
       Comments
     %hr
     =render 'comments/comments'
     =render 'comments/form'
+  .span6
+    = link_to image_tag(@event.cover.url(:medium)), "#/", :class => "thumbnail"

@@ -1,35 +1,32 @@
-= bootstrap_page_header "#{@video.name}", "Video by #{icon_link(:user,@video.user.username, @video.user)}"
+= bootstrap_page_header "#{@video.name}"
 .row
-  .span10
-    -if @video.youtube_url.empty?
-      %video.video-js.vjs-default-skin{:controls => "", "data-setup" => "{}", :height => "330", :poster => "#{@video.item.url(:thumb)}", :preload => "auto", :width => "100%"}
-        %source{:src => @video.item.url, :type => "video/mp4"}
-    -else 
-      %iframe{:allowfullscreen => "", :frameborder => "0", :height => "330", :src => "http://www.youtube.com/embed/#{parse_youtube(@video.youtube_url)}", :width => "100%" }
-    .well
-      %h6 Description
-      %p= @video.description
+  .span10.offset3
+    .well.well-small.black
+      -if @video.youtube_url.empty?
+        %video.video-js.vjs-default-skin{:controls => "", "data-setup" => "{}", :height => "330", :poster => "#{@video.item.url(:thumb)}", :preload => "auto", :width => "100%"}
+          %source{:src => @video.item.url, :type => "video/mp4"}
+      -else 
+        %iframe{:allowfullscreen => "", :frameborder => "0", :height => "330", :src => "http://www.youtube.com/embed/#{parse_youtube(@video.youtube_url)}", :width => "100%" }
+    %hr.d
+    .row
+      .span2
+        = link_to image_tag(@video.user.profile_photo.url(:large)), @video.user, :class => "thumbnail"
+      .span8
+        .well
+          %h1
+            = @video.user.username
+            %small= @video.user.full_name
+
+          %h6 Description
+          %p= @video.description
+    %h4
+      #{@video.user.username}'s Videos
+    %hr.d
+    %ul.thumbnails
+      = render @video.user.videos, :span => "span2"
     %h3 
       %i.icon-comments-alt
       Comments
     %hr
     =render 'comments/comments'
     =render 'comments/form'
-  .span6.omega
-    .row
-      .span2
-        = link_to image_tag(@video.user.profile_photo.url(:large)), @video.user, :class => "thumbnail"
-      .span4
-        %h1
-          = @video.user.username
-          %small= @video.user.full_name
-        %p
-          = button_link "plus", "Follow", nil, "btn-success btn-mini"
-          = button_link "user", "Profile", nil, "btn-info btn-mini"
-    
-    %hr
-    %h3
-      #{@video.user.username}'s Videos
-    %hr.d
-    %ul.thumbnails
-      = render @video.user.videos, :span => "span2"

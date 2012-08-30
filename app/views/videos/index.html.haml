@@ -13,7 +13,7 @@
     %ul.thumbnails
       -if @videos.each do |video| 
         %li.span3
-          = link_to image_tag("http://placehold.it/500x500"), video, :class => "thumbnail", "data-original-title" => "#{video.name}", "data-content" => "<p>#{video.description}</p>", :rel => "popover"
+          = link_to image_tag(video.item.url(:thumb)), video, class: :thumbnail, rel: :tooltip, title: video.name
       -end.empty?
         -show_msg = true
     -if show_msg ==  true

@@ -1,0 +1,9 @@
+%h3= link_to "Header", "#customize-header", "data-toggle" => "collapse"
+#customize-header.row.collapse
+  .span5
+    = f.input :header_background_color, :required => false, :input_html => {:class => "span5 color"}
+  .span5
+    = f.input :header_color, :required => false, :input_html => {:class => "span5 color"}
+    = f.input :header_small_color, :required => false, :input_html => {:class => "span5 color"}
+
+%hr

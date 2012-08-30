@@ -1,7 +1,7 @@
 %ul.thumbnails
 	-if @albums.each do |album| 
 		%li.span2
-			= link_to image_tag(album.cover.url(:large)), album, :class => "thumbnail", "data-original-title" => "#{album.name}", "data-content" => "<p>#{album.description}</p><h6>#{album.record_label} / #{album.year_produced}</h6>", :rel => "popover"
+			= link_to image_tag(album.cover.url(:large)), album, :class => "thumbnail", "data-original-title" => "#{album.name}", "data-content" => "<p>#{truncate(album.description, length: 200, seperator: ' ')}</p>", "data-trigger" => "hover", :rel => "popover"
 	-end.empty?
 		-show_msg = true
 -if show_msg ==  true

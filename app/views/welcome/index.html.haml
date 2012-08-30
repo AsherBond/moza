@@ -1,0 +1,103 @@
+.content#featured-artists
+	= bootstrap_page_header "Featured Artists", "Hand Picked" 
+	.row
+		.span16
+			%ul.thumbnails
+				- @featured_artists.each do |user| 
+					%li.span4
+						.thumbnail
+							= link_to image_tag(user.profile_photo.url(:large)), user
+							.caption
+								%h3
+									= link_to user.artist_name, user
+									%small= user.username
+
+.content#featured-middle
+	.row
+		.span8
+			%h3 
+				%i.icon-star.icon-large
+				Popular Albums
+				%small Most Liked
+			%hr
+			%ul.thumbnails
+				- @popular_albums.each do |album|
+					%li.span2
+						= link_to image_tag(album.cover.url(:large)), album, rel: :tooltip, title: "<strong>'#{album.name}'</strong> by #{album.user.artist_name}".html_safe, class: :thumbnail
+
+
+		.span8
+			%h3 
+				%i.icon-pushpin.icon-large
+				Popular Songs
+				%small Most Liked
+			%hr
+			- @popular_songs.to_enum.with_index(1).each  do |song, s|
+				.row
+					.span1
+						%p.track-number
+							%sup #
+							= s
+					.span7
+						%p.mozer-song
+							.mozer-song-controls
+								%p
+									%a.btn.btn-inverse.mozer-play{"data-song-id" => "play_song_#{song.id}", :href => "#/"}
+										%i.icon-play
+										= song.name
+									%a.btn.btn-danger.mozer-pause.hide{"data-song-id" => "play_song_#{song.id}", :href => "#/"}
+										%i.icon-pause
+										= song.name
+							%audio{:id => "play_song_#{song.id}", :src => "#{song.file.url}", :type => "audio/mp3"}
+
+						%p
+							= link_to "by <strong>#{song.album.user.artist_name}</strong>".html_safe, song.album.user, :class => "btn btn-mini btn-danger"
+						
+						
+
+.content#featured-bottom
+	.row
+		.span8
+			%h3 
+				%i.icon-music.icon-large
+				New Albums
+				%small Oven fresh
+			%hr
+			%ul.thumbnails
+				- @new_albums.each do |album|
+					%li.span2
+						= link_to image_tag(album.cover.url(:large)), album, rel: :tooltip, title: "<strong>'#{album.name}'</strong> by #{album.user.artist_name}".html_safe, class: :thumbnail
+		.span8
+			- if user_signed_in?
+				.well.black
+					%h3 
+						%i.icon-thumbs-up.icon-large
+						Thanks for signing up!
+					%hr
+					%p.lead Check out some of the awesome features we provide!
+					%hr.d
+	
+					%dl.dl-horizontal
+						%dt Feature 1
+						%dd In all this vastness, there is no hint that help will come from elsewhere to save us from ourselves.
+						%dt Feature 2
+						%dd In all this vastness, there is no hint that help will come from elsewhere to save us from ourselves.
+						%dt Feature 3
+						%dd In all this vastness, there is no hint that help will come from elsewhere to save us from ourselves.
+
+			- else
+				%h3 
+					%i.icon-group.icon-large
+					Fan or Artist?
+					%small Choose your account type
+				%hr
+				= link_to image_tag("http://placehold.it/700x200"), root_path, class: :thumbnail
+				%hr.d
+				.well.black.center
+					= link_to "<i class='icon-user icon-large'></i> Sign up!".html_safe, new_user_registration_path, class: "btn btn-large btn-primary"
+					= link_to "<i class='icon-signin icon-large'></i> Login".html_safe, new_user_session_path, class: "btn btn-large btn-info"
+				.row
+					.span4
+						%p Our posturings, our imagined self-importance, the delusion that we have some privileged position in the Universe, are challenged by this point of pale light. Our planet is a lonely speck in the great enveloping cosmic dark. In our obscurity, in all this vastness, there is no hint that help will come from elsewhere to save us from ourselves.
+					.span4
+						%p Our posturings, our imagined self-importance, the delusion that we have some privileged position in the Universe, are challenged by this point of pale light. Our planet is a lonely speck in the great enveloping cosmic dark. In our obscurity, in all this vastness, there is no hint that help will come from elsewhere to save us from ourselves.

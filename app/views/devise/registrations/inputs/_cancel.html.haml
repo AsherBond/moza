@@ -1,0 +1,7 @@
+.tab-pane#cancel-account
+  %p.lead
+    Unhappy? 
+  =link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "btn btn-danger"
+  %hr
+  %h6 Sorry to see you go!
+  %p If theres anything we can do let us know!

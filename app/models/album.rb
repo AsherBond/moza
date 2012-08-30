@@ -1,31 +1,13 @@
 class Album < ActiveRecord::Base
 	belongs_to :user
 	has_many :songs
-	attr_accessible :active, :description, :featured, :name, :position, :record_label, :year_produced, :cover
 	has_many :comments, as: :commentable, :dependent => :destroy
 
 	has_reputation :album_votes, source: :user, aggregated_by: :sum
 	has_reputation :song_votes, source: {reputation: :song_votes, of: :songs}, aggregated_by: :sum
-	#-----\
-	#
-	# SEARCH!
-	#---------\
-	include PgSearch
-	pg_search_scope :search, 
-							against: [:name, :record_label],
-							using: {tsearch: {dictionary: "english"}},
-							associated_against: {user: :artist_name, songs: :name}
 
-	def self.text_search(query)
-		if query.present?
-			search(query)
-		else
-			scoped
-		end
-	end
-
-	# Validations
-	# -----------
+	attr_accessible :active, :description, :featured, :name, :position, :record_label, :year_produced, :cover
+	
 	validates :record_label, 
 			  allow_blank: true,
 	          length: { 
@@ -63,5 +45,19 @@ class Album < ActiveRecord::Base
                       },
 			  		  :storage => :s3,
 					  :s3_credentials => "#{Rails.root}/config/s3.yml",
-                      :default_url => 'http://placehold.it/400x400'
+                      default_url: 'http://placehold.it/400x400'
+
+	include PgSearch
+	pg_search_scope :search, 
+							against: [:name, :record_label],
+							using: {tsearch: {dictionary: "english"}},
+							associated_against: {user: :artist_name, songs: :name}
+
+	def self.text_search(query)
+		if query.present?
+			search(query)
+		else
+			scoped
+		end
+	end
 end

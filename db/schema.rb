@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120818230653) do
+ActiveRecord::Schema.define(:version => 20120829015238) do
 
   create_table "albums", :force => true do |t|
     t.string   "name"
@@ -235,6 +235,17 @@ ActiveRecord::Schema.define(:version => 20120818230653) do
   add_index "rs_reputations", ["reputation_name"], :name => "index_rs_reputations_on_reputation_name"
   add_index "rs_reputations", ["target_id", "target_type"], :name => "index_rs_reputations_on_target_id_and_target_type"
 
+  create_table "singles", :force => true do |t|
+    t.string   "name"
+    t.text     "lyrics"
+    t.boolean  "active"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "singles", ["user_id"], :name => "index_singles_on_user_id"
+
   create_table "songs", :force => true do |t|
     t.string   "name"
     t.text     "lyrics"
@@ -337,6 +348,8 @@ ActiveRecord::Schema.define(:version => 20120818230653) do
     t.string   "background_image_content_type"
     t.integer  "background_image_file_size"
     t.datetime "background_image_updated_at"
+    t.string   "account_type"
+    t.boolean  "featured"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

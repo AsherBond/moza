@@ -1,51 +1,42 @@
 = bootstrap_page_header "Sign Up", "Registrations are currently free!" 
 .row
-	.span8
-		= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :defaults => {:input_html => { :class => "span8" }}) do |f|
-			= f.error_notification
-			= f.input :email, :required => true, :autofocus => true
-			= f.input :full_name, :required => true
-			= f.input :username, :required => true
+	.span8.offset4
+		.well
+			= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :defaults => {:input_html => { :class => "input-block-level" }}) do |f|
+				= f.error_notification
+				.center
+					%p.lead Hello, I am a(n)...
+					%p.well.black.btn-group{"data-toggle"=>"buttons-radio"}
+						- if params[:user].present? and params[:user][:account_type] == "1"
+							%label.btn.btn-large.btn-primary.active#user_artist
+								%i.icon-user
+								Artist
+							%span.btn.btn-large.btn-primary.disabled or 
+							%input{:type=>"hidden", :id=>"user_role", :name=>"user[account_type]", :value=>"1", :style=>"display:none"}
+							%label.btn.btn-large.btn-primary#user_fan
+								%i.icon-headphones
+								Fan
+						- else 
+							%label.btn.btn-large.btn-primary#user_artist
+								%i.icon-user
+								Artist
+							%span.btn.btn-large.btn-primary.disabled or 
+							%input{:type=>"hidden", :id=>"user_role", :name=>"user[account_type]", :value=>"0", :style=>"display:none"}
+							%label.btn.btn-large.btn-primary.active#user_fan
+								%i.icon-headphones
+								Fan
+					
+				.alert.alert-info
+					%strong Notice: 
+					Please select the correct account type, you cannot change this!
+				= f.input :username, :required => true, :autofocus => true
+				= f.input :email, :required => true
 
-			= f.label :gender, :required => true
-			%p.btn-group{"data-toggle"=>"buttons-radio"}
-				%label.btn.btn-large{:for=>"user_male"} 
-					%i.icon-user
-					Male
-				%label.btn.btn-large{:for=>"user_female"} 
-					%i.icon-user
-					Female
-			%input{:type=>"checkbox", :id=>"user_male", :name=>"user[gender]", :value=>"1", :style=>"display:none"}
-			%input{:type=>"checkbox", :id=>"user_female", :name=>"user[gender]", :value=>"0", :style=>"display:none"}
-			= f.hint :gender, :required => true
 
-			= f.input :password, :required => true
-			= f.input :password_confirmation, :required => true
-			.form-actions
-				= f.button :submit, "Sign up", :class => "btn btn-primary"
-			%p= render "devise/shared/links"
-	.span8
-		= link_to image_tag(phit("600x300")), nil, :class => "thumbnail"
-		%hr.d
-		%p After you register you will be  prompted for which type of account you will be using. 
-		%p 
-			Once you signup you'll gain access to a bunch of features! 
-			%strong Such as our profile engine and album uploader, they are one of a kind!
 
-		%hr
-		%p.lead What type of account should you pick?
-		.row
-			.span4
-				%h3
-					%icon.icon-user
-					Artists
-				%p The Earth is a very small stage in a vast cosmic arena. Think of the rivers of blood spilled by all those generals and emperors so that, in glory and triumph.
-				%p
-					= button_link "headphones", "Learn More", nil, "btn-danger btn-mini"
-			.span4
-				%h3
-					%icon.icon-headphones
-					Fans
-				%p The Earth is a very small stage in a vast cosmic arena. Think of the rivers of blood spilled by all those generals and emperors so that, in glory and triumph.
-				%p
-					= button_link "user", "Learn More", nil, "btn-info btn-mini"
+
+				= f.input :password, :required => true
+				= f.input :password_confirmation, :required => true
+				.form-actions
+					= f.button :submit, "Sign up", :class => "btn btn-primary"
+				

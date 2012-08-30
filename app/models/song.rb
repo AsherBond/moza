@@ -37,6 +37,8 @@ class Song < ActiveRecord::Base
   	has_attached_file :file,
 		:content_type => ['audio/mpeg', 'audio/x-mpeg', 'audio/mp3', 'audio/x-mp3', 'audio/mpeg3', 'audio/x-mpeg3', 'audio/mpg', 'audio/x-mpg', 'audio/x-mpegaudio'],
 		:storage => :s3,
-		:s3_credentials => "#{Rails.root}/config/s3.yml"
+		:s3_credentials => "#{Rails.root}/config/s3.yml",
+        default_url: 'http://placehold.it/400x400'
+
 
 end

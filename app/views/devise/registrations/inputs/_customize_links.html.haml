@@ -1,0 +1,9 @@
+%h3= link_to "Links", "#customize-links", "data-toggle" => "collapse"
+
+#customize-links.row.collapse
+  .span5
+    = f.input :link_color, :required => false, :input_html => {:class => "span5 color"}
+  .span5
+    = f.input :link_color_hover, :required => false, :input_html => {:class => "span5 color"}
+
+%hr

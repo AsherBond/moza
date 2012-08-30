@@ -1,11 +1,12 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.7'
+gem 'rails', '3.2.8'
 gem 'pg'
 gem 'pg_search'
 group :development do
 	gem "letter_opener"
 	gem "faker"
+	gem "bullet"
 end
 group :assets do
 	gem 'sass-rails',   '~> 3.2.3'
@@ -44,3 +45,5 @@ gem 'capistrano'
 gem 'aws-sdk'
 gem 'aws-s3'
 gem 'delayed_job_active_record'
+
+gem 'rack-mini-profiler'

@@ -3,7 +3,7 @@
 		.span1
 			%p
 				.track-number=s
-		.span9
+		.span7
 			%p.mozer-song
 				.mozer-song-controls
 					%p
@@ -17,12 +17,13 @@
 
 			.btn-toolbar.song-ratings
 				.btn-group
-					= button_link "money", "Buy Song", paypal_path, "btn-success btn-mini"
-				= render 'songs/shared/vote', :song => song
-				= render 'playlists/shared/button', :song => song
-				.btn-group.share-lyrics
 					= link_to "<i class='icon-share'></i> Share".html_safe, "#/", :class => "btn btn-mini btn-inverse", "data-toggle" => "collapse", "data-target" => "#share_song_#{song.id}"
 					= link_to "<i class='icon-pencil'></i> Lyrics".html_safe, "#/", :class => "btn btn-mini btn-inverse", "data-toggle" => "collapse", "data-target" => "#song_#{song.id}_lyrics"
+				.btn-group
+					= button_link "money", "Buy Song", buy_song_path(song), "btn-success btn-mini"
+				= render 'songs/shared/vote', :song => song
+				= render 'playlists/shared/button', :song => song
+
 			.collapse.out{:id => "song_#{song.id}_lyrics"}
 				%p
 					-if song.lyrics.blank?
@@ -39,5 +40,5 @@
 
 - end.empty?
 	.row
-		.span10
+		.span8
 			.alert.alert-info No songs!

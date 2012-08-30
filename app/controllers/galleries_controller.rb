@@ -1,6 +1,6 @@
 class GalleriesController < ApplicationController
-  # GET /galleries
-  # GET /galleries.json
+  load_and_authorize_resource
+
   def index
     @galleries = current_user.galleries
 
@@ -10,10 +10,7 @@ class GalleriesController < ApplicationController
     end
   end
 
-  # GET /galleries/1
-  # GET /galleries/1.json
   def show
-    @gallery = Gallery.find(params[:id])
 
     # Comments
     @commentable = @gallery
@@ -26,8 +23,6 @@ class GalleriesController < ApplicationController
     end
   end
 
-  # GET /galleries/new
-  # GET /galleries/new.json
   def new
     @gallery = current_user.galleries.build
 
@@ -37,13 +32,9 @@ class GalleriesController < ApplicationController
     end
   end
 
-  # GET /galleries/1/edit
   def edit
-    @gallery = Gallery.find(params[:id])
   end
 
-  # POST /galleries
-  # POST /galleries.json
   def create
     @gallery = current_user.galleries.build(params[:gallery])
 
@@ -58,11 +49,7 @@ class GalleriesController < ApplicationController
     end
   end
 
-  # PUT /galleries/1
-  # PUT /galleries/1.json
   def update
-    @gallery = Gallery.find(params[:id])
-
     respond_to do |format|
       if @gallery.update_attributes(params[:gallery])
         format.html { redirect_to @gallery, notice: 'Gallery was successfully updated.' }
@@ -74,10 +61,7 @@ class GalleriesController < ApplicationController
     end
   end
 
-  # DELETE /galleries/1
-  # DELETE /galleries/1.json
   def destroy
-    @gallery = Gallery.find(params[:id])
     @gallery.destroy
 
     respond_to do |format|

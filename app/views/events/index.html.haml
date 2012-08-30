@@ -6,16 +6,19 @@
     %table.table.table-striped.table-bordered
       %thead
         %tr
-          %th{:width => "40%"} Event
-          %th{:width => "40%"} Start - End
+          %th{:width => "30%"} Event
+          %th{:width => "50%"} Start - End
           %th{:width => "20%"} Actions
       %tbody
         - @events.each do |event|
           %tr
             %td= link_to "#{event.name}", event
-            %td= event.start_date
+            %td
+              = "#{l event.start_date, format: :event_date} @ #{l event.start_time, format: :event_time}"
+              \-
+              = "#{l event.end_date, format: :event_date} @ #{l event.end_time, format: :event_time}"
             %td
               = button_link "edit", "Edit", edit_event_path(event), "btn-warning btn-mini"
-              = button_link "remove", nil, edit_event_path(event), "btn-danger btn-mini"
+              = button_link "eye-open", "View", event, "btn-info btn-mini"
               
   .span6

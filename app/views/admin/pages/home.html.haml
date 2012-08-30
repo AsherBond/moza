@@ -1,11 +1,59 @@
 = bootstrap_page_header "Top Secret", "The guts of mozapolis." 
 
-.row.admin-area
-	.span2
-		= link_to "<i class='icon-home'></i>".html_safe, nil, :class => "giant-text", :rel => "tooltip", :title => "Home", "data-placement" => "right"
-		= link_to "<i class='icon-beaker'></i>".html_safe, nil, :class => "giant-text", :rel => "tooltip", :title => "Bug Reports", "data-placement" => "right"
-		= link_to "<i class='icon-music'></i>".html_safe, nil, :class => "giant-text", :rel => "tooltip", :title => "Music Overview", "data-placement" => "right"
-		= link_to "<i class='icon-group'></i>".html_safe, nil, :class => "giant-text", :rel => "tooltip", :title => "Users", "data-placement" => "right"
-		= link_to "<i class='icon-film'></i>".html_safe, nil, :class => "giant-text", :rel => "tooltip", :title => "Videos", "data-placement" => "right"
-		= link_to "<i class='icon-camera-retro'></i>".html_safe, nil, :class => "giant-text", :rel => "tooltip", :title => "Images", "data-placement" => "right"
-		= link_to "<i class='icon-cogs'></i>".html_safe, nil, :class => "giant-text", :rel => "tooltip", :title => "Settings", "data-placement" => "right"
+.row
+
+	.span16
+		%h6 
+			%i.icon-umbrella
+			Shortcuts
+		%ul.nav.nav-pills
+			%li= link_to "<i class='icon-home'></i> Home".html_safe, nil, :rel => "tooltip", :title => "An overview of everything."
+			%li= link_to "<i class='icon-beaker'></i> Bug Reports".html_safe, nil, :rel => "tooltip", :title => "Bug Reports by users and the system."
+			%li= link_to "<i class='icon-music'></i> Music Overview".html_safe, nil, :rel => "tooltip", :title => "Mange the songs, and albums submitted by users."
+			%li= link_to "<i class='icon-group'></i> Users".html_safe, nil, :rel => "tooltip", :title => "Manage fans and artists."
+			%li= link_to "<i class='icon-film'></i> Videos".html_safe, nil, :rel => "tooltip", :title => "Manage the videos submitted by users."
+			%li= link_to "<i class='icon-camera-retro'></i> Images".html_safe, nil, :rel => "tooltip", :title => "Manage the galleries and images submitted by users."
+			%li= link_to "<i class='icon-cogs'></i> Settings".html_safe, nil, :rel => "tooltip", :title => "Modify how Mozapolis behaves."
+		%hr
+		.row
+			.span16
+				%h4 Bugs
+				%hr
+				%table.table.table-striped.table-bordered
+					%thead
+						%th That nasty bug...
+						%th Bug Issued around
+						%th Actions
+					%tbody
+						%tr 
+							%td= link_to "The page you are looking for does...", nil
+							%td 5 minutes ago
+							%td
+								= button_link "envelope-alt", "Send report", nil, "btn-info btn-mini"
+								= button_link "file", "More", nil, "btn-inverse btn-mini"
+
+			.span16
+				%h4 Settings
+				%hr
+
+
+			.span16.hide
+				%h4 Songs
+				%hr
+			.span16.hide
+				%h4 Albums
+				%hr
+
+			.span16.hide
+				%h4 Artists
+				%hr
+			.span16.hide
+				%h4 Fans
+				%hr
+
+			.span16.hide
+				%h4 Videos
+				%hr
+			.span16.hide
+				%h4 Galleries
+				%hr

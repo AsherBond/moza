@@ -1,0 +1,10 @@
+%h3= link_to "Thumbnails", "#customize-thumbnails", "data-toggle" => "collapse"
+
+#customize-thumbnails.row.collapse
+  .span5
+    = f.input :thumbnail_background_color, :required => false, :input_html => {:class => "span5 color"}
+  .span5
+    = f.input :thumbnail_border_color, :required => false, :input_html => {:class => "span5 color"}
+    = f.input :thumbnail_border_color_hover, :required => false, :input_html => {:class => "span5 color"}
+
+%hr

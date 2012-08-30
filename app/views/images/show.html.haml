@@ -3,8 +3,17 @@
   .span8.offset4
     = link_to image_tag(@image.item.url), "#/", :class => "thumbnail"
     %hr.d
-    -if !@image.description.nil?
-      .well= @image.description
+    .row
+      .span2
+        = link_to image_tag(@image.gallery.cover.url(:medium)), "#/", class: :thumbnail
+      .span6
+        %h4 
+          From
+          = link_to @image.gallery.name, @image.gallery
+          %small
+            by
+            = link_to @image.gallery.user.artist_name, @image.gallery.user
+        %p= @image.description if !@image.description.nil?
     %hr
     %h3 
       %i.icon-comments-alt

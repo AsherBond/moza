@@ -4,7 +4,8 @@
 	.span6
 		= link_to image_tag(@album.cover.url(:large)), nil, :class => "thumbnail"
 		%hr.d
-		= render 'albums/shared/vote'
+		#album-vote-links
+			= render 'albums/shared/vote'
 		%hr.d
 		.row
 			.span2
@@ -42,13 +43,15 @@
 						.span10
 							-if is_me? @album.user
 								.btn-group
-									= link_to "<i class='icon-arrow-left'></i> Back".html_safe, "#normal", :class => "btn", "data-toggle" => "tab"
+									= button_link "upload", "Upload Song", new_album_song_path(@album), "btn-success disabled"
+									= button_link "edit", "Edit Album Details", edit_album_path(@album), "btn-warning disabled"
+									= link_to "<i class='icon-edit'></i> Edit Songs".html_safe, "#reorder", :class => "btn disabled", "data-toggle" => "tab"
+									= link_to "<i class='icon-arrow-left'></i> Back".html_safe, "#normal", :class => "btn btn-info", "data-toggle" => "tab"
 								%hr 
 					#sortable
 						= content_tag_for(:div, @songs, :class => "row") do |song|
 							.span10
 								%p
 									.btn-group
-										= link_to "<i class='icon-move'></i>".html_safe, nil, :class => "btn btn-inverse btn-large"
-										= button_link "edit", "#{song.name}", edit_album_song_path(@album, song), "btn-danger btn-large"
+										= button_link "edit", "#{song.name}", edit_album_song_path(@album, song), "btn-danger"
 								%hr.d

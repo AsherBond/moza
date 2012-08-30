@@ -7,7 +7,7 @@
 			%span.caret
 		%ul.dropdown-menu
 			- if current_user.playlists.each do |playlist|
-				%li= link_to playlist.name, add_song_to_playlist_path("song_id" => song.id, "playlist_id" => playlist.id), :method => :post
+				%li= link_to "<span class='add_song_to_playlist_#{song.id}'>#{playlist.name}</span>".html_safe, add_song_to_playlist_path(song_id: song.id, playlist_id: playlist.id), remote: :true, action: :add_song_to
 			- end.empty?
 				%li= icon_link "remove", "You have no playlists", new_playlist_path
 			%li.divider

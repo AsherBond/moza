@@ -1,7 +1,8 @@
-= simple_form_for @video, :html => { :class => 'form-vertical' }, :defaults => { :input_html => {:class => "span8"} } do |f|
+= simple_form_for @video, :html => { :class => 'form-vertical' }, :defaults => { :input_html => {:class => "input-block-level"} } do |f|
+  = f.error_notification
   = f.input :name
   .row
-    .span4
+    .span3
       = f.input :item, :input_html => { :class => "span4" }
     .span4
       = f.input :youtube_url, :input_html => { :class => "span4" }
@@ -9,20 +10,20 @@
   = f.label :active
   .btn-group{"data-toggle"=>"buttons-radio"}
     -if @video.active?
-      %label.btn.btn-large.active{:for=>"video_active"} 
+      %label.btn.btn-inverse.btn-large.active{:for=>"video_active"} 
         %i.icon-eye-open
         Active
     -else
-      %label.btn.btn-large{:for=>"video_active"} 
+      %label.btn.btn-inverse.btn-large{:for=>"video_active"} 
         %i.icon-eye-open
         Active
 
     -if !@video.active?
-      %label.btn.btn-large.active{:for=>"video_unactive"} 
+      %label.btn.btn-inverse.btn-large.active{:for=>"video_unactive"} 
         %i.icon-eye-close
         Hidden
     -else
-      %label.btn.btn-large{:for=>"video_unactive"} 
+      %label.btn.btn-inverse.btn-large{:for=>"video_unactive"} 
         %i.icon-eye-close
         Hidden
 

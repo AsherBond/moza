@@ -13,7 +13,7 @@
     %ul.thumbnails
       -if @albums.each do |album| 
         %li.span3
-          = link_to image_tag(album.cover.url(:large)), album, :class => "thumbnail", "data-original-title" => "#{album.name}", "data-content" => "<p>#{album.description}</p><h6>#{album.record_label} / #{album.year_produced}</h6>", :rel => "popover"
+          = link_to image_tag(album.cover.url(:large)), album, class: :thumbnail, rel: :tooltip, title: album.name
       -end.empty?
         -show_msg = true
     -if show_msg ==  true

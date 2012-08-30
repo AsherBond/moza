@@ -1,13 +1,6 @@
 = bootstrap_page_header "New Video", nil 
+
 .row
-	.span8
-		= render 'form'
-	.span8
-
-		%p.lead New Video
-
-		%hr
-
-		%p
-			%strong If this is your first video on Mozapolis these tips may come in handy!
-		%p There is a drag and drop uploader to make your album upload super easy, to learn more click here.
+	.span8.offset4
+		.well
+			= render 'form'

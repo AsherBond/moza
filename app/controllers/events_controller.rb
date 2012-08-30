@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
-  # GET /events
-  # GET /events.json
+  load_and_authorize_resource
+
   def index
     @events = current_user.events
 
@@ -10,10 +10,7 @@ class EventsController < ApplicationController
     end
   end
 
-  # GET /events/1
-  # GET /events/1.json
   def show
-    @event = Event.find(params[:id])
     # Comments
     @commentable = @event
     @comments = @commentable.comments
@@ -24,8 +21,6 @@ class EventsController < ApplicationController
     end
   end
 
-  # GET /events/new
-  # GET /events/new.json
   def new
     @event = current_user.events.build
 
@@ -35,13 +30,9 @@ class EventsController < ApplicationController
     end
   end
 
-  # GET /events/1/edit
   def edit
-    @event = Event.find(params[:id])
   end
 
-  # POST /events
-  # POST /events.json
   def create
     @event = current_user.events.build(params[:event])
 
@@ -56,11 +47,7 @@ class EventsController < ApplicationController
     end
   end
 
-  # PUT /events/1
-  # PUT /events/1.json
   def update
-    @event = Event.find(params[:id])
-
     respond_to do |format|
       if @event.update_attributes(params[:event])
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
@@ -72,10 +59,7 @@ class EventsController < ApplicationController
     end
   end
 
-  # DELETE /events/1
-  # DELETE /events/1.json
   def destroy
-    @event = Event.find(params[:id])
     @event.destroy
 
     respond_to do |format|

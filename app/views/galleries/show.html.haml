@@ -3,13 +3,24 @@
 .row
   .span8
     -if user_signed_in? and current_user == @gallery.user
-      %h3 
+      %p 
         = button_link "upload-alt", "Upload New Image", new_gallery_image_path(@gallery), "btn-success"
         = button_link "edit", "Edit Gallery", edit_gallery_path(@gallery), "btn-warning"
       %hr
-    %ul.thumbnails
-      - @gallery.images.each do |image|
-        %li.span2= link_to image_tag(image.item.url(:medium)), image, :class => "thumbnail"
+
+    - if @gallery.images.empty?
+      .alert.alert-info This gallery has no images.
+    - else
+      %ul.thumbnails
+        - @gallery.images.each do |image|
+          %li.span2
+            .gallery-edit-tools
+              .btn.btn-inverse.btn-mini.disabled
+                %i.icon-move
+              = link_to "<i class='icon-edit'></i> Edit".html_safe, edit_image_path(image), class: "btn btn-info btn-mini"
+
+            = link_to image_tag(image.item.url(:medium)), image, :class => "thumbnail"
+
   .span8
     %h3 
       %i.icon-comments-alt

@@ -1,0 +1,19 @@
+= bootstrap_page_header "Purchase Song", "#{@song.name}" 
+.row
+	.span10
+		.well
+			= render @song
+
+		.well.black
+			%h4 Purchasing music is really easy on Mozapolis, just link up your paypal account!
+			%hr.d
+			%p Our posturings, our imagined self-importance, the delusion that we have some privileged position in the Universe, are challenged by this point of pale light. Our planet is a lonely speck in the great enveloping cosmic dark. In our obscurity, in all this vastness, there is no hint that help will come from elsewhere to save us from ourselves.
+	.span6
+		.well
+			%p.lead Login with Paypal
+			= simple_form_for Gallery.new, :html => { :class => 'form-vertical' }, :defaults => { :input_html => {:class => "input-block-level"} } do |f|
+				= f.input :name, :label => "Paypal Login/Username"
+				= f.input :name, :label => "Password"
+				.form-actions
+					= f.button :submit, "Login", :class => 'btn-primary'
+					= link_to t('.cancel', :default => t("helpers.links.cancel")), root_path, :class => 'btn'

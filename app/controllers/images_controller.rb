@@ -1,6 +1,6 @@
 class ImagesController < ApplicationController
-  # GET /images
-  # GET /images.json
+  load_and_authorize_resource
+  
   def index
     @images = Image.all
 
@@ -10,8 +10,6 @@ class ImagesController < ApplicationController
     end
   end
 
-  # GET /images/1
-  # GET /images/1.json
   def show
     @image = Image.find(params[:id])
     # Comments
@@ -24,8 +22,6 @@ class ImagesController < ApplicationController
     end
   end
 
-  # GET /images/new
-  # GET /images/new.json
   def new
     @gallery = Gallery.find(params[:gallery_id])
     @image = @gallery.images.build
@@ -36,13 +32,10 @@ class ImagesController < ApplicationController
     end
   end
 
-  # GET /images/1/edit
   def edit
     @image = Image.find_by_id(params[:id])
   end
 
-  # POST /images
-  # POST /images.json
   def create
     @gallery = Gallery.find(params[:gallery_id])
     @image = @gallery.images.build(params[:image])
@@ -58,8 +51,6 @@ class ImagesController < ApplicationController
     end
   end
 
-  # PUT /images/1
-  # PUT /images/1.json
   def update
     @image = Image.find(params[:id])
 
@@ -74,8 +65,6 @@ class ImagesController < ApplicationController
     end
   end
 
-  # DELETE /images/1
-  # DELETE /images/1.json
   def destroy
     @image = Image.find(params[:id])
     @image.destroy

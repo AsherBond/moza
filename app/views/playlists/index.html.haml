@@ -2,27 +2,23 @@
 
 .row
   .span12
-    .btn-group
-      = button_link "plus", "New Playlist", new_playlist_path, "btn-success"
-    %hr 
-    #sortable
-      = content_tag_for(:div, @playlists, :class => "row") do |playlist|
-        .span6
-          %h2
-            = link_to playlist.name, playlist
-          %p
-            = button_link "move", nil, nil, "btn-inverse btn-mini"
-            = button_link "edit", "Edit Details", edit_playlist_path(playlist), "btn-warning btn-mini"
-        .span3
-          %h6 Views
-          %p 3,324
-        .span3
-          %h6 Total Plays
-          %p 20
-        .span12
-          %hr.d
+    = button_link "plus", "New Playlist", new_playlist_path, "btn-success"
+    %hr
+    %table.table.table-striped.table-bordered
+      %thead
+        %tr
+          %th{:width => "70%"} Event
+          %th{:width => "30%"} Actions
+      %tbody
+        - @playlists.each do |playlist|
+          %tr
+            %td= link_to "#{playlist.name}", playlist
+            %td
+              = button_link "edit", "Edit", edit_playlist_path(playlist), "btn-warning btn-mini"
+              = button_link "eye-open", "View", playlist, "btn-info btn-mini"
+              = button_link "share", "Share", playlist, "btn-inverse btn-mini"
+  .span4
 
-  .span4.omega
     %h4
       %i.icon-umbrella
       Welcome to the playlist manager, we make it pretty easy and fun to manage your playlists.

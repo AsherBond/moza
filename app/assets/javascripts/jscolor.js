@@ -938,11 +938,11 @@ var jscolor = {
 
 		// require images
 		switch(modeID) {
-			case 0: jscolor.requireImage('hs.png'); break;
-			case 1: jscolor.requireImage('hv.png'); break;
+			case 0: jscolor.requireImage('/assets/hs.png'); break;
+			case 1: jscolor.requireImage('/assets/hv.png'); break;
 		}
-		jscolor.requireImage('cross.gif');
-		jscolor.requireImage('arrow.gif');
+		jscolor.requireImage('/assets/cross.gif');
+		jscolor.requireImage('/assets/arrow.gif');
 
 		this.importColor();
 	}

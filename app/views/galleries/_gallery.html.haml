@@ -1,2 +1,2 @@
 %li{:class => "#{span}"}
-  = link_to image_tag(gallery.cover.url(:large)), gallery, :class => "thumbnail", "data-original-title" => "#{gallery.name}", "data-content" => "<p>#{gallery.description}</p>", :rel => "popover"
+  = link_to image_tag(gallery.cover.url(:large)), gallery, class: :thumbnail, rel: :tooltip, title: gallery.name

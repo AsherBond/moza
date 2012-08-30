@@ -1,5 +1,6 @@
 <%= form_for(current_user.relationships.find_by_followed_id(@user),
              html: { method: :delete },
              remote: true) do |f| %>
+  <p class="lead">We are friends! </p>
   <%= f.submit "Unfollow", class: "btn btn-danger" %>
 <% end %>

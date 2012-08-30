@@ -1,4 +1,5 @@
-= simple_form_for(@album, :defaults => { :input_html => {:class => "span8"} }) do |f|
+= simple_form_for(@album, :defaults => { :input_html => {:class => "input-block-level"} }) do |f|
+  = f.error_notification
   = f.input :name
   = f.input :cover
   = f.input :description, :input_html => { :rows => 5}
@@ -9,19 +10,19 @@
   
   .btn-group{"data-toggle"=>"buttons-radio"}
     -if @album.active?
-      %label.btn.btn-large.active{:for=>"album_active"} 
+      %label.btn.btn-inverse.btn-large.active{:for=>"album_active"} 
         %i.icon-eye-open
         Active
     -else
-      %label.btn.btn-large{:for=>"album_active"} 
+      %label.btn.btn-inverse.btn-large{:for=>"album_active"} 
         %i.icon-eye-open
         Active
     -if !@album.active?
-      %label.btn.btn-large.active{:for=>"album_unactive"} 
+      %label.btn.btn-inverse.btn-large.active{:for=>"album_unactive"} 
         %i.icon-eye-close
         Hidden
     -else
-      %label.btn.btn-large{:for=>"album_unactive"} 
+      %label.btn.btn-inverse.btn-large{:for=>"album_unactive"} 
         %i.icon-eye-close
         Hidden
 

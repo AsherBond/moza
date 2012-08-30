@@ -2,7 +2,7 @@
   = bootstrap_page_header "#{current_user.full_name}", "#{current_user.email}" 
 
   .row
-    -if !current_user.is_active?
+    -if !current_user.is_active? and current_user.has_role? :artist
       .span16
         .alert.alert-info
           %h4 Hey #{current_user.full_name}. 
@@ -12,8 +12,9 @@
         %li.active= link_to "Credentials", "#credentials", "data-toggle" => "tab"
         %li= link_to "Passwords", "#passwords", "data-toggle" => "tab"
         %li= link_to "Personal", "#personal", "data-toggle" => "tab"
-        %li= link_to "Artist Details", "#artist-details", "data-toggle" => "tab"
-        %li= link_to "Customize", "#customize", "data-toggle" => "tab"
+        -if current_user.has_role? :artist
+          %li= link_to "Artist Details", "#artist-details", "data-toggle" => "tab"
+          %li= link_to "Customize", "#customize", "data-toggle" => "tab"
         %li= link_to "Cancel Account", "#cancel-account", "data-toggle" => "tab"
       =f.error_notification
       .tab-content
@@ -22,146 +23,18 @@
           = f.input :username, :required => true
 
         .tab-pane#customize
-          %h3= link_to "Background", "#customize-background", "data-toggle" => "collapse"
-          #customize-background.row.collapse
-            .span5
-              = f.input :background_image, :required => false, :input_html => {:class => "span5"}
-              = f.input :background_color, :required => false, :input_html => {:class => "span5 color"}
-              %hr.d
-              = f.label :background_attachment
-              = render 'devise/registrations/image_attachment'
-              %hr.d
-              = f.label :background_position
-              = render 'devise/registrations/image_position'
-              %hr.d
-              = f.label :background_image_repeat
-              = render 'devise/registrations/image_repeat'
-              %hr.d
-              = f.label "Enable/Disable Background Image"
-              = render 'devise/registrations/image_active'
-            .span5
-              = f.input :content_background_color, :required => false, :input_html => {:class => "span5 color"}
-              %hr.d
-              = f.label "Background Content Color Active"
-              = render 'devise/registrations/content_background_active'
-          %hr
-          %h3= link_to "Header", "#customize-header", "data-toggle" => "collapse"
-          #customize-header.row.collapse
-            .span5
-              = f.input :header_background_color, :required => false, :input_html => {:class => "span5 color"}
-            .span5
-              = f.input :header_color, :required => false, :input_html => {:class => "span5 color"}
-              = f.input :header_small_color, :required => false, :input_html => {:class => "span5 color"}
+          = render 'devise/registrations/inputs/customize_background', f: f
+          = render 'devise/registrations/inputs/customize_header', f: f
+          = render 'devise/registrations/inputs/customize_links', f: f
+          = render 'devise/registrations/inputs/customize_thumbnails', f: f
+          = render 'devise/registrations/inputs/customize_comments', f: f
+          = render 'devise/registrations/inputs/customize_navbuttons', f: f
+          = render 'devise/registrations/inputs/customize_general', f: f
+        = render 'devise/registrations/inputs/personal', f: f
+        = render 'devise/registrations/inputs/passwords', f: f
+        = render 'devise/registrations/inputs/artist_details', f: f
+        = render 'devise/registrations/inputs/cancel', f: f
 
-          %hr
-          %h3= link_to "Links", "#customize-links", "data-toggle" => "collapse"
-
-          #customize-links.row.collapse
-            .span5
-              = f.input :link_color, :required => false, :input_html => {:class => "span5 color"}
-            .span5
-              = f.input :link_color_hover, :required => false, :input_html => {:class => "span5 color"}
-
-          %hr
-          %h3= link_to "Thumbnails", "#customize-thumbnails", "data-toggle" => "collapse"
-
-          #customize-thumbnails.row.collapse
-            .span5
-              = f.input :thumbnail_background_color, :required => false, :input_html => {:class => "span5 color"}
-            .span5
-              = f.input :thumbnail_border_color, :required => false, :input_html => {:class => "span5 color"}
-              = f.input :thumbnail_border_color_hover, :required => false, :input_html => {:class => "span5 color"}
-
-          %hr
-          %h3= link_to "Comments", "#customize-comments", "data-toggle" => "collapse"
-
-          #customize-comments.row.collapse
-            .span5
-              = f.input :blockquote_border_color, :required => false, :input_html => {:class => "span5 color"}
-              = f.input :blockquote_color, :required => false, :input_html => {:class => "span5 color"}
-            .span5
-              = f.input :comment_textarea_color, :required => false, :input_html => {:class => "span5 color"}
-              = f.input :comment_textarea_border_color, :required => false, :input_html => {:class => "span5 color"}
-              = f.input :comment_textarea_background, :required => false, :input_html => {:class => "span5 color"}
-          %hr
-          %h3= link_to "Nav Buttons", "#customize-navbar", "data-toggle" => "collapse"
-
-          #customize-navbar.row.collapse
-            .span5
-              = f.input :nav_text_color, :required => false, :input_html => {:class => "span5 color"}
-              = f.input :nav_text_color_hover, :required => false, :input_html => {:class => "span5 color"}
-              = f.input :nav_background_color_hover, :required => false, :input_html => {:class => "span5 color"}
-            .span5
-              = f.input :nav_background_color_active, :required => false, :input_html => {:class => "span5 color"}
-              = f.input :nav_text_color_active, :required => false, :input_html => {:class => "span5 color"}
-
-          %hr
-          %h3= link_to "General", "#customize-general", "data-toggle" => "collapse"
-
-          #customize-general.row.collapse
-            .span5
-              = f.input :content_header_color, :required => false, :input_html => {:class => "span5 color"}
-              = f.input :content_small_header_color, :required => false, :input_html => {:class => "span5 color"}
-              = f.input :content_text_color, :required => false, :input_html => {:class => "span5 color"}
-            .span5
-              = f.input :hr_color_top, :required => false, :input_html => {:class => "span5 color"}
-              = f.input :hr_color_bottom, :required => false, :input_html => {:class => "span5 color"}
-              %hr.d
-              = f.input :hrd_color_top, :required => false, :input_html => {:class => "span5 color"}
-              = f.input :hrd_color_bottom, :required => false, :input_html => {:class => "span5 color"}
-
-
-
-        .tab-pane#personal
-          .row
-            .span3
-              -if current_user.profile_photo.file?
-                =link_to image_tag(current_user.profile_photo.url(:medium)), "#/", :class => "thumbnail"
-            .span7
-              = f.input :full_name, :required => true, :input_html => { :class => "span7" }
-              = f.input :profile_photo, :input_html => { :class => "span6" }
-          %hr.d
-         
-          = f.input :date_of_birth, :required => false, :as => :string, :input_html => { "data-datepicker" => "datepicker" }
-          .row
-            .span4= f.input :city, :required => false, :input_html => { :class => "span4" }
-            .span3= f.input :state, :required => false, :input_html => { :class => "span3" }
-            .span3= f.input :country, :required => false, :input_html => { :class => "span3" }
-            
-          
-          = f.input :phone, :required => false
-
-        .tab-pane#passwords
-          = f.input :password, :autocomplete => "off", :hint => "leave it blank if you don't want to change it", :required => false
-          = f.input :password_confirmation, :required => false
-
-        .tab-pane#artist-details
-          .row
-            .span4
-              %div{:style => "padding-left:0px;margin-left:-20px;padding-top:0;"}= f.association :genres, :input_html => { :class => "span4 pull-left" }, :label => false, :hint => false
-            .span6{:style => "padding-top:10px;"}
-              = f.label :genres
-              = f.hint :genres
-          %hr.d
-          .row
-            .span6
-              = f.input :artist_name, :required => true, :input_html => { :class => "span6" }
-            .span4
-              = f.input :band_birth, :required => false, :as => :string, :input_html => { "data-datepicker" => "datepicker" }, :input_html => { :class => "span4" }
-          
-          = f.input :band_members, :required => false, :input_html => {:rows => 5}
-          = f.input :about, :required => false, :input_html => {:rows => 5}
-          = f.input :interests, :required => false, :input_html => {:rows => 5}
-          = f.input :inspirations, :required => false, :input_html => {:rows => 5}
-          = f.input :sounds_like, :required => false, :input_html => {:rows => 5}
-        .tab-pane#cancel-account
-          %p.lead
-            Unhappy? 
-          =link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "btn btn-danger"
-          %hr
-          %h6 Sorry to see you go!
-          %p If theres anything we can do let us know!
-          
     .span6
       = f.button :submit, "Click to save changes", :class => "btn btn-large btn-success"
       %hr

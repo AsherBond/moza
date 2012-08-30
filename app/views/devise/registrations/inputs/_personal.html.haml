@@ -1,0 +1,17 @@
+.tab-pane#personal
+  .row
+    .span3
+      -if current_user.profile_photo.file?
+        =link_to image_tag(current_user.profile_photo.url(:medium)), "#/", :class => "thumbnail"
+    .span7
+      = f.input :full_name, :required => true, :input_html => { :class => "span7" }
+      = f.input :profile_photo, :input_html => { :class => "span6" }
+  %hr.d
+ 
+  = f.input :date_of_birth, :required => false, :as => :string, :input_html => { "data-datepicker" => "datepicker" }
+  .row
+    .span4= f.input :city, :required => false, :input_html => { :class => "span4" }
+    .span3= f.input :state, :required => false, :input_html => { :class => "span3" }
+    .span3= f.input :country, :required => false, :input_html => { :class => "span3" }
+
+  = f.input :phone, :required => false

@@ -1,0 +1,33 @@
+
+%p.mozer-song
+	.mozer-song-controls
+		%p
+			%a.btn.btn-inverse.mozer-play{"data-song-id" => "play_song_#{song.id}", :href => "#/"}
+				%i.icon-play
+				= song.name
+			%a.btn.btn-danger.mozer-pause.hide{"data-song-id" => "play_song_#{song.id}", :href => "#/"}
+				%i.icon-pause
+				= song.name
+	%audio{:id => "play_song_#{song.id}", :src => "#{song.file.url}", :type => "audio/mp3"}
+
+.btn-toolbar.song-ratings
+	.btn-group
+		= link_to "<i class='icon-share'></i> Share".html_safe, "#/", :class => "btn btn-mini btn-inverse", "data-toggle" => "collapse", "data-target" => "#share_song_#{song.id}"
+		= link_to "<i class='icon-pencil'></i> Lyrics".html_safe, "#/", :class => "btn btn-mini btn-inverse", "data-toggle" => "collapse", "data-target" => "#song_#{song.id}_lyrics"
+	.btn-group
+		= button_link "money", "Buy Song", buy_song_path(song), "btn-success btn-mini"
+	= render 'songs/shared/vote', :song => song
+	= render 'playlists/shared/button', :song => song
+
+.collapse.out{:id => "song_#{song.id}_lyrics"}
+	%p
+		-if song.lyrics.blank?
+			There are no lyrics for this song, sorry!
+		-else
+			= song.lyrics.html_safe
+.collapse.out{:id => "share_song_#{song.id}"}
+	%p.btn-group
+		= button_link "facebook", "Post to Wall", nil, "btn-mini btn-facebook"
+		= button_link "twitter", "Tweet", nil, "btn-mini btn-twitter"
+		= button_link "google-plus", "Google+", nil, "btn-mini btn-google"
+		= button_link "envelope-alt", "Email", nil, "btn-email btn-mini"

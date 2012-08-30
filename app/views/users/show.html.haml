@@ -1,4 +1,5 @@
--if @user.is_active?
+-if @user.has_role? :fan
+-elsif @user.is_active? and @user.has_role? :artist
 	.page-header
 		.pull-right
 			= button_link "facebook", "Facebook", nil, "btn-facebook"
@@ -44,6 +45,11 @@
 					-if @user.events.empty?
 						.alert.alert-info This user has no events.
 				#fans.tab-pane.fade.in
+					%ul.thumbnails
+					- @user.followers.each do |fan|
+						.span1= link_to image_tag(fan.profile_photo.url(:avatar)), fan, class: "thumbnail", rel: "tooltip", title: fan.username
+					- if @user.followers.empty?
+						.alert.alert-info This user has no fans.
 				#comments.tab-pane.fade.in
 					=render 'users/profile/comments'
 				#videos.tab-pane.fade.in

@@ -1,4 +1,4 @@
-= simple_form_for @event, :html => { :class => 'form-vertical' }, :defaults => { :input_html => {:class => "span8"} } do |f|
+= simple_form_for @event, :html => { :class => 'form-vertical' }, :defaults => { :input_html => {:class => "input-block-level"} } do |f|
   = f.input :name
   .row
     .span3
@@ -22,20 +22,20 @@
   = f.label :active, :required => true
   .btn-group{"data-toggle"=>"buttons-radio"}
     -if @event.active?
-      %label.btn.btn-large.active{:for=>"event_active"} 
+      %label.btn.btn-inverse.btn-large.active{:for=>"event_active"} 
         %i.icon-eye-open
         Active
     -else
-      %label.btn.btn-large{:for=>"event_active"} 
+      %label.btn.btn-inverse.btn-large{:for=>"event_active"} 
         %i.icon-eye-open
         Active
 
     -if !@event.active?
-      %label.btn.btn-large.active{:for=>"event_unactive"} 
+      %label.btn.btn-inverse.btn-large.active{:for=>"event_unactive"} 
         %i.icon-eye-close
         Hidden
     -else
-      %label.btn.btn-large{:for=>"event_unactive"} 
+      %label.btn.btn-inverse.btn-large{:for=>"event_unactive"} 
         %i.icon-eye-close
         Hidden
   %input{:type=>"checkbox", :id=>"event_active", :name=>"event[active]", :value=>"1", :style=>"display:none"}

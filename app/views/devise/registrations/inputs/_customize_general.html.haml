@@ -1,0 +1,13 @@
+%h3= link_to "General", "#customize-general", "data-toggle" => "collapse"
+
+#customize-general.row.collapse
+  .span5
+    = f.input :content_header_color, :required => false, :input_html => {:class => "span5 color"}
+    = f.input :content_small_header_color, :required => false, :input_html => {:class => "span5 color"}
+    = f.input :content_text_color, :required => false, :input_html => {:class => "span5 color"}
+  .span5
+    = f.input :hr_color_top, :required => false, :input_html => {:class => "span5 color"}
+    = f.input :hr_color_bottom, :required => false, :input_html => {:class => "span5 color"}
+    %hr.d
+    = f.input :hrd_color_top, :required => false, :input_html => {:class => "span5 color"}
+    = f.input :hrd_color_bottom, :required => false, :input_html => {:class => "span5 color"}

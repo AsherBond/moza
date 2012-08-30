@@ -1,0 +1,23 @@
+%h3= link_to "Background", "#customize-background", "data-toggle" => "collapse"
+#customize-background.row.collapse
+  .span5
+    = f.input :background_image, :required => false, :input_html => {:class => "span5"}
+    = f.input :background_color, :required => false, :input_html => {:class => "span5 color"}
+    %hr.d
+    = f.label :background_attachment
+    = render 'devise/registrations/image_attachment'
+    %hr.d
+    = f.label :background_position
+    = render 'devise/registrations/image_position'
+    %hr.d
+    = f.label :background_image_repeat
+    = render 'devise/registrations/image_repeat'
+    %hr.d
+    = f.label "Enable/Disable Background Image"
+    = render 'devise/registrations/image_active'
+  .span5
+    = f.input :content_background_color, :required => false, :input_html => {:class => "span5 color"}
+    %hr.d
+    = f.label "Background Content Color Active"
+    = render 'devise/registrations/content_background_active'
+%hr

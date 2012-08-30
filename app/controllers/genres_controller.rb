@@ -1,8 +1,7 @@
 class GenresController < ApplicationController
-  # GET /genres
-  # GET /genres.json
+  load_and_authorize_resource
+
   def index
-    @genres = Genre.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +12,6 @@ class GenresController < ApplicationController
   # GET /genres/1
   # GET /genres/1.json
   def show
-    @genre = Genre.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +22,6 @@ class GenresController < ApplicationController
   # GET /genres/new
   # GET /genres/new.json
   def new
-    @genre = Genre.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +31,11 @@ class GenresController < ApplicationController
 
   # GET /genres/1/edit
   def edit
-    @genre = Genre.find(params[:id])
   end
 
   # POST /genres
   # POST /genres.json
   def create
-    @genre = Genre.new(params[:genre])
 
     respond_to do |format|
       if @genre.save
@@ -56,7 +51,6 @@ class GenresController < ApplicationController
   # PUT /genres/1
   # PUT /genres/1.json
   def update
-    @genre = Genre.find(params[:id])
 
     respond_to do |format|
       if @genre.update_attributes(params[:genre])
@@ -72,7 +66,6 @@ class GenresController < ApplicationController
   # DELETE /genres/1
   # DELETE /genres/1.json
   def destroy
-    @genre = Genre.find(params[:id])
     @genre.destroy
 
     respond_to do |format|

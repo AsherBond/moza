@@ -1,7 +1,9 @@
 class UserRegistrationsController < Devise::RegistrationsController
+  def new
+   # render :layout => "signup"
+  end
   def edit
     @user = current_user
-
   end
 
   def update
